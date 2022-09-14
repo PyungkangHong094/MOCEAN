@@ -25,7 +25,7 @@ const items = [
   },
 
   {
-    href: '/login',
+    href: '/',
     icon: (<LockIcon fontSize="small" />),
     title: 'Login'
   },
