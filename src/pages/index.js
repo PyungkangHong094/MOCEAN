@@ -28,7 +28,7 @@ const index = () => {
           'Password is required')
     }),
     onSubmit: () => {
-      router.push('/dashboard');
+      router.push('/customers');
     }
   });
 

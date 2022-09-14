@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { AppBar, Avatar, Typography, Box, IconButton, Toolbar,  } from '@mui/material';
+import { AppBar, Button, Typography, Box, IconButton, Toolbar,  } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
 
@@ -61,6 +61,14 @@ export const DashboardNavbar = (props) => {
           >
             pyungkangHong@test.com
           </Typography>
+          {/* 로그아웃 */}
+          <Button
+            color="error"
+            variant="contained"
+            sx={{ mr: 1 }}
+          >
+            로그아웃
+          </Button>
           
           
           {/* <Avatar
