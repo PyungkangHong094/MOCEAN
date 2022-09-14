@@ -4,9 +4,7 @@ import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Facebook as FacebookIcon } from '../icons/facebook';
-import { Google as GoogleIcon } from '../icons/google';
+import MoceanLogo from 'src/components/MoceanLogo';
 
 const index = () => {
   const router = useRouter();
@@ -49,18 +47,7 @@ const index = () => {
         }}
       >
         <Container maxWidth="sm">
-          <NextLink
-            href="/dashboard"
-            passHref
-          >
-            <Button
-              component="a"
-              startIcon={<ArrowBackIcon fontSize="small" />}
-            >
-              Dashboard TEMP
-            </Button>
-          </NextLink>
-          
+          <MoceanLogo/>
           <form onSubmit={formik.handleSubmit}>
             <Box sx={{ my: 3 }}>
               <Typography
