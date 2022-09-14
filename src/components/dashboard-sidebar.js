@@ -15,6 +15,7 @@ import { Users as UsersIcon } from '../icons/users';
 import { XCircle as XCircleIcon } from '../icons/x-circle';
 import { Logo } from './logo';
 import { NavItem } from './nav-item';
+import Image from "next/image";
 
 const items = [
 
@@ -25,7 +26,7 @@ const items = [
   },
 
   {
-    href: '/login',
+    href: '/',
     icon: (<LockIcon fontSize="small" />),
     title: 'Login'
   },
@@ -70,14 +71,14 @@ export const DashboardSidebar = (props) => {
               passHref
             >
               <a>
-                {/* 로고 넣기 */}
-                <Logo
-                  sx={{
-                    height: 42,
-                    width: 42
-                  }}
+                {/* 유저 페이지 로고 */}
+                <Image
+                src={"/static/images/mocean_sns.png"}
+                width ={220}
+                height={120}
                 />
               </a>
+              
             </NextLink>
           </Box>
           
