@@ -66,10 +66,11 @@ export const DashboardSidebar = (props) => {
         <div>
           <Box sx={{ p: 3 }}>
             <NextLink
-              href="/"
+              href="/customers"
               passHref
             >
               <a>
+                {/* 로고 넣기 */}
                 <Logo
                   sx={{
                     height: 42,

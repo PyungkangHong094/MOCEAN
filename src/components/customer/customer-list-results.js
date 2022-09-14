@@ -82,16 +82,16 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                   />
                 </TableCell>
                 <TableCell>
-                  Name
+                  이름
                 </TableCell>
                 <TableCell>
-                  Email
+                  이메일
                 </TableCell>
                 <TableCell>
-                  Location
+                  생년월일
                 </TableCell>
                 <TableCell>
-                  Phone
+                  전화번호
                 </TableCell>
                 <TableCell>
                   
@@ -137,7 +137,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                     {customer.email}
                   </TableCell>
                   <TableCell>
-                    {`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`}
+                    {customer.birthday}
                   </TableCell>
                   <TableCell>
                     {customer.phone}

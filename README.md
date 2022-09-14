@@ -1,12 +1,8 @@
 MOCEAN
 
-
 - [Users Page](https://material-kit-react.devias.io/customers)
 - [Login Page](https://material-kit-react.devias.io/login)
 
-
-## Free Figma Community File
- - [Duplicate File](https://www.figma.com/community/file/1039837897183395483/Devias-Dashboard-Design-Library-Kit)
 
 ## Quick start
 
