@@ -4,7 +4,9 @@ import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
-import MoceanLogo from 'src/components/MoceanLogo';
+import Image from "next/image";
+//import MoceanLogo from 'src/components/MoceanLogo';
+
 
 const index = () => {
   const router = useRouter();
@@ -47,8 +49,12 @@ const index = () => {
         }}
       >
         <Container maxWidth="sm">
-          <MoceanLogo/>
           <form onSubmit={formik.handleSubmit}>
+                <Image
+                src={"/static/images/mocean_sns.png"}
+                width ={600}
+                height ={95}
+                />
             <Box sx={{ my: 3 }}>
               <Typography
                 color="textPrimary"

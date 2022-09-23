@@ -33,6 +33,7 @@ export const CustomerListToolbar = (props) => (
         <Button
           color="primary"
           variant="contained"
+          href='/addCustomer'
         >
           Add Customers
         </Button>
