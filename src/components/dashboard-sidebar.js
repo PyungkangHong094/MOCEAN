@@ -71,7 +71,7 @@ export const DashboardSidebar = (props) => {
                 <Image
                 src={"/static/images/mocean_sns.png"}
                 width ={220}
-                height={120}
+                height ={35}
                 />
               </a>
               

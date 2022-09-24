@@ -66,6 +66,7 @@ export const DashboardNavbar = (props) => {
             color="error"
             variant="contained"
             sx={{ mr: 1 }}
+            href='/'
           >
             로그아웃
           </Button>
