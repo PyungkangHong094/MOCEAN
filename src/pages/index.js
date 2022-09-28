@@ -50,11 +50,11 @@ const index = () => {
       >
         <Container maxWidth="sm">
           <form onSubmit={formik.handleSubmit}>
-                <Image
-                src={"/static/images/mocean_sns.png"}
-                width ={600}
-                height ={95}
-                />
+            <Image
+              src={"/static/images/mocean_sns.png"}
+              width={600}
+              height={95}
+            />
             <Box sx={{ my: 3 }}>
               <Typography
                 color="textPrimary"
@@ -70,14 +70,14 @@ const index = () => {
                 MOCEAN 관리자 로그인
               </Typography>
             </Box>
-            
+
             <Box
               sx={{
                 pb: 1,
                 pt: 3
               }}
             >
-            
+
             </Box>
             <TextField
               error={Boolean(formik.touched.email && formik.errors.email)}
@@ -117,28 +117,29 @@ const index = () => {
                 로그인
               </Button>
             </Box>
-            <Typography
-              color="textSecondary"
-              variant="body2"
-            >
-              Don&apos;t have an account?
-              {' '}
-              <NextLink
-                href="/register"
-              >
-                <Link
-                  to="/register"
-                  variant="subtitle2"
-                  underline="hover"
-                  sx={{
-                    cursor: 'pointer'
-                  }}
-                >
-                  Sign Up
-                </Link>
-              </NextLink>
-            </Typography>
           </form>
+
+          <Typography
+            color="textSecondary"
+            variant="body2"
+          >
+            Don&apos;t have an account?
+            {' '}
+            <NextLink
+              href="/register"
+            >
+              <Link
+                to="/register"
+                variant="subtitle2"
+                underline="hover"
+                sx={{
+                  cursor: 'pointer'
+                }}
+              >
+                Sign Up
+              </Link>
+            </NextLink>
+          </Typography>
         </Container>
       </Box>
     </>
