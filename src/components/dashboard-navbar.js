@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { AppBar, Button, Typography, Box, IconButton, Toolbar,  } from '@mui/material';
+import { AppBar, Button, Typography, Box, IconButton, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useDialog } from './dialogs/context';
+import { useRouter } from 'next/router';
 
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
@@ -11,6 +13,9 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
 
 export const DashboardNavbar = (props) => {
   const { onSidebarOpen, ...other } = props;
+
+  const router = useRouter();
+  const { showConfirmDialog } = useDialog();
 
   return (
     <>
@@ -43,21 +48,21 @@ export const DashboardNavbar = (props) => {
           >
             <MenuIcon fontSize="small" />
           </IconButton>
-          
+
           <Box sx={{ flexGrow: 1 }} />
           <Typography
             sx={{ m: 1 }}
             variant="h7"
-            style={{color: 'black'}}
-            
+            style={{ color: 'black' }}
+
           >
             반갑습니다, pkhong 님
           </Typography>
           <Typography
             sx={{ m: 1 }}
             variant="h7"
-            style={{color: 'black'}}
-            
+            style={{ color: 'black' }}
+
           >
             pyungkangHong@test.com
           </Typography>
@@ -66,12 +71,16 @@ export const DashboardNavbar = (props) => {
             color="error"
             variant="contained"
             sx={{ mr: 1 }}
-            href='/'
+            onClick={() => showConfirmDialog({
+              title: '로그아웃',
+              message: '정말로 로그아웃하시겠습니까?',
+              onConfirm: () => router.push('/')
+            })}
           >
             로그아웃
           </Button>
-          
-          
+
+
           {/* <Avatar
             sx={{
               height: 40,

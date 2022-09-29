@@ -6,8 +6,23 @@ import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { createEmotionCache } from '../utils/create-emotion-cache';
 import { theme } from '../theme';
+import { DialogProvider } from 'src/components/dialogs/context';
+import DialogController from 'src/components/dialogs/controller';
 
 const clientSideEmotionCache = createEmotionCache();
+
+const AppWrapper = ({ children }) => {
+  return (
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <DialogProvider>
+          {children}
+        </DialogProvider>
+      </ThemeProvider>
+    </LocalizationProvider>
+  );
+}
 
 const App = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
@@ -25,12 +40,10 @@ const App = (props) => {
           content="initial-scale=1, width=device-width"
         />
       </Head>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          {getLayout(<Component {...pageProps} />)}
-        </ThemeProvider>
-      </LocalizationProvider>
+      <AppWrapper>
+        {getLayout(<Component {...pageProps} />)}
+        <DialogController />
+      </AppWrapper>
     </CacheProvider>
   );
 };
