@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import { Box,  Divider, Drawer,  useMediaQuery } from '@mui/material';
+import { Box, Divider, Drawer, useMediaQuery } from '@mui/material';
 import { Lock as LockIcon } from '../icons/lock';
 import { Selector as SelectorIcon } from '../icons/selector';
 import { ShoppingBag as ShoppingBagIcon } from '../icons/shopping-bag';
@@ -21,11 +21,11 @@ const items = [
     title: 'Customers'
   },
 
-  {
-    href: '/',
-    icon: (<LockIcon fontSize="small" />),
-    title: 'Login'
-  },
+  // {
+  //   href: '/',
+  //   icon: (<LockIcon fontSize="small" />),
+  //   title: 'Login'
+  // },
 
 ];
 
@@ -69,15 +69,15 @@ export const DashboardSidebar = (props) => {
               <a>
                 {/* 유저 페이지 로고 */}
                 <Image
-                src={"/static/images/mocean_sns.png"}
-                width ={220}
-                height ={35}
+                  src={"/static/images/mocean_sns.png"}
+                  width={220}
+                  height={35}
                 />
               </a>
-              
+
             </NextLink>
           </Box>
-          
+
         </div>
         <Divider
           sx={{
@@ -96,7 +96,7 @@ export const DashboardSidebar = (props) => {
           ))}
         </Box>
         <Divider sx={{ borderColor: '#2D3748' }} />
-        
+
       </Box>
     </>
   );

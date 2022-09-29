@@ -15,9 +15,12 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
-import { getInitials } from '../../utils/get-initials';
+// import { customers } from '../__mocks__/customers';
+import { CustomerListItem } from './customer-list-item';
+import { customers } from 'src/__mocks__/customers';
 
-export const CustomerListResults = ({ customers, ...rest }) => {
+export const CustomerList = ({ ...rest }) => {
+  const [customerList, setCustomerList] = useState(customers);
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
@@ -26,7 +29,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
     let newSelectedCustomerIds;
 
     if (event.target.checked) {
-      newSelectedCustomerIds = customers.map((customer) => customer.id);
+      newSelectedCustomerIds = customerList.map((customer) => customer.id);
     } else {
       newSelectedCustomerIds = [];
     }
@@ -34,7 +37,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
     setSelectedCustomerIds(newSelectedCustomerIds);
   };
 
-  const handleSelectOne = (event, id) => {
+  const handleSelectOne = (id) => {
     const selectedIndex = selectedCustomerIds.indexOf(id);
     let newSelectedCustomerIds = [];
 
@@ -54,6 +57,11 @@ export const CustomerListResults = ({ customers, ...rest }) => {
     setSelectedCustomerIds(newSelectedCustomerIds);
   };
 
+  const removeCustomer = (customer) => {
+    const newCustomerList = customerList.filter((_) => _.id !== customer.id);
+    setCustomerList(newCustomerList);
+  }
+
   const handleLimitChange = (event) => {
     setLimit(event.target.value);
   };
@@ -71,11 +79,11 @@ export const CustomerListResults = ({ customers, ...rest }) => {
               <TableRow>
                 <TableCell padding="checkbox">
                   <Checkbox
-                    checked={selectedCustomerIds.length === customers.length}
+                    checked={selectedCustomerIds.length === customerList.length}
                     color="primary"
                     indeterminate={
                       selectedCustomerIds.length > 0
-                      && selectedCustomerIds.length < customers.length
+                      && selectedCustomerIds.length < customerList.length
                     }
                     onChange={handleSelectAll}
                   />
@@ -93,86 +101,24 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                   전화번호
                 </TableCell>
                 <TableCell>
-                  
+
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(0, limit).map((customer) => (
-                <TableRow
-                  hover
-                  key={customer.id}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
-                >
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, customer.id)}
-                      value="true"
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Box
-                      sx={{
-                        alignItems: 'center',
-                        display: 'flex'
-                      }}
-                    >
-                      <Avatar
-                        src={customer.avatarUrl}
-                        sx={{ mr: 2 }}
-                      >
-                        {getInitials(customer.name)}
-                      </Avatar>
-                      <Typography
-                        color="textPrimary"
-                        variant="body1"
-                      >
-                        {customer.name}
-                      </Typography>
-                    </Box>
-                  </TableCell>
-                  <TableCell>
-                    {customer.email}
-                  </TableCell>
-                  <TableCell>
-                    {customer.birthday}
-                  </TableCell>
-                  <TableCell>
-                    {customer.phone}
-                  </TableCell>
-                  <TableCell>
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    sx={{ mr: 1 }}
-                  >
-                   수정
-                  </Button>
-                  <Button
-                    color="success"
-                    variant="contained"
-                    sx={{ mr: 1 }}
-                  >
-                    보기
-                  </Button>
-                  <Button
-                    color="error"
-                    variant="contained"
-                    sx={{ mr: 1 }}
-                  >
-                    삭제
-                  </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {customerList.slice(0, limit).map((customer) => <CustomerListItem
+                customer={customer}
+                selected={selectedCustomerIds.indexOf(customer.id) !== -1}
+                onSelect={handleSelectOne}
+                onRemove={() => removeCustomer(customer)}
+              />)}
             </TableBody>
           </Table>
         </Box>
       </PerfectScrollbar>
       <TablePagination
         component="div"
-        count={customers.length}
+        count={customerList.length}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleLimitChange}
         page={page}
@@ -183,6 +129,5 @@ export const CustomerListResults = ({ customers, ...rest }) => {
   );
 };
 
-CustomerListResults.propTypes = {
-  customers: PropTypes.array.isRequired
+CustomerList.propTypes = {
 };
