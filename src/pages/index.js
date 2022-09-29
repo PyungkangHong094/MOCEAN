@@ -5,8 +5,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import Image from "next/image";
-import MoceanLogo from 'src/components/MoceanLogo';
-
 
 const index = () => {
   const router = useRouter();
