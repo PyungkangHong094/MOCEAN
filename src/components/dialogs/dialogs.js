@@ -11,7 +11,7 @@ const BaseDialog = ({ children: actions, ...restProps }) =>
         </DialogTitle>
 
         <DialogContent>
-            <DialogContentText align='center'>
+            <DialogContentText align='center' style={{ whiteSpace: 'pre-line' }}>
                 {restProps.message}
             </DialogContentText>
         </DialogContent>

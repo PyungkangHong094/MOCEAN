@@ -44,7 +44,7 @@ export const CustomerListToolbar = (props) => {
                 {
                   title: '유저 추가',
                   message: '아직 미구현 페이지입니다. 그럼에도 이동합니다.',
-                  onConfirm: () => router.push('/addCustomer')
+                  onConfirm: () => router.push('/customers/form')
                 }
               )
             }}
