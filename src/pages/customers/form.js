@@ -1,6 +1,7 @@
 import { Box, Container, Typography } from "@mui/material";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { CustomerFormToolbar } from "src/components/customer/customer-form-toolbar";
 import { DashboardLayout } from '../../components/dashboard-layout';
 
 
@@ -22,9 +23,10 @@ const CustomerForm = ({ data: initialData }) => {
                 sx={{
                     display: 'flex',
                     flexGrow: 1,
-                    py: 8
+                    flexDirection: 'column'
                 }}
             >
+                <CustomerFormToolbar isNew={id === null || id === undefined} />
                 <Box
                     display="flex"
                     justifyContent="center"

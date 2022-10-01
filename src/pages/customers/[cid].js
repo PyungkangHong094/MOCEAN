@@ -1,9 +1,8 @@
 import { Box, Container, Typography } from "@mui/material";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { CustomerToolbar } from "src/components/customer/customer-toolbar";
 import { DashboardLayout } from '../../components/dashboard-layout';
-
-
 
 const CustomerDetail = ({ cid }) => {
     const router = useRouter()
@@ -21,9 +20,13 @@ const CustomerDetail = ({ cid }) => {
                 sx={{
                     display: 'flex',
                     flexGrow: 1,
-                    py: 8
+                    flexDirection: "column",
                 }}
             >
+                <CustomerToolbar
+                    name={'Joshua Park'}
+                    datetime={'2022-10-01 16:30'}
+                    email={'joshuapark@gmail.com'} />
                 <Box
                     display="flex"
                     justifyContent="center"
