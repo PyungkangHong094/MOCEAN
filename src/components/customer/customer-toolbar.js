@@ -25,11 +25,10 @@ export const CustomerToolbar = ({ name, datetime, email }) => {
         display: 'flex',
         justifyContent: 'space-between',
         flexWrap: 'wrap',
-        backgroundColor: '#0038A4',
+        backgroundColor: '#2A5f8B',
         m: 0
-      }}
-    >
-      <Box sx={{ m: 1 }}>
+      }}>
+      <Box sx={{ mx: 1 }}>
 
         <Button
           sx={{ color: '#FFF' }}
@@ -60,7 +59,7 @@ export const CustomerToolbar = ({ name, datetime, email }) => {
         </Typography >
         <Divider orientation='vertical' flexItem />
         <Typography color='#FFF'>
-          Email {email ?? '-'}
+          Email: {email ?? '-'}
         </Typography>
       </Box>
     </Box>
