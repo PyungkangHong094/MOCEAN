@@ -8,17 +8,22 @@ import { createEmotionCache } from '../utils/create-emotion-cache';
 import { theme } from '../theme';
 import { DialogProvider } from 'src/components/dialogs/context';
 import DialogController from 'src/components/dialogs/controller';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const clientSideEmotionCache = createEmotionCache();
+
+const queryClient = new QueryClient();
 
 const AppWrapper = ({ children }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <DialogProvider>
-          {children}
-        </DialogProvider>
+        <QueryClientProvider client={queryClient}>
+          <DialogProvider>
+            {children}
+          </DialogProvider>
+        </QueryClientProvider>
       </ThemeProvider>
     </LocalizationProvider>
   );
