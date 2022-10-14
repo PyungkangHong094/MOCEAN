@@ -58,7 +58,7 @@ export const CustomerMenu = ({ onSelectMenu }) => {
             <TabItem
                 icon={<>
                     <Image
-                        src={"/static/images/avatars/avatar_1.png"}
+                        src={"/static/images/avatars/m.png"}
                         width={60}
                         height={60} />
                     <Box height={'8px'} />
@@ -68,7 +68,7 @@ export const CustomerMenu = ({ onSelectMenu }) => {
             <TabItem
                 icon={<>
                     <Image
-                        src={"/static/images/avatars/avatar_2.png"}
+                        src={"/static/images/avatars/o.png"}
                         width={60}
                         height={60} />
                     <Box height={'8px'} />
@@ -77,7 +77,7 @@ export const CustomerMenu = ({ onSelectMenu }) => {
                 wrapped />
             <TabItem icon={<>
                 <Image
-                    src={"/static/images/avatars/avatar_3.png"}
+                    src={"/static/images/avatars/c.png"}
                     width={60}
                     height={60} />
                 <Box height={'8px'} />
@@ -87,7 +87,7 @@ export const CustomerMenu = ({ onSelectMenu }) => {
             <TabItem
                 icon={<>
                     <Image
-                        src={"/static/images/avatars/avatar_4.png"}
+                        src={"/static/images/avatars/e.png"}
                         width={60}
                         height={60} />
                     <Box height={'8px'} />
@@ -95,7 +95,7 @@ export const CustomerMenu = ({ onSelectMenu }) => {
             <TabItem
                 icon={<>
                     <Image
-                        src={"/static/images/avatars/avatar_5.png"}
+                        src={"/static/images/avatars/a.png"}
                         width={60}
                         height={60} />
                     <Box height={'8px'} />
@@ -103,7 +103,7 @@ export const CustomerMenu = ({ onSelectMenu }) => {
             <TabItem
                 icon={<>
                     <Image
-                        src={"/static/images/avatars/avatar_6.png"}
+                        src={"/static/images/avatars/n.png"}
                         width={60}
                         height={60} />
                     <Box height={'8px'} />
