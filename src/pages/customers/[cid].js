@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { CustomerMenu } from "src/components/customer/customer-menu";
 import { CustomerToolbar } from "src/components/customer/customer-toolbar";
+import RatingBar from "src/components/rating/rating-bar";
+import RatingContainer from "src/components/rating/rating-container";
 import { DashboardLayout } from '../../components/dashboard-layout';
 
 const CustomerDetail = ({ cid }) => {
@@ -34,11 +36,10 @@ const CustomerDetail = ({ cid }) => {
                 <CustomerMenu onSelectMenu={(idx) => setData(idx)} />
                 <Box
                     display="flex"
-                    justifyContent="center"
-                    alignItems="center"
                     sx={{
                         flex: 1,
                     }}>
+                    <RatingContainer title='Organ System' />
                     <Typography style={{ whiteSpace: 'pre-line' }}>
                         Customer ID: {cid}
                         {'\n'}
