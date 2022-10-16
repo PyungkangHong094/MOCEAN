@@ -21,7 +21,7 @@ function RatingContainer({ title, data }) {
         <Typography sx={{ mb: 2 }} variant='h5'>
             {title}
         </Typography>
-        {data.map(e => <RatingBar title={e.title} rating={e.score} />)}
+        {data.map((e, i) => <RatingBar key={i} title={e.title} rating={e.score} />)}
     </Box>);
 }
 

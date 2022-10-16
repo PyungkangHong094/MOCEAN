@@ -1,21 +1,13 @@
 import {
   Box,
   Button,
-  Card,
-  CardContent,
-  TextField,
-  InputAdornment,
-  SvgIcon, Typography, Divider
+  Typography,
+  Divider
 } from '@mui/material';
-import { Search as SearchIcon } from '../../icons/search';
-import { Upload as UploadIcon } from '../../icons/upload';
-import { Download as DownloadIcon } from '../../icons/download';
 import { useRouter } from 'next/router';
-import { useDialog } from '../dialogs/context';
-import { useState } from 'react';
 import { ArrowBackIosNewRounded } from '@mui/icons-material';
 
-export const CustomerToolbar = ({ name, datetime, email }) => {
+export const ResultToolbar = ({ name, datetime, email }) => {
   const router = useRouter();
 
   return (
