@@ -1,9 +1,8 @@
 import { Box, Typography } from "@mui/material";
 
-const { default: Image } = require("next/image");
-const { useUserforM } = require("src/data/repository/users");
-const { default: RatingContainer } = require("../rating/rating-container");
-const { Program } = require("../result-menu");
+import Image from "next/image";
+import RatingContainer from "../../rating/rating-container";
+import { Program } from "../../result-menu";
 
 const ResultMView = () => {
     // const data = useUserforM();

@@ -8,7 +8,8 @@ import { useRouter } from 'next/router';
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
-  boxShadow: theme.shadows[3]
+  boxShadow: theme.shadows[3],
+  position: 'relative',
 }));
 
 export const DashboardNavbar = (props) => {
@@ -19,16 +20,7 @@ export const DashboardNavbar = (props) => {
 
   return (
     <>
-      <DashboardNavbarRoot
-        sx={{
-          left: {
-            lg: 280
-          },
-          width: {
-            lg: 'calc(100% - 280px)'
-          }
-        }}
-        {...other}>
+      <DashboardNavbarRoot {...other}>
         <Toolbar
           disableGutters
           sx={{

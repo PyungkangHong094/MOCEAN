@@ -46,15 +46,18 @@ const CustomerDetail = ({ cid }) => {
                     flexDirection: "column",
                 }}
             >
-                <ResultToolbar
-                    name={'Joshua Park'}
-                    datetime={'2022-10-01 16:30'}
-                    email={'joshuapark@gmail.com'} />
-                <ResultMenu onSelectMenu={(idx) => setMenuIdx(idx)} />
+                <Box sx={{ position: '-webkit-sticky', position: 'sticky', top: 0, zIndex: 2, }}>
+                    <ResultToolbar
+                        name={'Joshua Park'}
+                        datetime={'2022-10-01 16:30'}
+                        email={'joshuapark@gmail.com'} />
+                    <ResultMenu onSelectMenu={(idx) => setMenuIdx(idx)} />
+                </Box>
                 <Box
                     display="flex"
                     sx={{
                         flex: 1,
+                        p: 1,
                     }}>
                     {renderResultView()}
 

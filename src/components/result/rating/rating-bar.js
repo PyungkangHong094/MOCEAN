@@ -9,7 +9,7 @@ const Bar = ({ color, enable = false }) => {
 
 const RatingBar = ({ title, rating }) => {
     return (
-        <Box sx={{}}>
+        <Box my={2}>
             <Typography m={0.5}>
                 {title}
             </Typography>
