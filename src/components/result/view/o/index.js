@@ -5,7 +5,6 @@ import Image from "next/image";
 import RatingContainer from "../../rating/rating-container";
 import { Program } from "../../result-menu";
 import { useUserforM } from "src/data/repository/users";
-import ScoreText from "./score";
 import { HydrationArticle, InflammationArticle, MuscleArticle, PhaseArticle, TotalScoreArticle, VisceralArticle, } from "./articles";
 
 const ResultOView = () => {

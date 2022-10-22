@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material"
-import ScoreText from "./score"
+import ScoreText from "../../../score"
 
 const Article = ({ title, children }) => {
     return <Box sx={{ m: 2 }}>
