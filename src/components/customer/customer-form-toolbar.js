@@ -34,8 +34,10 @@ export const CustomerFormToolbar = ({ isNew }) => {
         display: 'flex',
         justifyContent: 'space-between',
         flexWrap: 'wrap',
-        mx: 3,
-        my: 2,
+        height: 80,
+        backgroundColor: '#F9FAFC',
+        px: 3,
+        py: 2,
       }}
     >
       <Typography variant='h5'>
