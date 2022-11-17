@@ -1,11 +1,11 @@
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import ApiClient from "../api-client";
 
-export const useSignIn = (email, password) => {
-    const getSignIn = async () => {
-        const { data } = await ApiClient().get(`login?email=${email}&password=${password}`);
-        return data;
-    }
+const postSignIn = ({ username, password }) => {
+  return ApiClient().post("/login", {
+    username,
+    password,
+  });
+};
 
-    return useQuery('sign-in', getSignIn);
-}
+export const useSignIn = () => useMutation(postSignIn);
