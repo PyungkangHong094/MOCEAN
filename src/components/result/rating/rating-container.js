@@ -3,15 +3,26 @@ import React from "react";
 import RatingBar from "./rating-bar";
 
 function RatingContainer({ title, data }) {
-  console.log(data);
   return (
     <Box sx={{ width: 400 }}>
       <Typography sx={{ mb: 2 }} variant="h5">
         {title}
       </Typography>
-      {data.map((e, i) => (
-        <RatingBar key={i} title={e.title} rating={e.score} />
-      ))}
+      {data.map((e, i) => {
+        const ratingBars = e.items.map((item) => (
+          <RatingBar key={i} title={item.title} rating={item.score} />
+        ));
+        return (
+          <Box ml={1} my={4}>
+            {e.category ? (
+              <Typography variant="h6" ml={2}>
+                {e.category}
+              </Typography>
+            ) : null}
+            {ratingBars}
+          </Box>
+        );
+      })}
     </Box>
   );
 }

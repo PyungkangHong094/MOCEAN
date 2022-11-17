@@ -15,37 +15,37 @@ import {
 } from "./articles";
 
 const ratingData = [
-  { title: "Cellular Health", score: 2 },
-  { title: "Hydration", score: 2 },
-  { title: "Body Fat", score: 3 },
-  { title: "Visceral Fat", score: 4 },
-  { title: "Inflammation", score: 2 },
-  { title: "Upper Body (left)", score: 3 },
-  { title: "Upper Body (right)", score: 3 },
-  { title: "Lower Body (left)", score: 3 },
-  { title: "Lower Body (right)", score: 3 },
-  { title: "Trunk", score: 4 },
-  { title: "Cell integrity", score: 2 },
+  { items: [{ title: "Cellular Health", score: 2 }] },
+  { items: [{ title: "Hydration", score: 2 }] },
+  { items: [{ title: "Body Fat", score: 3 }] },
+  { items: [{ title: "Visceral Fat", score: 4 }] },
+  { items: [{ title: "Inflammation", score: 2 }] },
+  { items: [{ title: "Upper Body (left)", score: 3 }] },
+  { items: [{ title: "Upper Body (right)", score: 3 }] },
+  { items: [{ title: "Lower Body (left)", score: 3 }] },
+  { items: [{ title: "Lower Body (right)", score: 3 }] },
+  { items: [{ title: "Trunk", score: 4 }] },
+  { items: [{ title: "Cell integrity", score: 2 }] },
 ];
 
 const ResultOView = () => {
-  const data = useUserforM();
+  // const data = useUserforM();
 
   return (
     <>
       <RatingContainer title={Program.O} data={ratingData} />
       <Box>
-        <TotalScoreArticle />
+        <TotalScoreArticle score={2} />
         <Divider variant="middle" sx={{ color: "black", borderBottom: 1.5 }} />
-        <HydrationArticle />
+        <HydrationArticle score={1} />
         <Divider variant="middle" sx={{ color: "black", borderBottom: 1.5 }} />
-        <MuscleArticle />
+        <MuscleArticle score={2} />
         <Divider variant="middle" sx={{ color: "black", borderBottom: 1.5 }} />
-        <VisceralArticle />
+        <VisceralArticle score={3} />
         <Divider variant="middle" sx={{ color: "black", borderBottom: 1.5 }} />
-        <InflammationArticle />
+        <InflammationArticle score={0} />
         <Divider variant="middle" sx={{ color: "black", borderBottom: 1.5 }} />
-        <PhaseArticle />
+        <PhaseArticle score={2} />
         <Divider variant="middle" sx={{ color: "black", borderBottom: 1.5 }} />
       </Box>
     </>

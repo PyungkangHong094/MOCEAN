@@ -6,17 +6,39 @@ import { Program } from "../../result-menu";
 import ArticleBox from "./articles";
 
 const ratingData = [
-  { title: "Cellular Health", score: 2 },
-  { title: "Hydration", score: 2 },
-  { title: "Body Fat", score: 3 },
-  { title: "Visceral Fat", score: 4 },
-  { title: "Inflammation", score: 2 },
-  { title: "Upper Body (left)", score: 3 },
-  { title: "Upper Body (right)", score: 3 },
-  { title: "Lower Body (left)", score: 3 },
-  { title: "Lower Body (right)", score: 3 },
-  { title: "Trunk", score: 4 },
-  { title: "Cell integrity", score: 2 },
+  { category: "Posture", items: [{ title: "Posture", score: 2 }] },
+  {
+    category: "Mobility & Balance",
+    items: [
+      { title: "Spine_Cervical", score: 1 },
+      { title: "Spine_Thoraco-lumbar", score: 1 },
+    ],
+  },
+  {
+    category: "Upper Extremity",
+    items: [
+      { title: "Left", score: 1 },
+      { title: "Right", score: 4 },
+    ],
+  },
+  {
+    category: "Lower Extremity",
+    items: [
+      { title: "Left", score: 2 },
+      { title: "Right", score: 3 },
+    ],
+  },
+  { category: "Movement", items: [{ title: "Movement", score: 3 }] },
+  { category: "Cardio-respiratory strength", items: [{ title: "VO2 Max", score: 1 }] },
+
+  {
+    category: "Musculo skeletal strength",
+    items: [
+      { title: "Push-up test", score: 2 },
+      { title: "Squat test", score: 3 },
+      { title: "Plank test", score: 1 },
+    ],
+  },
 ];
 
 const ResultMView = () => {
@@ -30,7 +52,7 @@ const ResultMView = () => {
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Image src={"/static/images/body1.png"} width={500} height={500} objectFit="contain" />
         </Box>
-        <ArticleBox />
+        <ArticleBox score={0} />
       </Box>
     </>
   );

@@ -12,14 +12,18 @@ import {
 } from "./articles";
 
 const ratingData = [
-  { title: "Blood Circulation", score: 1 },
-  { title: "Lymph circulation", score: 2 },
-  { title: "Toxicity level", score: 4 },
-  { title: "Blood Pressure", score: 2 },
-  { title: "Red Blood Cell", score: 3 },
-  { title: "Oxygen level", score: 1 },
-  { title: "Carbon Dioxide level", score: 1 },
-  { title: "Nitric Oxide level", score: 2 },
+  { items: [{ title: "Blood Circulation", score: 2 }] },
+  { items: [{ title: "Lymph circulation", score: 2 }] },
+  { items: [{ title: "Toxicity level", score: 3 }] },
+  { items: [{ title: "Blood Pressure", score: 4 }] },
+  { items: [{ title: "Oxygen Level", score: 2 }] },
+  { items: [{ title: "Pulse Rate", score: 3 }] },
+  { items: [{ title: "Blood Glucose", score: 3 }] },
+  { items: [{ title: "Blood Uric Acid", score: 3 }] },
+  { items: [{ title: "Blood Cholesterol", score: 3 }] },
+  { items: [{ title: "Respiratory Circulation", score: 4 }] },
+  { items: [{ title: "Nitric Oxide level", score: 2 }] },
+  { items: [{ title: "Red Blood Cell", score: 2 }] },
 ];
 
 const ResultCView = () => {
@@ -29,15 +33,15 @@ const ResultCView = () => {
     <>
       <RatingContainer title={Program.C} data={ratingData} />
       <Box>
-        <BloodPressureArticle />
+        <BloodPressureArticle score={0} />
         <Divider variant="middle" sx={{ color: "black", borderBottom: 1.5 }} />
-        <GlucoseArticle />
+        <GlucoseArticle score={1} />
         <Divider variant="middle" sx={{ color: "black", borderBottom: 1.5 }} />
-        <CholesterolArticle score={4} />
+        <CholesterolArticle score={2} />
         <Divider variant="middle" sx={{ color: "black", borderBottom: 1.5 }} />
-        <RespiratoryArticle />
+        <RespiratoryArticle score={3} />
         <Divider variant="middle" sx={{ color: "black", borderBottom: 1.5 }} />
-        <NitricArticle />
+        <NitricArticle score={0} />
         <Divider variant="middle" sx={{ color: "black", borderBottom: 1.5 }} />
         <LiveBloodArticle />
       </Box>

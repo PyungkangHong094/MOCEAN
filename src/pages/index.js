@@ -22,7 +22,7 @@ const index = () => {
       username: Yup.string().max(255).required("Username is required"),
       password: Yup.string().max(255).required("Password is required"),
     }),
-    onSubmit: (values) => {
+    onSubmit: (values, { setSubmitting }) => {
       // router.push("/customers");
       const { username, password } = values;
       mutate(
@@ -41,6 +41,7 @@ const index = () => {
               title: "로그인 오류",
               message: `[${error.code}]\n${error.message}`,
             });
+            setSubmitting(false);
           },
         }
       );
