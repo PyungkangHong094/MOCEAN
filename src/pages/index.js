@@ -48,10 +48,6 @@ const index = () => {
     },
   });
 
-  useEffect(() => {
-    console.log(status);
-  }, [status]);
-
   return (
     <>
       <Head>

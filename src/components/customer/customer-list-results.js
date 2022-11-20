@@ -17,9 +17,9 @@ import {
 } from "@mui/material";
 // import { customers } from '../__mocks__/customers';
 import { CustomerListItem } from "./customer-list-item";
-import { customers } from "src/__mocks__/customers";
+import { customersMoc } from "src/__mocks__/customers";
 
-export const CustomerList = ({ ...rest }) => {
+export const CustomerList = ({ customers = customersMoc, ...rest }) => {
   const [customerList, setCustomerList] = useState(customers);
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);

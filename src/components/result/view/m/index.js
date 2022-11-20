@@ -1,6 +1,8 @@
 import { Box, Typography } from "@mui/material";
 
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useMMobility } from "src/data/repository/m";
 import RatingContainer from "../../rating/rating-container";
 import { Program } from "../../result-menu";
 import ArticleBox from "./articles";
@@ -42,7 +44,9 @@ const ratingData = [
 ];
 
 const ResultMView = () => {
-  // const data = useUserforM();
+  const { query } = useRouter();
+  // const { status, data } = useMMobility(query.cid);
+  // console.log(status, data);
 
   return (
     <>

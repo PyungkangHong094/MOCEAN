@@ -1,13 +1,13 @@
 import Head from "next/head";
-import { Box, Container } from "@mui/material";
+import { Box, CircularProgress, Container } from "@mui/material";
 import { CustomerList } from "../../components/customer/customer-list-results";
 import { CustomerListToolbar } from "../../components/customer/customer-list-toolbar";
 import { DashboardLayout } from "../../components/dashboard-layout";
 import { useAllUsers } from "src/data/repository/users";
 
 const Customers = () => {
-  // const { status, data } = useAllUsers();
-  // console.log(status, data);
+  const { data, isLoading, isError } = useAllUsers();
+
   return (
     <>
       <Head>
@@ -23,7 +23,11 @@ const Customers = () => {
         <Container maxWidth={false}>
           <CustomerListToolbar />
           <Box sx={{ mt: 3 }}>
-            <CustomerList />
+            {isLoading ? (
+              <CircularProgress />
+            ) : isError ? null : (
+              <CustomerList customers={data.items} />
+            )}
           </Box>
         </Container>
       </Box>

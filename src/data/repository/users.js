@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
 import ApiClient from "../api-client";
 
-export const useAllUsers = (page = 0, pageSize = 20, filterName) => {
+export const useAllUsers = (page = 1, pageSize = 20, filterName) => {
   const getAllUsers = async () => {
     const { data } = await ApiClient().get(
-      `/customers?page=${page}&items_per_page=${pageSize}&name=${filterName}`
+      `/customers?page=${page}&items_per_page=${pageSize}` //&name=${filterName}`,
     );
     return data;
   };
@@ -14,7 +14,7 @@ export const useAllUsers = (page = 0, pageSize = 20, filterName) => {
 
 export const useCreateUser = ({ name, email, password, phone, birth }) => {
   const postUser = async () => {
-    const result = await ApiClient().post("users", {
+    const result = await ApiClient().post("/customers", {
       name,
       email,
       password,
@@ -28,14 +28,6 @@ export const useCreateUser = ({ name, email, password, phone, birth }) => {
   return useQuery("post-user", postUser);
 };
 
-export const useUserforM = (userId) => {
-  const getUserM = async () => {
-    const { data } = await ApiClient().get(`users/${userId}/musculoskeletal`);
-    return data;
-  };
-
-  return useQuery("get-user-M", getUserM);
-};
 export const useUserforO = (userId) => {
   const getUserO = async () => {
     const { data } = await ApiClient().get(`users/${userId}/musculoskeletal`);

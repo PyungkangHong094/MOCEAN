@@ -10,10 +10,10 @@ function RatingContainer({ title, data }) {
       </Typography>
       {data.map((e, i) => {
         const ratingBars = e.items.map((item) => (
-          <RatingBar key={i} title={item.title} rating={item.score} />
+          <RatingBar title={item.title} rating={item.score} />
         ));
         return (
-          <Box ml={1} my={4}>
+          <Box key={i} ml={1} my={4}>
             {e.category ? (
               <Typography variant="h6" ml={2}>
                 {e.category}
