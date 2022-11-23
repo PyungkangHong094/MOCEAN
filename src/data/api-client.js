@@ -15,7 +15,8 @@ const ApiClient = ({ needAuth = true, contentType = "application/json" } = {}) =
   }
 
   return axios.create({
-    baseURL: `${process.env.NEXT_PUBLIC_MOCEAN_BASE_URL}/moc`,
+    // baseURL: `${process.env.NEXT_PUBLIC_MOCEAN_BASE_URL}/moc`,
+    baseURL: `https://www.moceanbackend.com/moc`,
     headers,
   });
 };
