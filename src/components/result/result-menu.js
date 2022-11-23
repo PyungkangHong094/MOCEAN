@@ -1,16 +1,16 @@
-import {
-    Box,
-    Button,
-    Card,
-    CardContent,
-    TextField,
-    InputAdornment,
-    SvgIcon, Typography, Divider, Tab, Tabs,
-} from '@mui/material';
-import { useDialog } from '../dialogs/context';
+import { Box, Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
 import { styled } from '@mui/system';
 import Image from 'next/image';
+
+export const Program = {
+    M: 'Musculoskeletal System',
+    O: 'Organ System',
+    C: 'Circulatory System',
+    E: 'Emotion',
+    A: 'Articular Joint',
+    N: 'Circulatory System',
+}
 
 const TabRow = styled(Tabs)({
     backgroundColor: '#F7F7F7',
@@ -45,7 +45,7 @@ const TabItem = styled((props) => <Tab disableRipple {...props} />)(({ theme }) 
     },
 }));
 
-export const CustomerMenu = ({ onSelectMenu }) => {
+export const ResultMenu = ({ onSelectMenu }) => {
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -63,7 +63,7 @@ export const CustomerMenu = ({ onSelectMenu }) => {
                         height={60} />
                     <Box height={'8px'} />
                 </>}
-                label="Musculoskeletal system"
+                label={Program.M}
                 wrapped />
             <TabItem
                 icon={<>
@@ -73,7 +73,7 @@ export const CustomerMenu = ({ onSelectMenu }) => {
                         height={60} />
                     <Box height={'8px'} />
                 </>}
-                label="Organ system (digestion)"
+                label={`${Program.O} (digestion)`}
                 wrapped />
             <TabItem icon={<>
                 <Image
@@ -82,7 +82,7 @@ export const CustomerMenu = ({ onSelectMenu }) => {
                     height={60} />
                 <Box height={'8px'} />
             </>}
-                label="Circulatory system"
+                label={Program.C}
                 wrapped />
             <TabItem
                 icon={<>
@@ -91,7 +91,7 @@ export const CustomerMenu = ({ onSelectMenu }) => {
                         width={60}
                         height={60} />
                     <Box height={'8px'} />
-                </>} label="Emotion (energy)" wrapped />
+                </>} label={`${Program.E} (energy)`} wrapped />
             <TabItem
                 icon={<>
                     <Image
@@ -99,7 +99,7 @@ export const CustomerMenu = ({ onSelectMenu }) => {
                         width={60}
                         height={60} />
                     <Box height={'8px'} />
-                </>} label="Articular joint (joint)" disabled wrapped />
+                </>} label={`${Program.A} (joint)`} disabled wrapped />
             <TabItem
                 icon={<>
                     <Image
@@ -107,7 +107,7 @@ export const CustomerMenu = ({ onSelectMenu }) => {
                         width={60}
                         height={60} />
                     <Box height={'8px'} />
-                </>} label="Nervous system" disabled wrapped />
+                </>} label={Program.N} disabled wrapped />
         </TabRow>
     );
 }

@@ -196,6 +196,12 @@ export const theme = createTheme({
       primary: '#121828',
       secondary: '#65748B',
       disabled: 'rgba(55, 65, 81, 0.48)'
+    },
+    score: {
+      poor: '#C1282D',
+      fair: '#F7931F',
+      good: '#FCEE21',
+      excellent: '#8CC63F',
     }
   },
   shape: {

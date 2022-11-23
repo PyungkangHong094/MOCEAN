@@ -2,15 +2,34 @@ import { Box, Container, Typography } from "@mui/material";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { CustomerMenu } from "src/components/customer/customer-menu";
-import { CustomerToolbar } from "src/components/customer/customer-toolbar";
+import { ResultMenu } from "src/components/result/result-menu";
+import { ResultToolbar } from "src/components/result/result-toolbar";
+import RatingContainer from "src/components/result/rating/rating-container";
 import { DashboardLayout } from '../../components/dashboard-layout';
+import ResultMView from "src/components/result/view/m";
+import ResultOView from "src/components/result/view/o";
+import ResultCView from "src/components/result/view/c";
+import ResultEView from "src/components/result/view/e";
 
 const CustomerDetail = ({ cid }) => {
     const router = useRouter()
 
-    const [data, setData] = useState(0);
+    const [menuIdx, setMenuIdx] = useState(0);
 
+    const renderResultView = () => {
+        switch (menuIdx) {
+            case 0:
+                return <ResultMView />;
+            case 1:
+                return <ResultOView />;
+            case 2:
+                return <ResultCView />;
+            case 3:
+                return <ResultEView />;
+            default:
+                return <ResultMView />;
+        }
+    }
 
     return (
         <>
@@ -27,23 +46,21 @@ const CustomerDetail = ({ cid }) => {
                     flexDirection: "column",
                 }}
             >
-                <CustomerToolbar
-                    name={'Joshua Park'}
-                    datetime={'2022-10-01 16:30'}
-                    email={'joshuapark@gmail.com'} />
-                <CustomerMenu onSelectMenu={(idx) => setData(idx)} />
+                <Box sx={{ position: '-webkit-sticky', position: 'sticky', top: 0, zIndex: 2, }}>
+                    <ResultToolbar
+                        name={'Joshua Park'}
+                        datetime={'2022-10-01 16:30'}
+                        email={'joshuapark@gmail.com'} />
+                    <ResultMenu onSelectMenu={(idx) => setMenuIdx(idx)} />
+                </Box>
                 <Box
                     display="flex"
-                    justifyContent="center"
-                    alignItems="center"
                     sx={{
                         flex: 1,
+                        p: 1,
                     }}>
-                    <Typography style={{ whiteSpace: 'pre-line' }}>
-                        Customer ID: {cid}
-                        {'\n'}
-                        Current Tab: {data}
-                    </Typography>
+                    {renderResultView()}
+
                 </Box>
             </Box>
         </>

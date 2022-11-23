@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import PropTypes from 'prop-types';
+import { useState } from "react";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import PropTypes from "prop-types";
 import {
   Avatar,
   Button,
@@ -13,13 +13,13 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Typography
-} from '@mui/material';
+  Typography,
+} from "@mui/material";
 // import { customers } from '../__mocks__/customers';
-import { CustomerListItem } from './customer-list-item';
-import { customers } from 'src/__mocks__/customers';
+import { CustomerListItem } from "./customer-list-item";
+import { customersMoc } from "src/__mocks__/customers";
 
-export const CustomerList = ({ ...rest }) => {
+export const CustomerList = ({ customers = customersMoc, ...rest }) => {
   const [customerList, setCustomerList] = useState(customers);
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
@@ -60,7 +60,7 @@ export const CustomerList = ({ ...rest }) => {
   const removeCustomer = (customer) => {
     const newCustomerList = customerList.filter((_) => _.id !== customer.id);
     setCustomerList(newCustomerList);
-  }
+  };
 
   const handleLimitChange = (event) => {
     setLimit(event.target.value);
@@ -82,36 +82,29 @@ export const CustomerList = ({ ...rest }) => {
                     checked={selectedCustomerIds.length === customerList.length}
                     color="primary"
                     indeterminate={
-                      selectedCustomerIds.length > 0
-                      && selectedCustomerIds.length < customerList.length
+                      selectedCustomerIds.length > 0 &&
+                      selectedCustomerIds.length < customerList.length
                     }
                     onChange={handleSelectAll}
                   />
                 </TableCell>
-                <TableCell>
-                  이름
-                </TableCell>
-                <TableCell>
-                  이메일
-                </TableCell>
-                <TableCell>
-                  생년월일
-                </TableCell>
-                <TableCell>
-                  전화번호
-                </TableCell>
-                <TableCell>
-
-                </TableCell>
+                <TableCell>이름</TableCell>
+                <TableCell>이메일</TableCell>
+                <TableCell>생년월일</TableCell>
+                <TableCell>전화번호</TableCell>
+                <TableCell></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {customerList.slice(0, limit).map((customer) => <CustomerListItem
-                customer={customer}
-                selected={selectedCustomerIds.indexOf(customer.id) !== -1}
-                onSelect={handleSelectOne}
-                onRemove={() => removeCustomer(customer)}
-              />)}
+              {customerList.slice(0, limit).map((customer) => (
+                <CustomerListItem
+                  key={customer.id}
+                  customer={customer}
+                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
+                  onSelect={handleSelectOne}
+                  onRemove={() => removeCustomer(customer)}
+                />
+              ))}
             </TableBody>
           </Table>
         </Box>
@@ -129,5 +122,4 @@ export const CustomerList = ({ ...rest }) => {
   );
 };
 
-CustomerList.propTypes = {
-};
+CustomerList.propTypes = {};

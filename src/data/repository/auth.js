@@ -1,11 +1,26 @@
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import ApiClient from "../api-client";
 
-export const useSignIn = (email, password) => {
-    const getSignIn = async () => {
-        const { data } = await ApiClient().get(`login?email=${email}&password=${password}`);
-        return data;
-    }
+const postSignIn = ({ username, password }) => {
+  return ApiClient({ needAuth: false }).post("/login", {
+    username,
+    password,
+  });
+};
 
-    return useQuery('sign-in', getSignIn);
-}
+const postRefresh = async () => {
+  const { status, data } = await ApiClient({ needAuth: false }).post("/refresh-token", {
+    token: sessionStorage.getItem("MOCEAN-TOKEN"),
+  });
+
+  if (status != 200) {
+    return false;
+  }
+
+  sessionStorage.setItem("MOCEAN-TOKEN", data.token);
+
+  return true;
+};
+
+export const useSignIn = () => useMutation(postSignIn);
+export const useRefreshToken = () => useMutation(postRefresh);
