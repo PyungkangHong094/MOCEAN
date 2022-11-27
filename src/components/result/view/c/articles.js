@@ -20,7 +20,7 @@ export const BloodPressureArticle = ({ name = "Client", score = 0 }) => {
         Therefore maintaining optimal blood pressure and circulation is crucial for the health. 
       </Typography>
       <Typography my={2}>
-        <b>{name}</b>'s blood pressure level is <ScoreText score={score} />
+        <b>{name}</b>&apos;s blood pressure level is <ScoreText score={score} />
         {/*[low / optimal / high normal / hypertension]*/}
       </Typography>
       {score > 1 ? (
@@ -63,7 +63,7 @@ export const GlucoseArticle = ({ name = "Client", score = 0 }) => {
         health.
       </Typography>
       <Typography my={2}>
-        <b>{name}</b>'s glucose level is <ScoreText score={score} />
+        <b>{name}</b>&apos;s glucose level is <ScoreText score={score} />
         {/* [low / good  / high / very high] */}
       </Typography>
       {score > 1 ? (
@@ -108,7 +108,7 @@ export const CholesterolArticle = ({ name = "Client", score = 0 }) => {
         cardiovascular disease, so managing cholesterol levels is important for health.
       </Typography>
       <Typography my={2}>
-        <b>{name}</b>'s cholosterol level is <ScoreText score={score} />
+        <b>{name}</b>&apos;s cholosterol level is <ScoreText score={score} />
         {/* [optimal / elevated / high]														 */}
       </Typography>
       {score > 1 ? (
@@ -170,7 +170,7 @@ export const NitricArticle = ({ name = "Client", score = 0 }) => {
         supplementation to promotees overall health energy and vitality
       </Typography>
       <Typography my={2}>
-        <b>{name}</b>'s current nitric oxide level is <ScoreText score={score} />
+        <b>{name}</b>&apos;s current nitric oxide level is <ScoreText score={score} />
       </Typography>
     </Article>
   );

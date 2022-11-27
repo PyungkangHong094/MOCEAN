@@ -9,7 +9,7 @@ import { useSignIn } from "src/data/repository/auth";
 import { useEffect } from "react";
 import { useDialog } from "src/components/dialogs/context";
 
-const index = () => {
+const LoginPage = () => {
   const router = useRouter();
   const { mutate, status } = useSignIn();
   const { showAlertDialog } = useDialog();
@@ -141,4 +141,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default LoginPage;

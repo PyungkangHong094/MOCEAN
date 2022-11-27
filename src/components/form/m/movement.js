@@ -8,7 +8,7 @@ const Movement = () => {
       <Table>
         <TableRow>
           {["", "Assessment", "Assessment Maximum", "Patient Score"].map((title) => (
-            <TableCell align="center">
+            <TableCell key={title} align="center">
               <Typography variant="h6">{title}</Typography>
             </TableCell>
           ))}
@@ -226,7 +226,7 @@ const Movement = () => {
         <TableRow sx={{ borderTop: "1px solid black" }}>
           {["Result", "Assessment Sum", "Assessment Maximum Sum", "Patient Score Sum"].map(
             (title) => (
-              <TableCell align="center">
+              <TableCell key={title} align="center">
                 <Typography variant="h6">{title}</Typography>
               </TableCell>
             )

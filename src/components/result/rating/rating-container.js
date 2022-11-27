@@ -10,7 +10,7 @@ function RatingContainer({ title, data }) {
       </Typography>
       {data.map((e, i) => {
         const ratingBars = e.items.map((item) => (
-          <RatingBar title={item.title} rating={item.score} />
+          <RatingBar key={item.title} title={item.title} rating={item.score} />
         ));
         return (
           <Box key={i} ml={1} my={4}>
