@@ -14,7 +14,7 @@ const MobilityLower = () => {
             "Right",
             "Right Assessment",
           ].map((title) => (
-            <TableCell align="center">
+            <TableCell key={title} align="center">
               <Typography variant="h6">{title}</Typography>
             </TableCell>
           ))}
@@ -162,7 +162,7 @@ const MobilityLower = () => {
       <Table>
         <TableRow>
           {["", "Assessment Score", "Assessment Maximum", "Patient Score"].map((title) => (
-            <TableCell align="center">
+            <TableCell key={title} align="center">
               <Typography variant="h6">{title}</Typography>
             </TableCell>
           ))}
