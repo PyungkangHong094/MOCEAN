@@ -1,37 +1,36 @@
-import { Box, Table, TableCell, TableRow, TextField, Typography } from "@mui/material";
+import { Box, Table, TableRow, TextField, Typography } from "@mui/material";
+import { BorderedCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
+import TableFrame from "./table-frame";
 
 const Cardio = () => {
   return (
-    <Box mt={4} mb={2}>
-      <Typography variant="h5">Cardio-respiraotory strength</Typography>
-      <Table sx={{ maxWidth: 600 }}>
-        <TableRow>
-          <TableCell>
-            <Typography>Gender</Typography>
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <Typography>Age</Typography>
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <Typography>Time on bruce protocol</Typography>
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-        </TableRow>
-      </Table>
-    </Box>
+    <TableFrame title={"Cardio-respiraotory strength"} maxWidth={600}>
+      <TableRow>
+        <TitleCell title={"Gender (M/F)"} />
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+      </TableRow>
+      <TableRow>
+        <TitleCell title={"Age"} />
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+      </TableRow>
+      <TableRow>
+        <TitleCell title={"Maximum HR"} />
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+      </TableRow>
+      <TableRow>
+        <TitleCell title={"Time on bruce protocol"} />
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+      </TableRow>
+    </TableFrame>
   );
 };
 

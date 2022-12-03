@@ -7,24 +7,29 @@ import TextInput from "../textinput";
 const Hydration = () => {
   return (
     <Box mt={4} mb={2}>
-      <Box sx={{ position: "relative", height: 300, mb: 2 }}>
-        <Image src={"/static/images/inputs/o/O_2section.png"} layout="fill" objectFit="contain" />
+      <Typography mb={2} variant="h5">
+        2. Hydration% = Total Body Water (TBW) / Weigth
+      </Typography>
+      <Box sx={{ position: "relative", height: 240, mb: 2 }}>
+        <Image src={"/static/images/inputs/o/o1.png"} layout="fill" objectFit="contain" />
       </Box>
       <Table>
-        <TableRow>
-          <TableCell align="center" sx={{ border: 1 }}>
-            <Typography>Gender</Typography>
-          </TableCell>
-          <TableCell align="center" sx={{ border: 1 }}>
-            <TextInput />
-          </TableCell>
-          <TableCell align="center" sx={{ border: 1 }}>
-            <TextInput />
-          </TableCell>
-          <TableCell align="center" sx={{ border: 1 }}>
-            <TextInput />
-          </TableCell>
-        </TableRow>
+        <TableBody>
+          <TableRow>
+            <TableCell align="center" sx={{ border: 1 }}>
+              <Typography>Gender</Typography>
+            </TableCell>
+            <TableCell align="center" sx={{ border: 1 }}>
+              <TextInput />
+            </TableCell>
+            <TableCell align="center" sx={{ border: 1 }}>
+              <TextInput />
+            </TableCell>
+            <TableCell align="center" sx={{ border: 1 }}>
+              <TextInput />
+            </TableCell>
+          </TableRow>
+        </TableBody>
       </Table>
       {/* <Typography mb={2} variant="h5">
         1. Cellular Health Score

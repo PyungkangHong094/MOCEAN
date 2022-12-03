@@ -9,21 +9,23 @@ const Visceral = () => {
       <Typography mb={2} variant="h5">
         4. Visceral Fat
       </Typography>
-      <Box sx={{ position: "relative", height: 300 }}>
-        <Image src={"/static/images/inputs/o/O_4section.png"} layout="fill" objectFit="contain" />
+      <Box sx={{ position: "relative", height: 240, mb: 2 }}>
+        <Image src={"/static/images/inputs/o/o4.png"} layout="fill" objectFit="contain" />
       </Box>
       <Table>
-        <TableRow>
-          <TableCell align="center" sx={{ border: 1 }}>
-            <Typography>should be below 100</Typography>
-          </TableCell>
-          <TableCell align="center" sx={{ border: 1 }}>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell align="center" sx={{ border: 1 }}>
-            <Typography>visceral / 10</Typography>
-          </TableCell>
-        </TableRow>
+        <TableBody>
+          <TableRow>
+            <TableCell align="center" sx={{ border: 1 }}>
+              <Typography>should be below 100</Typography>
+            </TableCell>
+            <TableCell align="center" sx={{ border: 1 }}>
+              <TextInput fullWidth />
+            </TableCell>
+            <TableCell align="center" sx={{ border: 1 }}>
+              <Typography>visceral / 10</Typography>
+            </TableCell>
+          </TableRow>
+        </TableBody>
       </Table>
     </Box>
   );

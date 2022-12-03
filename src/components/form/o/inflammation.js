@@ -10,8 +10,8 @@ const Inflammation = () => {
       <Typography mb={2} variant="h5">
         5,6,7,8. Inflammation Reference (ECW/TBW)
       </Typography>
-      <Box sx={{ position: "relative", height: 200 }}>
-        <Image src={"/static/images/inputs/o/O_part5_8.png"} layout="fill" objectFit="contain" />
+      <Box sx={{ position: "relative", height: 160, mb: 2 }}>
+        <Image src={"/static/images/inputs/o/o5.png"} layout="fill" objectFit="contain" />
       </Box>
       <Table sx={{ width: 600 }}>
         <TableBody>

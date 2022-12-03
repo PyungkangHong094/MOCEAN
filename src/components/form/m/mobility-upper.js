@@ -1,151 +1,148 @@
-import { Box, Table, TableCell, TableRow, Typography } from "@mui/material";
+import { Box, TableRow, Typography } from "@mui/material";
+import { BorderedCell, EmptyCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
+import TableFrame from "./table-frame";
 
 const MobilityUpper = () => {
   return (
-    <Box mt={4} mb={2}>
-      <Typography variant="h5">Mobility&Balance_Upper_Extremity</Typography>
-      <Table>
+    <TableFrame
+      title={"Mobility&Balance_Upper_Extremity"}
+      head={
         <TableRow>
           {[
             "Upper Extremity Assessment",
             "Left",
-            "Left Assessment",
             "Right",
+            "Left Assessment",
             "Right Assessment",
           ].map((title) => (
-            <TableCell key={title} align="center">
-              <Typography variant="h6">{title}</Typography>
-            </TableCell>
+            <BorderedCell key={title} align="center">
+              <Typography variant="h6" textTransform={"capitalize"}>
+                {title}
+              </Typography>
+            </BorderedCell>
           ))}
         </TableRow>
-        <TableRow>
-          <TableCell align="center">
-            <Typography>Mandible Position</Typography>
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell align="center">
-            <Typography>Cervical Extension</Typography>
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell align="center">
-            <Typography>Cervical Flexion</Typography>
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell align="center">
-            <Typography>Cervical Rotation</Typography>
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell align="center">
-            <Typography>Cervical Side Bendering</Typography>
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-        </TableRow>
-      </Table>
-      <Typography variant="h6" ml={4} mt={4}>
-        Result
-      </Typography>
-      <Table>
-        <TableRow>
-          {["", "Assessment Score", "Assessment Maximum", "Patient Score"].map((title) => (
-            <TableCell key={title} align="center">
-              <Typography variant="h6">{title}</Typography>
-            </TableCell>
-          ))}
-        </TableRow>
-        <TableRow>
-          <TableCell align="center">
-            <Typography>Left</Typography>
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell align="center">
-            <Typography>Right</Typography>
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-        </TableRow>
-      </Table>
-    </Box>
+      }
+    >
+      <TableRow>
+        <TitleCell title={"Flexion"} />
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+      </TableRow>
+      <TableRow>
+        <TitleCell title={"Internal Rotation"} />
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+      </TableRow>
+      <TableRow>
+        <TitleCell title={"External Rotation"} />
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+      </TableRow>
+      <TableRow>
+        <TitleCell title={"Horizontal Abduction"} />
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+      </TableRow>
+      <TableRow>
+        <TitleCell title={"Apical expansion\n(which lung is restricted with breathing?)"} />
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <EmptyCell />
+        <EmptyCell />
+        <EmptyCell />
+      </TableRow>
+      <TableRow>
+        <TitleCell title={"Infrasternal Angle\n(wide or narrow)"} />
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <EmptyCell />
+        <EmptyCell />
+        <EmptyCell />
+      </TableRow>
+      <TableRow>
+        <TitleCell title={"Pattern"} />
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <EmptyCell />
+        <EmptyCell />
+        <EmptyCell />
+      </TableRow>
+      <TableRow>
+        <EmptyCell />
+        <TitleCell title={"Accessment Score"} colSpan={2} align={"center"} />
+        <TitleCell title={"Accessment Maximum"} align={"center"} />
+        <TitleCell title={"Patient Score"} align={"center"} />
+      </TableRow>
+      <TableRow>
+        <TitleCell title={"Upper Extremity_Left"} />
+        <BorderedCell colSpan={2} align={"center"}>
+          <Typography>-</Typography>
+        </BorderedCell>
+        <BorderedCell align={"center"}>
+          <Typography>-</Typography>
+        </BorderedCell>
+        <BorderedCell align={"center"}>
+          <Typography>-</Typography>
+        </BorderedCell>
+      </TableRow>
+      <TableRow>
+        <TitleCell title={"Upper Extremity_Right"} />
+        <BorderedCell colSpan={2} align={"center"}>
+          <Typography>-</Typography>
+        </BorderedCell>
+        <BorderedCell align={"center"}>
+          <Typography>-</Typography>
+        </BorderedCell>
+        <BorderedCell align={"center"}>
+          <Typography>-</Typography>
+        </BorderedCell>
+      </TableRow>
+    </TableFrame>
   );
 };
 

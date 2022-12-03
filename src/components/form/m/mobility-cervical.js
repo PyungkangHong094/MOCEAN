@@ -1,99 +1,110 @@
-import { Box, Table, TableCell, TableRow, Typography } from "@mui/material";
+import { Box, Table, TableBody, TableHead, TableRow, Typography } from "@mui/material";
+import { BorderedCell, EmptyCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
+import TableFrame from "./table-frame";
 
 const MobilityCervical = () => {
   return (
-    <Box mt={4} mb={2}>
-      <Typography variant="h5">Mobility&Balance_Cervical</Typography>
-      <Table>
+    <TableFrame
+      title={"Mobility&Balance_Cervical"}
+      head={
         <TableRow>
-          {["Cervical", "Assessment", "Assessment Maximum", "Patient Score"].map((title) => (
-            <TableCell key={title} align="center">
-              <Typography variant="h6">{title}</Typography>
-            </TableCell>
+          {["Cervical", "Assessment", "Patient Score", "Assessment Maximum", ""].map((title) => (
+            <BorderedCell key={title} align={"center"}>
+              <Typography variant="h6" textTransform={"capitalize"}>
+                {title}
+              </Typography>
+            </BorderedCell>
           ))}
         </TableRow>
-        <TableRow>
-          <TableCell align="center">
-            <Typography>Mandible Position</Typography>
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell align="center">
-            <Typography>Cervical Extension</Typography>
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell align="center">
-            <Typography>Cervical Flexion</Typography>
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell align="center">
-            <Typography>Cervical Rotation</Typography>
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell align="center">
-            <Typography>Cervical Side Bendering</Typography>
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-          <TableCell>
-            <TextInput fullWidth />
-          </TableCell>
-        </TableRow>
-        <TableRow sx={{ borderTop: "1px solid black" }}>
-          {["Result", "Assessment Sum", "Assessment Maximum Sum", "Patient Score Sum"].map(
-            (title) => (
-              <TableCell key={title} align="center">
-                <Typography variant="h6">{title}</Typography>
-              </TableCell>
-            )
-          )}
-        </TableRow>
-      </Table>
-    </Box>
+      }
+    >
+      <TableRow>
+        <TitleCell title={"Mandible Position"} />
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <EmptyCell />
+      </TableRow>
+      <TableRow>
+        <TitleCell title={"Cervical Extension"} />
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <EmptyCell />
+      </TableRow>
+      <TableRow>
+        <TitleCell title={"Cervical Flexion"} />
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <EmptyCell />
+      </TableRow>
+      <TableRow>
+        <TitleCell title={"Cervical Rotation"} />
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <EmptyCell />
+      </TableRow>
+      <TableRow>
+        <TitleCell title={"Cervical Side Bendering"} />
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <BorderedCell>
+          <TextInput fullWidth />
+        </BorderedCell>
+        <EmptyCell />
+      </TableRow>
+      <TableRow>
+        <EmptyCell />
+        <EmptyCell />
+        <TitleCell title={"Accessment Score"} align={"center"} />
+        <TitleCell title={"Accessment Maximum"} align={"center"} />
+        <TitleCell title={"Patient Score"} align={"center"} />
+      </TableRow>
+      <TableRow>
+        <EmptyCell />
+        <EmptyCell />
+        <BorderedCell align={"center"}>
+          <Typography>-</Typography>
+        </BorderedCell>
+        <BorderedCell align={"center"}>
+          <Typography>-</Typography>
+        </BorderedCell>
+        <BorderedCell align={"center"}>
+          <Typography>-</Typography>
+        </BorderedCell>
+      </TableRow>
+    </TableFrame>
   );
 };
 
