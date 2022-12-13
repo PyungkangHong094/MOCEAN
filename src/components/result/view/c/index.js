@@ -13,13 +13,13 @@ import {
 
 const ratingData = [
   { items: [{ title: "Blood Circulation", score: 2 }] },
-  { items: [{ title: "Lymph circulation", score: 2 }] },
-  { items: [{ title: "Toxicity level", score: 3 }] },
+  { items: [{ title: "Lymph Circulation", score: 2 }] },
+  { items: [{ title: "Toxicity Level", score: 3 }] },
+  { items: [{ title: "Visceral Fat", score: 3 }] },
   { items: [{ title: "Blood Pressure", score: 4 }] },
   { items: [{ title: "Oxygen Level", score: 2 }] },
   { items: [{ title: "Pulse Rate", score: 3 }] },
   { items: [{ title: "Blood Glucose", score: 3 }] },
-  { items: [{ title: "Blood Uric Acid", score: 3 }] },
   { items: [{ title: "Blood Cholesterol", score: 3 }] },
   { items: [{ title: "Respiratory Circulation", score: 4 }] },
   { items: [{ title: "Nitric Oxide level", score: 2 }] },

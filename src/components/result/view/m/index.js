@@ -51,7 +51,12 @@ const ResultMView = () => {
       <Box sx={{ mx: 4, flex: 1 }}>
         <Typography variant="h5">Posture Report</Typography>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Image src={"/static/images/body1.png"} width={500} height={500} objectFit="contain" />
+          <Image
+            src={"/static/images/inputs/m/1.png"}
+            width={500}
+            height={500}
+            objectFit="contain"
+          />
         </Box>
         <ArticleBox score={0} />
       </Box>

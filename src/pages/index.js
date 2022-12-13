@@ -64,7 +64,7 @@ const LoginPage = () => {
       >
         <Container maxWidth="sm">
           <form onSubmit={formik.handleSubmit}>
-            <Image src={"/static/images/mocean_sns.png"} width={600} height={95} />
+            <Image src={"/static/images/mocean_logo.png"} width={600} height={95} />
             <Box sx={{ my: 3 }}>
               <Typography color="textPrimary" variant="h4">
                 Sign in

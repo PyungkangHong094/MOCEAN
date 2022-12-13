@@ -1,109 +1,71 @@
 import { Box, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import { green, orange, red, yellow } from "@mui/material/colors";
 import Image from "next/image";
+import { useState } from "react";
 import { theme } from "src/theme";
+import { DropdownCell, TextInputCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
 
-const Hydration = () => {
+const initData = {
+  gender: 0,
+  bodyWater: 0,
+  weight: 0,
+};
+
+const Hydration = ({ initialData = initData }) => {
+  const [data, setData] = useState(initialData);
+  const { bodyWater, weight } = data;
+
+  const setGender = (value) => {
+    const newData = {
+      ...data,
+      gender: value,
+    };
+    setData(newData);
+  };
+  const setBodyWater = (value) => {
+    const newData = {
+      ...data,
+      bodyWater: value,
+    };
+    setData(newData);
+  };
+  const setWeight = (value) => {
+    const newData = {
+      ...data,
+      weight: value,
+    };
+    setData(newData);
+  };
+
+  const score = weight == 0 ? 0 : ((bodyWater / weight) * 100).toFixed(1);
+
   return (
     <Box mt={4} mb={2}>
-      <Box sx={{ position: "relative", height: 300, mb: 2 }}>
-        <Image src={"/static/images/inputs/o/O_2section.png"} layout="fill" objectFit="contain" />
+      <Typography mb={2} variant="h5">
+        2. Hydration% = Total Body Water (TBW) / Weigth
+      </Typography>
+      <Box sx={{ position: "relative", height: 240, mb: 2 }}>
+        <Image src={"/static/images/inputs/o/o1.png"} layout="fill" objectFit="contain" />
       </Box>
       <Table>
-        <TableRow>
-          <TableCell align="center" sx={{ border: 1 }}>
-            <Typography>Gender</Typography>
-          </TableCell>
-          <TableCell align="center" sx={{ border: 1 }}>
-            <TextInput />
-          </TableCell>
-          <TableCell align="center" sx={{ border: 1 }}>
-            <TextInput />
-          </TableCell>
-          <TableCell align="center" sx={{ border: 1 }}>
-            <TextInput />
-          </TableCell>
-        </TableRow>
-      </Table>
-      {/* <Typography mb={2} variant="h5">
-        1. Cellular Health Score
-      </Typography>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell sx={{ border: 1 }} align="center" colSpan={4}>
-              <Typography>
-                score = (0.54987 * weight(kg)) + (0.01279 * SMM(kg)) - (1.85422 * fat(kg)) +
-                75.67391
-              </Typography>
-            </TableCell>
-          </TableRow>
-          <TableRow sx={{ border: 1 }}>
-            <TableCell align="center" colSpan={1}>
-              <Typography color={theme.palette.score.poor}>70 or less (Poor)</Typography>
-            </TableCell>
-            <TableCell align="center" colSpan={1}>
-              <Typography color={theme.palette.score.fair}>70-80 (Fair)</Typography>
-            </TableCell>
-            <TableCell align="center" colSpan={1}>
-              <Typography color={theme.palette.score.good}>80-90 (Good)</Typography>
-            </TableCell>
-            <TableCell align="center" colSpan={1}>
-              <Typography color={theme.palette.score.excellent}>{"> 90 (Excellent)"}</Typography>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell sx={{ border: 1 }} align="center" colSpan={4}>
-              <Typography>Lean Body Mass = Body Weight - (Body Weight * Body Fat%)</Typography>
-            </TableCell>
-          </TableRow>
-        </TableHead>
         <TableBody>
           <TableRow>
-            <TableCell align="center" sx={{ border: 1 }}>
-              <Typography>pound (Weight)</Typography>
-            </TableCell>
-            <TableCell align="center" sx={{ border: 1 }}>
-              <Typography>SMM (lbs)</Typography>
-            </TableCell>
-            <TableCell align="center" sx={{ border: 1 }}>
-              <Typography>Fat (lbs)</Typography>
-            </TableCell>
-            <TableCell align="center" sx={{ border: 1 }}>
-              <Typography>Score</Typography>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell sx={{ border: 1 }}>
-              <TextInput />
-            </TableCell>
-            <TableCell sx={{ border: 1 }}>
-              <TextInput />
-            </TableCell>
-            <TableCell sx={{ border: 1 }}>
-              <TextInput />
-            </TableCell>
-            <TableCell sx={{ border: 1 }}>
-              <TextInput />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell sx={{ border: 1 }}>
-              <Typography>pound input / 2.205</Typography>
-            </TableCell>
-            <TableCell sx={{ border: 1 }}>
-              <Typography>SMM / 2.205</Typography>
-            </TableCell>
-            <TableCell sx={{ border: 1 }}>
-              <Typography>Fat / 2.205</Typography>
-            </TableCell>
-            <TableCell sx={{ border: 1 }}>
-              <Typography></Typography>
-            </TableCell>
+            <DropdownCell
+              id="gender"
+              values={["Male", "Female"]}
+              renderItem={(v) => (
+                <Typography variant="h6" color={"black"}>
+                  {v}
+                </Typography>
+              )}
+            />
+            <TextInputCell defaultValue={bodyWater} hint={"Body water"} onChange={setBodyWater} />
+            <TextInputCell defaultValue={weight} hint={"Weight"} onChange={setWeight} />
+            <TitleCell title={score} />
           </TableRow>
         </TableBody>
-      </Table> */}
+      </Table>
     </Box>
   );
 };

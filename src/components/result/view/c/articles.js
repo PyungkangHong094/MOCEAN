@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import Image from "next/image";
 import ScoreText from "../../../score";
 
 const Article = ({ title, children }) => {
@@ -187,13 +188,22 @@ export const LiveBloodArticle = ({ name = "Client", score = 0 }) => {
       <Typography my={2}>
         <b>{name}</b> have <ScoreText score={score} /> Red Blood Cells.
       </Typography>
-      {score < 1 && (
+      {score <= 1 && (
         <Typography>
           The presence of <ScoreText score={score} /> restrics the blood circulation and decrease
           toxic waste products excretion. <br />
           To purify blood and resotre RBC, restoration of liver and kidney function is needed.
         </Typography>
       )}
+      <Box sx={{ position: "relative", height: 200, mt: 2 }}>
+        <Image
+          src={
+            "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
+          }
+          layout="fill"
+          objectFit="contain"
+        />
+      </Box>
     </Article>
   );
 };
