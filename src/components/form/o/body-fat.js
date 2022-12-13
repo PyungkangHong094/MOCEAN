@@ -1,6 +1,7 @@
 import { Box, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import Image from "next/image";
 import { theme } from "src/theme";
+import { BorderedCell, DropdownCell, TextInputCell } from "../cell-types";
 import TextInput from "../textinput";
 
 const BodyFat = () => {
@@ -20,15 +21,17 @@ const BodyFat = () => {
       <Table>
         <TableBody>
           <TableRow>
-            <TableCell align="center" sx={{ border: 1 }}>
-              <Typography>Gender</Typography>
-            </TableCell>
-            <TableCell align="center" sx={{ border: 1 }}>
-              <Typography>Age</Typography>
-            </TableCell>
-            <TableCell align="center" sx={{ border: 1 }}>
-              <TextInput fullWidth />
-            </TableCell>
+            <DropdownCell
+              id="gender"
+              values={["Male", "Female"]}
+              renderItem={(v) => (
+                <Typography variant="h6" color={"black"}>
+                  {v}
+                </Typography>
+              )}
+            />
+            <TextInputCell hint={"Age"} type="number" onChange={() => {}} />
+            <TextInputCell hint={"Percent"} type="number" onChange={() => {}} />
           </TableRow>
         </TableBody>
       </Table>

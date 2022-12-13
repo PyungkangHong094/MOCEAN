@@ -1,9 +1,65 @@
 import { Box, Table, TableBody, TableHead, TableRow, Typography } from "@mui/material";
-import { BorderedCell, EmptyCell, TitleCell } from "../cell-types";
+import { useState } from "react";
+import { BorderedCell, DropdownCell, EmptyCell, TextInputCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
 import TableFrame from "./table-frame";
 
-const MobilityCervical = () => {
+const dropdownValues = [
+  {
+    text: "Normal",
+    value: 2,
+  },
+  {
+    text: "Restricted",
+    value: 1,
+  },
+  {
+    text: "Pain/Hypermobile",
+    value: 0,
+  },
+];
+
+const initData = {
+  extension: 2,
+  flexion: 2,
+  rotation: 2,
+  side: 2,
+};
+
+const MobilityCervical = ({ initialData = initData }) => {
+  const [data, setData] = useState(initialData);
+
+  const setExtension = (v) => {
+    const newData = {
+      ...data,
+      extension: v.value,
+    };
+    setData(newData);
+  };
+  const setFlexion = (v) => {
+    const newData = {
+      ...data,
+      flexion: v.value,
+    };
+    setData(newData);
+  };
+  const setRotation = (v) => {
+    const newData = {
+      ...data,
+      rotation: v.value,
+    };
+    setData(newData);
+  };
+  const setSide = (v) => {
+    const newData = {
+      ...data,
+      side: v.value,
+    };
+    setData(newData);
+  };
+
+  const sum = Object.values(data).reduce((prev, curr) => prev + curr);
+
   return (
     <TableFrame
       title={"Mobility&Balance_Cervical"}
@@ -21,67 +77,73 @@ const MobilityCervical = () => {
     >
       <TableRow>
         <TitleCell title={"Mandible Position"} />
-        <BorderedCell>
-          <TextInput fullWidth />
-        </BorderedCell>
-        <BorderedCell>
-          <TextInput fullWidth />
-        </BorderedCell>
-        <BorderedCell>
-          <TextInput fullWidth />
-        </BorderedCell>
+        <EmptyCell />
+        <EmptyCell />
+        <EmptyCell />
         <EmptyCell />
       </TableRow>
       <TableRow>
         <TitleCell title={"Cervical Extension"} />
-        <BorderedCell>
-          <TextInput fullWidth />
-        </BorderedCell>
-        <BorderedCell>
-          <TextInput fullWidth />
-        </BorderedCell>
-        <BorderedCell>
-          <TextInput fullWidth />
-        </BorderedCell>
+        <DropdownCell
+          id="cervical-extension"
+          values={dropdownValues}
+          renderItem={(v) => (
+            <Typography variant="h6" color={"black"}>
+              {v.text}
+            </Typography>
+          )}
+          onSelected={setExtension}
+        />
+        <TitleCell title={data.extension} />
+        <TitleCell title={2} />
         <EmptyCell />
       </TableRow>
       <TableRow>
         <TitleCell title={"Cervical Flexion"} />
-        <BorderedCell>
-          <TextInput fullWidth />
-        </BorderedCell>
-        <BorderedCell>
-          <TextInput fullWidth />
-        </BorderedCell>
-        <BorderedCell>
-          <TextInput fullWidth />
-        </BorderedCell>
+        <DropdownCell
+          id="cervical-flexion"
+          values={dropdownValues}
+          renderItem={(v) => (
+            <Typography variant="h6" color={"black"}>
+              {v.text}
+            </Typography>
+          )}
+          onSelected={setFlexion}
+        />
+        <TitleCell title={data.flexion} />
+        <TitleCell title={2} />
         <EmptyCell />
       </TableRow>
       <TableRow>
         <TitleCell title={"Cervical Rotation"} />
-        <BorderedCell>
-          <TextInput fullWidth />
-        </BorderedCell>
-        <BorderedCell>
-          <TextInput fullWidth />
-        </BorderedCell>
-        <BorderedCell>
-          <TextInput fullWidth />
-        </BorderedCell>
+        <DropdownCell
+          id="cervical-rotation"
+          values={dropdownValues}
+          renderItem={(v) => (
+            <Typography variant="h6" color={"black"}>
+              {v.text}
+            </Typography>
+          )}
+          onSelected={setRotation}
+        />
+        <TitleCell title={data.rotation} />
+        <TitleCell title={2} />
         <EmptyCell />
       </TableRow>
       <TableRow>
         <TitleCell title={"Cervical Side Bendering"} />
-        <BorderedCell>
-          <TextInput fullWidth />
-        </BorderedCell>
-        <BorderedCell>
-          <TextInput fullWidth />
-        </BorderedCell>
-        <BorderedCell>
-          <TextInput fullWidth />
-        </BorderedCell>
+        <DropdownCell
+          id="cervical-side"
+          values={dropdownValues}
+          renderItem={(v) => (
+            <Typography variant="h6" color={"black"}>
+              {v.text}
+            </Typography>
+          )}
+          onSelected={setSide}
+        />
+        <TitleCell title={data.side} />
+        <TitleCell title={2} />
         <EmptyCell />
       </TableRow>
       <TableRow>
@@ -94,15 +156,9 @@ const MobilityCervical = () => {
       <TableRow>
         <EmptyCell />
         <EmptyCell />
-        <BorderedCell align={"center"}>
-          <Typography>-</Typography>
-        </BorderedCell>
-        <BorderedCell align={"center"}>
-          <Typography>-</Typography>
-        </BorderedCell>
-        <BorderedCell align={"center"}>
-          <Typography>-</Typography>
-        </BorderedCell>
+        <TitleCell align={"center"} title={sum} />
+        <TitleCell align={"center"} title={8} />
+        <TitleCell align={"center"} title={sum / 8} />
       </TableRow>
     </TableFrame>
   );

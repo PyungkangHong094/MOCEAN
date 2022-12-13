@@ -8,7 +8,7 @@ import Visceral from "./visceral";
 
 const FormOView = () => {
   return (
-    <Box px={4}>
+    <Box px={4} mb={4}>
       <Cellular />
       <Hydration />
       <BodyFat />
