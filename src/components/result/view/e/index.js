@@ -1,8 +1,9 @@
-import { Box } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 
 import Image from "next/image";
 import RatingContainer from "../../rating/rating-container";
 import { Program } from "../../result-menu";
+import { BioDynamicField, EnergyLevel, YinYangBalance } from "./articles";
 
 const ratingData = [
   {
@@ -38,7 +39,13 @@ const ResultEView = () => {
   return (
     <>
       <RatingContainer title={Program.E} data={ratingData} />
-      <Box></Box>
+      <Box>
+        <EnergyLevel />
+        <Divider variant="middle" sx={{ color: "black", borderBottom: 1.5 }} />
+        <YinYangBalance />
+        <Divider variant="middle" sx={{ color: "black", borderBottom: 1.5 }} />
+        <BioDynamicField />
+      </Box>
     </>
   );
 };
