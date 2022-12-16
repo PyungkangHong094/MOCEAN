@@ -1,18 +1,23 @@
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import ApiClient from "../api-client";
 
-export const useAllUsers = (page = 1, pageSize = 20, filterName) => {
-  const getAllUsers = async () => {
-    const { data } = await ApiClient().get(
-      `/customers?page=${page}&items_per_page=${pageSize}` //&name=${filterName}`,
-    );
-    return data;
-  };
-
-  return useQuery("get-all-users", getAllUsers);
+export const getAllUsers = async (page = 1, pageSize = 20, filterName) => {
+  let url = `/customers?page=${page}&items_per_page=${pageSize}`;
+  if (filterName) {
+    url += `&name=${filterName}`;
+  }
+  const { data } = await ApiClient().get(url);
+  return data;
 };
 
-export const useCreateUser = ({ name, email, password, phone, birth }) => {
+export const useUser = (customerId) => {
+  return useQuery(async () => {
+    const { data } = await ApiClient().get(`/customers/${customerId}`);
+    return data;
+  });
+};
+
+export const addUser = ({ name, email, password, phone, birth }) => {
   const postUser = async () => {
     const result = await ApiClient().post("/customers", {
       name,
@@ -28,27 +33,20 @@ export const useCreateUser = ({ name, email, password, phone, birth }) => {
   return useQuery("post-user", postUser);
 };
 
-export const useUserforO = (userId) => {
-  const getUserO = async () => {
-    const { data } = await ApiClient().get(`users/${userId}/musculoskeletal`);
+export const updateUser = async (customerId) => {
+  const updateRequest = async () => {
+    const { data } = await ApiClient().put(`/customers/${customerId}/info`);
     return data;
   };
 
-  return useQuery("get-user-O", getUserO);
+  return useMutation(updateRequest);
 };
-export const useUserforC = (userId) => {
-  const getUserC = async () => {
-    const { data } = await ApiClient().get(`users/${userId}/musculoskeletal`);
-    return data;
+
+export const deleteUser = async (customerId) => {
+  const deleteRequest = async () => {
+    const { status, data } = await ApiClient().delete(`/customers/${customerId}`);
+    return status == 200;
   };
 
-  return useQuery("get-user-C", getUserC);
-};
-export const useUserforE = (userId) => {
-  const getUserE = async () => {
-    const { data } = await ApiClient().get(`users/${userId}/musculoskeletal`);
-    return data;
-  };
-
-  return useQuery("get-user-E", getUserE);
+  return useMutation(deleteRequest);
 };

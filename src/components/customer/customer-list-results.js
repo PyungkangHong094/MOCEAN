@@ -18,12 +18,30 @@ import {
 // import { customers } from '../__mocks__/customers';
 import { CustomerListItem } from "./customer-list-item";
 import { customersMoc } from "src/__mocks__/customers";
+import { deleteUser, getAllUsers } from "src/data/repository/users";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import LoadingBar from "../loading-bar";
+import { CustomerListToolbar } from "./customer-list-toolbar";
 
-export const CustomerList = ({ customers = customersMoc, ...rest }) => {
-  const [customerList, setCustomerList] = useState(customers);
+export const CustomerList = (props) => {
+  const queryClient = useQueryClient();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
+  const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(0);
+  const [filter, setFilter] = useState("");
+
+  const { data, isLoading, isFetching, isError } = useQuery({
+    queryKey: ["customers", page, limit, filter],
+    queryFn: () => getAllUsers(page, limit, filter),
+    keepPreviousData: true,
+  });
+  const customerList = data?.items;
+
+  const { mutate: removeCustomer } = useMutation(deleteUser, {
+    onSettled: () => {
+      queryClient.invalidateQueries("customers");
+    },
+  });
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
@@ -57,11 +75,6 @@ export const CustomerList = ({ customers = customersMoc, ...rest }) => {
     setSelectedCustomerIds(newSelectedCustomerIds);
   };
 
-  const removeCustomer = (customer) => {
-    const newCustomerList = customerList.filter((_) => _.id !== customer.id);
-    setCustomerList(newCustomerList);
-  };
-
   const handleLimitChange = (event) => {
     setLimit(event.target.value);
   };
@@ -71,54 +84,61 @@ export const CustomerList = ({ customers = customersMoc, ...rest }) => {
   };
 
   return (
-    <Card {...rest}>
-      <PerfectScrollbar>
-        <Box sx={{ minWidth: 1050 }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={selectedCustomerIds.length === customerList.length}
-                    color="primary"
-                    indeterminate={
-                      selectedCustomerIds.length > 0 &&
-                      selectedCustomerIds.length < customerList.length
-                    }
-                    onChange={handleSelectAll}
-                  />
-                </TableCell>
-                <TableCell>이름</TableCell>
-                <TableCell>이메일</TableCell>
-                <TableCell>생년월일</TableCell>
-                <TableCell>전화번호</TableCell>
-                <TableCell></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {customerList.slice(0, limit).map((customer) => (
-                <CustomerListItem
-                  key={customer.id}
-                  customer={customer}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
-                  onSelect={handleSelectOne}
-                  onRemove={() => removeCustomer(customer)}
-                />
-              ))}
-            </TableBody>
-          </Table>
-        </Box>
-      </PerfectScrollbar>
-      <TablePagination
-        component="div"
-        count={customerList.length}
-        onPageChange={handlePageChange}
-        onRowsPerPageChange={handleLimitChange}
-        page={page}
-        rowsPerPage={limit}
-        rowsPerPageOptions={[5, 10, 25]}
-      />
-    </Card>
+    <>
+      <CustomerListToolbar onSearch={setFilter} />
+      {isFetching || isLoading || (!isLoading && !customerList) ? (
+        <LoadingBar />
+      ) : (
+        <Card>
+          <PerfectScrollbar>
+            <Box sx={{ minWidth: 1050 }}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell padding="checkbox">
+                      <Checkbox
+                        checked={selectedCustomerIds.length === customerList.length}
+                        color="primary"
+                        indeterminate={
+                          selectedCustomerIds.length > 0 &&
+                          selectedCustomerIds.length < customerList.length
+                        }
+                        onChange={handleSelectAll}
+                      />
+                    </TableCell>
+                    <TableCell>이름</TableCell>
+                    <TableCell>이메일</TableCell>
+                    <TableCell>생년월일</TableCell>
+                    <TableCell>전화번호</TableCell>
+                    <TableCell></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {customerList.slice(0, limit).map((customer) => (
+                    <CustomerListItem
+                      key={customer.id}
+                      customer={customer}
+                      selected={selectedCustomerIds.indexOf(customer.id) !== -1}
+                      onSelect={handleSelectOne}
+                      onRemove={() => removeCustomer(customer)}
+                    />
+                  ))}
+                </TableBody>
+              </Table>
+            </Box>
+          </PerfectScrollbar>
+          <TablePagination
+            component="div"
+            count={customerList.length}
+            onPageChange={handlePageChange}
+            onRowsPerPageChange={handleLimitChange}
+            page={page - 1}
+            rowsPerPage={limit}
+            rowsPerPageOptions={[5, 10, 25]}
+          />
+        </Card>
+      )}
+    </>
   );
 };
 

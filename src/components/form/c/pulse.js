@@ -4,7 +4,7 @@ import { theme } from "src/theme";
 import { TextInputCell } from "../cell-types";
 import InputForm from "./input-form";
 
-const PurseRate = ({ onInput }) => {
+const PulseRate = ({ onInput }) => {
   const [status, setStatus] = useState(null);
 
   const onChange = (inputValue) => {
@@ -24,7 +24,7 @@ const PurseRate = ({ onInput }) => {
     }
   };
   return (
-    <InputForm title={"Purse Rate"}>
+    <InputForm title={"Pulse Rate"}>
       {/* {status != null && (
         <Typography variant="h6" color={status.color}>
           {status.text}
@@ -35,4 +35,4 @@ const PurseRate = ({ onInput }) => {
   );
 };
 
-export default PurseRate;
+export default PulseRate;

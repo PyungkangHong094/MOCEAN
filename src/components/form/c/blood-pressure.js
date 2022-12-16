@@ -30,8 +30,8 @@ const BloodPressure = ({ onSysInput, onDiasInput }) => {
           {status.text}
         </Typography>
       )} */}
-      <TextInputCell type={"number"} onChange={onSysInput} />
-      <TextInputCell type={"number"} onChange={onDiasInput} />
+      <TextInputCell type={"number"} onChange={onSysInput} hint={"systolic pressure"} />
+      <TextInputCell type={"number"} onChange={onDiasInput} hint={"diastolic pressure"} />
     </InputForm>
   );
 };

@@ -5,6 +5,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useDialog } from "./dialogs/context";
 import { useRouter } from "next/router";
 import { useRefreshToken } from "src/data/repository/auth";
+import { deleteAuthResult, getAuthResult } from "src/data/session-storage";
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -17,7 +18,9 @@ export const DashboardNavbar = (props) => {
 
   const router = useRouter();
   const { showConfirmDialog } = useDialog();
-  const { mutate } = useRefreshToken();
+  // const { mutate } = useRefreshToken();
+
+  const { username, email } = getAuthResult();
 
   return (
     <>
@@ -44,10 +47,10 @@ export const DashboardNavbar = (props) => {
 
           <Box sx={{ flexGrow: 1 }} />
           <Typography sx={{ m: 1 }} variant="h7" style={{ color: "black" }}>
-            반갑습니다, pkhong 님
+            반갑습니다, {username} 님
           </Typography>
           <Typography sx={{ m: 1 }} variant="h7" style={{ color: "black" }}>
-            pyungkangHong@test.com
+            {email}
           </Typography>
           {/* 로그아웃 */}
           <Button
@@ -59,7 +62,7 @@ export const DashboardNavbar = (props) => {
                 title: "로그아웃",
                 message: "정말로 로그아웃하시겠습니까?",
                 onConfirm: () => {
-                  sessionStorage.removeItem("MOCEAN-TOKEN");
+                  deleteAuthResult();
                   router.push("/");
                 },
               })

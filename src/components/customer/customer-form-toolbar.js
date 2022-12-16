@@ -5,62 +5,64 @@ import {
   CardContent,
   TextField,
   InputAdornment,
-  SvgIcon, Typography, Divider
-} from '@mui/material';
-import { Search as SearchIcon } from '../../icons/search';
-import { Upload as UploadIcon } from '../../icons/upload';
-import { Download as DownloadIcon } from '../../icons/download';
-import { useRouter } from 'next/router';
-import { useDialog } from '../dialogs/context';
-import { useState } from 'react';
-import { ArrowBackIosNewRounded } from '@mui/icons-material';
+  SvgIcon,
+  Typography,
+  Divider,
+} from "@mui/material";
+import { Search as SearchIcon } from "../../icons/search";
+import { Upload as UploadIcon } from "../../icons/upload";
+import { Download as DownloadIcon } from "../../icons/download";
+import { useRouter } from "next/router";
+import { useDialog } from "../dialogs/context";
+import { useCallback, useState } from "react";
+import { ArrowBackIosNewRounded } from "@mui/icons-material";
 
-export const CustomerFormToolbar = ({ isNew }) => {
+export const CustomerFormToolbar = ({ isNew, currentMenu }) => {
   const router = useRouter();
-  const { showConfirmDialog } = useDialog();
+  const { showAlertDialog, showConfirmDialog } = useDialog();
+
+  const saveForm = useCallback(() => {
+    switch (currentMenu) {
+      case 0:
+        showAlertDialog({ title: "Diabled", message: "" });
+    }
+  }, [currentMenu]);
 
   const cancelForm = () => {
     showConfirmDialog({
-      title: `Cancel ${isNew ? 'Adding' : 'Editing'} Customer`,
-      message: 'Are you sure to exit?',
-      onConfirm: router.back
-    })
-  }
+      title: `Cancel ${isNew ? "Adding" : "Editing"} Customer`,
+      message: "Are you sure to exit?",
+      onConfirm: router.back,
+    });
+  };
 
   return (
     <Box
       sx={{
-        alignItems: 'center',
-        display: 'flex',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
+        alignItems: "center",
+        display: "flex",
+        justifyContent: "space-between",
+        flexWrap: "wrap",
         height: 80,
-        backgroundColor: '#F9FAFC',
+        backgroundColor: "#F9FAFC",
         px: 3,
         py: 2,
       }}
     >
-      <Typography variant='h5'>
-        {isNew ? 'Add Customer' : 'Edit Customer'}
-      </Typography>
-      <Box sx={{
-        display: 'flex',
-        flexDirection: 'row',
-      }}>
-        <Button
-          variant='contained'
-          color='error'
-          sx={{ width: 100 }}
-          onClick={cancelForm}
-        >
+      <Typography variant="h5">{isNew ? "Add Customer" : "Edit Customer"}</Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+        }}
+      >
+        <Button variant="contained" color="error" sx={{ width: 100 }} onClick={cancelForm}>
           Cancel
         </Button>
-        <Button variant='contained'
-          color='success'
-          sx={{ width: 100, mx: 2 }}>
+        <Button variant="contained" color="success" sx={{ width: 100, mx: 2 }} onClick={saveForm}>
           Save
         </Button>
       </Box>
-    </Box >
+    </Box>
   );
-}
+};
