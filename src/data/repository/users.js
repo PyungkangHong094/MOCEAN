@@ -11,35 +11,25 @@ export const getAllUsers = async (page = 1, pageSize = 20, filterName) => {
 };
 
 export const useUser = (customerId) => {
-  return useQuery(async () => {
-    const { data } = await ApiClient().get(`/customers/${customerId}`);
-    return data;
+  return useQuery({
+    queryKey: "get-user",
+    queryFn: async () => {
+      const { data } = await ApiClient().get(`/customers/${customerId}`);
+      return data;
+    },
+    enabled: !!customerId,
   });
 };
 
-export const addUser = ({ name, email, password, phone, birth }) => {
-  const postUser = async () => {
-    const result = await ApiClient().post("/customers", {
-      name,
-      email,
-      password,
-      phone_number: phone,
-      birthday: birth,
-    });
+export const addUser = async (profile) => {
+  const result = await ApiClient().post("/customers", profile);
 
-    return result.status == 200;
-  };
-
-  return useQuery("post-user", postUser);
+  return result.status == 200;
 };
 
-export const updateUser = async (customerId) => {
-  const updateRequest = async () => {
-    const { data } = await ApiClient().put(`/customers/${customerId}/info`);
-    return data;
-  };
-
-  return useMutation(updateRequest);
+export const updateUser = async ({ customerId, data }) => {
+  const result = await ApiClient().put(`/customers/${customerId}/info`, data);
+  return result.status == 200;
 };
 
 export const deleteUser = async (customerId) => {

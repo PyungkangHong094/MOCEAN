@@ -30,7 +30,7 @@ const MobilityUpper = ({ initialData = initData }) => {
   const [data, setData] = useState(initialData);
 
   const setFlexion = (opt, v) => {
-    value = { ...data.flexion, [opt]: v };
+    const value = { ...data.flexion, [opt]: v };
     const newData = {
       ...data,
       flexion: value,
@@ -38,7 +38,7 @@ const MobilityUpper = ({ initialData = initData }) => {
     setData(newData);
   };
   const setInternal = (opt, v) => {
-    value = { ...data.internal, [opt]: v };
+    const value = { ...data.internal, [opt]: v };
 
     const newData = {
       ...data,
@@ -47,7 +47,7 @@ const MobilityUpper = ({ initialData = initData }) => {
     setData(newData);
   };
   const setExternal = (opt, v) => {
-    value = { ...data.external, [opt]: v };
+    const value = { ...data.external, [opt]: v };
 
     const newData = {
       ...data,
@@ -56,7 +56,7 @@ const MobilityUpper = ({ initialData = initData }) => {
     setData(newData);
   };
   const setHorizontal = (opt, v) => {
-    value = { ...data.horizontal, [opt]: v };
+    const value = { ...data.horizontal, [opt]: v };
 
     const newData = {
       ...data,

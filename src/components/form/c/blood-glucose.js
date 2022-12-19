@@ -7,25 +7,6 @@ import ImageUpload from "./image-upload";
 import InputForm from "./input-form";
 
 const BloodGlucose = ({ onInput }) => {
-  const [status, setStatus] = useState(null);
-
-  const onChange = (inputValue) => {
-    onInput(inputValue);
-
-    const rate = Math.floor((inputValue / 21) * 100);
-    if (90 <= rate && rate <= 100) {
-      setStatus({ text: "excellent", color: theme.palette.score.excellent });
-    } else if (80 <= rate && rate <= 89) {
-      setStatus({ text: "good", color: theme.palette.score.good });
-    } else if (65 <= rate && rate <= 79) {
-      setStatus({ text: "fair", color: theme.palette.score.fair });
-    } else if (rate <= 64) {
-      setStatus({ text: "poor", color: theme.palette.score.poor });
-    } else {
-      setStatus(null);
-    }
-  };
-
   return (
     <Box mb={4}>
       <Typography variant="h5">Blood Glucose</Typography>
@@ -40,7 +21,7 @@ const BloodGlucose = ({ onInput }) => {
         <TableBody>
           <TableRow>
             <TitleCell title={"Figure"} align={"center"} />
-            <TextInputCell type="number" onChange={onInput} />
+            <TextInputCell type="number" onChange={(v) => onInput(parseFloat(v))} />
           </TableRow>
         </TableBody>
       </Table>

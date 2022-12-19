@@ -7,6 +7,7 @@ const SleepForm = ({ onInput }) => {
   const [status, setStatus] = useState(null);
 
   const onChange = (inputValue) => {
+    inputValue = parseFloat(inputValue);
     onInput(inputValue);
 
     if (50 <= inputValue && inputValue <= 65) {

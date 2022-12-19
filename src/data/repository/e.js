@@ -7,16 +7,21 @@ export const useUserforE = (userId) => {
     return data;
   };
 
-  return useQuery("get-user-E", getUserE);
+  return useQuery({
+    queryKey: "get-user-E",
+    queryFn: getUserE,
+    enabled: !!userId,
+  });
 };
 
-export const putE = async (customerId, dataE) => {
-  const { data } = await ApiClient().put(`/customers/${customerId}/emotion`, dataE);
+export const putE = async ({ id, dataE }) => {
+  const { data } = await ApiClient().put(`/customers/${id}/emotion`, dataE);
 
   return data;
 };
-export const postE = async (customerId, dataE) => {
-  const { data } = await ApiClient().post(`/customers/${customerId}/emotion`, dataE);
+export const postE = async ({ id, dataE }) => {
+  console.log(dataE);
+  const { data } = await ApiClient().post(`/customers/${id}/emotion`, dataE);
 
   return data;
 };

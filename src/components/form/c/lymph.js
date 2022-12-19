@@ -8,6 +8,8 @@ const LymphCirculation = ({ onInput }) => {
   const [status, setStatus] = useState(null);
 
   const onChange = (inputValue) => {
+    inputValue = parseFloat(inputValue);
+
     onInput(inputValue);
 
     const rate = Math.floor((inputValue / 18) * 100);

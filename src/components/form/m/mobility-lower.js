@@ -31,7 +31,7 @@ const MobilityLower = ({ initialData = initData }) => {
   const [data, setData] = useState(initialData);
 
   const setDropdownData = (key, opt, v) => {
-    value = { ...data[key], [opt]: v };
+    const value = { ...data[key], [opt]: v };
     const newData = {
       ...data,
       [key]: value,

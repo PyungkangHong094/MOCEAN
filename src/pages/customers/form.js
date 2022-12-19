@@ -4,18 +4,30 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { CustomerFormToolbar } from "src/components/customer/customer-form-toolbar";
 import FormCView from "src/components/form/c";
+import { CProvider } from "src/components/form/c/context";
 import FormEView from "src/components/form/e";
+import { EProvider } from "src/components/form/e/context";
 import FormMView from "src/components/form/m";
 import FormOView from "src/components/form/o";
-import FormProfile from "src/components/form/profile";
+import FormProfile, { ProfileProvider } from "src/components/form/profile";
+import LoadingBar from "src/components/loading-bar";
 import { ResultMenu } from "src/components/result/result-menu";
-import { useUserforC, useUserforE, useUserforM, useUserforO } from "src/data/repository/users";
+import {
+  useUser,
+  useUserforC,
+  useUserforE,
+  useUserforM,
+  useUserforO,
+} from "src/data/repository/users";
 import { DashboardLayout } from "../../components/dashboard-layout";
 
 const CustomerForm = () => {
   const router = useRouter();
   const { id } = router.query;
   const [menuIdx, setMenuIdx] = useState(0);
+
+  const { isLoading, data: userData } = useUser(id);
+  console.log(userData);
 
   const renderResultView = () => {
     switch (menuIdx) {
@@ -45,14 +57,20 @@ const CustomerForm = () => {
           flexDirection: "column",
         }}
       >
-        <Box sx={{ position: "-webkit-sticky", position: "sticky", top: 0, zIndex: 2 }}>
-          <CustomerFormToolbar isNew={id === null || id === undefined} currentMenu={menuIdx} />
-        </Box>
-        <FormProfile />
-        <Box sx={{ position: "-webkit-sticky", position: "sticky", top: 80, zIndex: 2 }}>
-          <ResultMenu onSelectMenu={(idx) => setMenuIdx(idx)} />
-        </Box>
-        {renderResultView()}
+        <ProfileProvider>
+          <CProvider>
+            <EProvider>
+              <Box sx={{ position: "-webkit-sticky", position: "sticky", top: 0, zIndex: 2 }}>
+                <CustomerFormToolbar id={id} currentMenu={menuIdx} />
+              </Box>
+              {isLoading ? <LoadingBar /> : <FormProfile profile={userData} />}
+              <Box sx={{ position: "-webkit-sticky", position: "sticky", top: 80, zIndex: 2 }}>
+                <ResultMenu onSelectMenu={(idx) => setMenuIdx(idx)} />
+              </Box>
+              {renderResultView()}
+            </EProvider>
+          </CProvider>
+        </ProfileProvider>
       </Box>
     </>
   );

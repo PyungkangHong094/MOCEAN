@@ -1,4 +1,6 @@
 import { Box, Divider } from "@mui/material";
+import LoadingBar from "src/components/loading-bar";
+import { useUserforC } from "src/data/repository/c";
 
 import RatingContainer from "../../rating/rating-container";
 import { Program } from "../../result-menu";
@@ -12,22 +14,31 @@ import {
 } from "./articles";
 
 const ratingData = [
-  { items: [{ title: "Blood Circulation", score: 2 }] },
-  { items: [{ title: "Lymph Circulation", score: 2 }] },
-  { items: [{ title: "Toxicity Level", score: 3 }] },
-  { items: [{ title: "Visceral Fat", score: 3 }] },
-  { items: [{ title: "Blood Pressure", score: 4 }] },
-  { items: [{ title: "Oxygen Level", score: 2 }] },
-  { items: [{ title: "Pulse Rate", score: 3 }] },
-  { items: [{ title: "Blood Glucose", score: 3 }] },
-  { items: [{ title: "Blood Cholesterol", score: 3 }] },
-  { items: [{ title: "Respiratory Circulation", score: 4 }] },
-  { items: [{ title: "Nitric Oxide level", score: 2 }] },
-  { items: [{ title: "Red Blood Cell", score: 2 }] },
+  { items: [{ title: "Blood Circulation", score: 0 }] },
+  { items: [{ title: "Lymph Circulation", score: 0 }] },
+  { items: [{ title: "Toxicity Level", score: 0 }] },
+  { items: [{ title: "Visceral Fat", score: 0 }] },
+  { items: [{ title: "Blood Pressure", score: 0 }] },
+  { items: [{ title: "Oxygen Level", score: 0 }] },
+  { items: [{ title: "Pulse Rate", score: 0 }] },
+  { items: [{ title: "Blood Glucose", score: 0 }] },
+  { items: [{ title: "Blood Cholesterol", score: 0 }] },
+  { items: [{ title: "Respiratory Circulation", score: 0 }] },
+  { items: [{ title: "Nitric Oxide level", score: 0 }] },
+  { items: [{ title: "Red Blood Cell", score: 0 }] },
 ];
 
-const ResultCView = () => {
-  // const data = useUserforM();
+const ResultCView = ({ id }) => {
+  const { isLoading, data } = useUserforC(id);
+  console.log("C data", data);
+
+  if (isLoading) {
+    return <LoadingBar />;
+  }
+
+  if (!data) {
+    return <Box />;
+  }
 
   return (
     <>

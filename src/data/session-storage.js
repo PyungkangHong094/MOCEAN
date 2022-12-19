@@ -7,6 +7,9 @@ export const saveAuthResult = (data) => {
 };
 
 export const getAuthResult = () => {
+  if (typeof window === "undefined") {
+    return {};
+  }
   return {
     token: sessionStorage.getItem("MOCEAN-TOKEN"),
     user_id: sessionStorage.getItem("MOCEAN-USER-ID"),

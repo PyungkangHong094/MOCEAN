@@ -7,6 +7,8 @@ const PNSYinForm = ({ onInput }) => {
   const [status, setStatus] = useState(null);
 
   const onChange = (inputValue) => {
+    inputValue = parseFloat(inputValue);
+
     onInput(inputValue);
 
     if (inputValue <= 30 || 41 <= inputValue) {

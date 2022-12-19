@@ -7,16 +7,20 @@ export const useUserforO = (userId) => {
     return data;
   };
 
-  return useQuery("get-user-O", getUserO);
+  return useQuery({
+    queryKey: "get-user-O",
+    queryFn: getUserO,
+    enabled: !!userId,
+  });
 };
 
-export const putO = async (customerId, dataO) => {
-  const { data } = await ApiClient().put(`/customers/${customerId}/organ`, dataO);
+export const putO = async ({ id, dataO }) => {
+  const { data } = await ApiClient().put(`/customers/${id}/organ`, dataO);
 
   return data;
 };
-export const postO = async (customerId, dataO) => {
-  const { data } = await ApiClient().post(`/customers/${customerId}/organ`, dataO);
+export const postO = async ({ id, dataO }) => {
+  const { data } = await ApiClient().post(`/customers/${id}/organ`, dataO);
 
   return data;
 };
