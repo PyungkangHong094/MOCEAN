@@ -120,7 +120,7 @@ const LoginPage = () => {
             </Box>
           </form>
 
-          <Typography color="textSecondary" variant="body2">
+          {/* <Typography color="textSecondary" variant="body2">
             Don&apos;t have an account?{" "}
             <NextLink href="/register">
               <Link
@@ -134,7 +134,7 @@ const LoginPage = () => {
                 Sign Up
               </Link>
             </NextLink>
-          </Typography>
+          </Typography> */}
         </Container>
       </Box>
     </>

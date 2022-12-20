@@ -26,6 +26,7 @@ import { CustomerListToolbar } from "./customer-list-toolbar";
 export const CustomerList = (props) => {
   const queryClient = useQueryClient();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
+
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [filter, setFilter] = useState("");
@@ -120,7 +121,7 @@ export const CustomerList = (props) => {
                       customer={customer}
                       selected={selectedCustomerIds.indexOf(customer.id) !== -1}
                       onSelect={handleSelectOne}
-                      onRemove={() => removeCustomer(customer)}
+                      onRemove={() => removeCustomer(customer.id)}
                     />
                   ))}
                 </TableBody>

@@ -49,6 +49,9 @@ const ratingData = [
 ];
 
 const initData = (data) => {
+  if (!data) {
+    return ratingData;
+  }
   const {
     stress,
     sleep,
@@ -69,11 +72,11 @@ const initData = (data) => {
   ratingData[0].items[3].score = getEnergyScore(energy);
   ratingData[1].items[0].score = getYangScore(sns_yang);
   ratingData[1].items[1].score = getYinScore(pns_yin);
-  ratingData[2].items[0].score = getDetoxScore(detox_energy);
-  ratingData[2].items[1].score = getLifeScore(life_energy);
-  ratingData[2].items[2].score = getDigestiveEnergyScore(digestive_energy);
-  ratingData[2].items[3].score = getImmuneScore(immune_energy);
-  ratingData[2].items[4].score = getPurificationScore(purification_energy);
+  ratingData[2].items[0].score = getDetoxScore(standard, detox_energy);
+  ratingData[2].items[1].score = getLifeScore(standard, life_energy);
+  ratingData[2].items[2].score = getDigestiveEnergyScore(standard, digestive_energy);
+  ratingData[2].items[3].score = getImmuneScore(standard, immune_energy);
+  ratingData[2].items[4].score = getPurificationScore(standard, purification_energy);
   return ratingData;
 };
 

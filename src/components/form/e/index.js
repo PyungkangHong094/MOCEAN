@@ -32,7 +32,7 @@ const FormEView = ({ id }) => {
     return <LoadingBar />;
   }
 
-  console.log("E data", apiResult.emotion);
+  // console.log("E data", apiResult.emotion);
 
   const onInput = (key) => (value) =>
     setData({

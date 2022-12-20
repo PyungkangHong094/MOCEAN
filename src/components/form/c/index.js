@@ -29,7 +29,7 @@ const FormCView = ({ id }) => {
   if (isLoading) {
     return <LoadingBar />;
   }
-  console.log("C data", apiResult.circulatory);
+  // console.log("C data", apiResult.circulatory);
 
   const onInput = (key) => (value) =>
     setData({

@@ -1,6 +1,8 @@
 import { useMutation, useQuery } from "react-query";
 import ApiClient from "../api-client";
 
+// 사용자(customer) API
+
 export const getAllUsers = async (page = 1, pageSize = 20, filterName) => {
   let url = `/customers?page=${page}&items_per_page=${pageSize}`;
   if (filterName) {
@@ -33,10 +35,6 @@ export const updateUser = async ({ customerId, data }) => {
 };
 
 export const deleteUser = async (customerId) => {
-  const deleteRequest = async () => {
-    const { status, data } = await ApiClient().delete(`/customers/${customerId}`);
-    return status == 200;
-  };
-
-  return useMutation(deleteRequest);
+  const { status, data } = await ApiClient().delete(`/customers/${customerId}`);
+  return status == 200;
 };

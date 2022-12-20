@@ -37,7 +37,14 @@ export const CustomerFormToolbar = ({ id, currentMenu }) => {
   console.log("ToolBar C", dataC);
   console.log("ToolBar E", dataE);
 
-  const { mutate: saveUser } = useMutation(isNew ? addUser : updateUser);
+  const { mutate: saveUser } = useMutation(isNew ? addUser : updateUser, {
+    onSuccess: () => {
+      showAlertDialog({ title: "Success", message: "Add user success" });
+    },
+    onError: () => {
+      showAlertDialog({ title: "Failed", message: "Add user failed" });
+    },
+  });
 
   // const { mutate: saveE } = useMutation(isNew ? postE : putE, {
   //   onSuccess: onSaveSuccess,
