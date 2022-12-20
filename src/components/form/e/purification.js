@@ -7,6 +7,8 @@ const PurificationForm = ({ standardValue, onInput }) => {
   const [status, setStatus] = useState(null);
 
   const onChange = (inputValue) => {
+    inputValue = parseFloat(inputValue);
+
     onInput(inputValue);
 
     const diff = Math.abs(inputValue - standardValue);

@@ -6,26 +6,7 @@ import { DropdownCell, TextInputCell, TitleCell } from "../cell-types";
 import ImageUpload from "./image-upload";
 import InputForm from "./input-form";
 
-const VisceralFat = ({ onInput }) => {
-  const [status, setStatus] = useState(null);
-
-  const onChange = (inputValue) => {
-    onInput(inputValue);
-
-    const rate = Math.floor((inputValue / 21) * 100);
-    if (90 <= rate && rate <= 100) {
-      setStatus({ text: "excellent", color: theme.palette.score.excellent });
-    } else if (80 <= rate && rate <= 89) {
-      setStatus({ text: "good", color: theme.palette.score.good });
-    } else if (65 <= rate && rate <= 79) {
-      setStatus({ text: "fair", color: theme.palette.score.fair });
-    } else if (rate <= 64) {
-      setStatus({ text: "poor", color: theme.palette.score.poor });
-    } else {
-      setStatus(null);
-    }
-  };
-
+const VisceralFat = ({ onSelect }) => {
   return (
     <Box mb={4}>
       <Typography variant="h5">Visceral Fat</Typography>
@@ -40,16 +21,17 @@ const VisceralFat = ({ onInput }) => {
               <TitleCell title={"Figure"} align={"center"} />
               <DropdownCell
                 values={[
-                  { text: "Poor", color: theme.palette.score.poor },
-                  { text: "Fair", color: theme.palette.score.fair },
-                  { text: "Good", color: theme.palette.score.good },
-                  { text: "Excellent", color: theme.palette.score.excellent },
+                  { text: "Poor", value: "poor", color: theme.palette.score.poor },
+                  { text: "Fair", value: "fair", color: theme.palette.score.fair },
+                  { text: "Good", value: "good", color: theme.palette.score.good },
+                  { text: "Excellent", value: "excellent", color: theme.palette.score.excellent },
                 ]}
                 renderItem={(v) => (
                   <Typography variant="h6" color={v.color}>
                     {v.text}
                   </Typography>
                 )}
+                onSelected={(v) => onSelect(v.value)}
               />
             </TableRow>
           </TableBody>

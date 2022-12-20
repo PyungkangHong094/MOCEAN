@@ -1,54 +1,40 @@
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import ApiClient from "../api-client";
 
-export const useAllUsers = (page = 1, pageSize = 20, filterName) => {
-  const getAllUsers = async () => {
-    const { data } = await ApiClient().get(
-      `/customers?page=${page}&items_per_page=${pageSize}` //&name=${filterName}`,
-    );
-    return data;
-  };
+// 사용자(customer) API
 
-  return useQuery("get-all-users", getAllUsers);
+export const getAllUsers = async (page = 1, pageSize = 20, filterName) => {
+  let url = `/customers?page=${page}&items_per_page=${pageSize}`;
+  if (filterName) {
+    url += `&name=${filterName}`;
+  }
+  const { data } = await ApiClient().get(url);
+  return data;
 };
 
-export const useCreateUser = ({ name, email, password, phone, birth }) => {
-  const postUser = async () => {
-    const result = await ApiClient().post("/customers", {
-      name,
-      email,
-      password,
-      phone_number: phone,
-      birthday: birth,
-    });
-
-    return result.status == 200;
-  };
-
-  return useQuery("post-user", postUser);
+export const useUser = (customerId) => {
+  return useQuery({
+    queryKey: "get-user",
+    queryFn: async () => {
+      const { data } = await ApiClient().get(`/customers/${customerId}`);
+      return data;
+    },
+    enabled: !!customerId,
+  });
 };
 
-export const useUserforO = (userId) => {
-  const getUserO = async () => {
-    const { data } = await ApiClient().get(`users/${userId}/musculoskeletal`);
-    return data;
-  };
+export const addUser = async (profile) => {
+  const result = await ApiClient().post("/customers", profile);
 
-  return useQuery("get-user-O", getUserO);
+  return result.status == 200;
 };
-export const useUserforC = (userId) => {
-  const getUserC = async () => {
-    const { data } = await ApiClient().get(`users/${userId}/musculoskeletal`);
-    return data;
-  };
 
-  return useQuery("get-user-C", getUserC);
+export const updateUser = async ({ customerId, data }) => {
+  const result = await ApiClient().put(`/customers/${customerId}/info`, data);
+  return result.status == 200;
 };
-export const useUserforE = (userId) => {
-  const getUserE = async () => {
-    const { data } = await ApiClient().get(`users/${userId}/musculoskeletal`);
-    return data;
-  };
 
-  return useQuery("get-user-E", getUserE);
+export const deleteUser = async (customerId) => {
+  const { status, data } = await ApiClient().delete(`/customers/${customerId}`);
+  return status == 200;
 };

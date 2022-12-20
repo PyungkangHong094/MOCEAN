@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useSignIn } from "src/data/repository/auth";
 import { useEffect } from "react";
 import { useDialog } from "src/components/dialogs/context";
+import { saveAuthResult } from "src/data/session-storage";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -15,8 +16,8 @@ const LoginPage = () => {
   const { showAlertDialog } = useDialog();
   const formik = useFormik({
     initialValues: {
-      username: "admin1",
-      password: "hawon1234",
+      username: "", //"admin1",
+      password: "", // "hawon1234",
     },
     validationSchema: Yup.object({
       username: Yup.string().max(255).required("Username is required"),
@@ -32,8 +33,7 @@ const LoginPage = () => {
         },
         {
           onSuccess: (data, variables) => {
-            console.log(data.data.token);
-            sessionStorage.setItem("MOCEAN-TOKEN", data.data.token);
+            saveAuthResult(data.data);
             router.push("/customers");
           },
           onError: (error) => {
@@ -120,7 +120,7 @@ const LoginPage = () => {
             </Box>
           </form>
 
-          <Typography color="textSecondary" variant="body2">
+          {/* <Typography color="textSecondary" variant="body2">
             Don&apos;t have an account?{" "}
             <NextLink href="/register">
               <Link
@@ -134,7 +134,7 @@ const LoginPage = () => {
                 Sign Up
               </Link>
             </NextLink>
-          </Typography>
+          </Typography> */}
         </Container>
       </Box>
     </>

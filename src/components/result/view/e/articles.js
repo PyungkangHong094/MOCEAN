@@ -40,7 +40,7 @@ export const EnergyLevel = ({ name = "Client", score = 0 }) => {
   );
 };
 
-export const YinYangBalance = ({ name = "Client", score = 0 }) => {
+export const YinYangBalance = ({ name = "Client", yin = 0, yang = 0 }) => {
   return (
     <Article title={"Yin-Yang Balance (SNS : PNS)"}>
       <Typography>
@@ -53,7 +53,7 @@ export const YinYangBalance = ({ name = "Client", score = 0 }) => {
       <Typography mt={2}>
         <b>SNS - Yang</b>
       </Typography>
-      {score == 3 ? (
+      {yang == 3 ? (
         <Typography>
           <b>{name}</b> 의 활력도 벨런스는 안정적입니다.
         </Typography>
@@ -67,7 +67,7 @@ export const YinYangBalance = ({ name = "Client", score = 0 }) => {
       <Typography mt={2}>
         <b>PNS - Yin</b>
       </Typography>
-      {score == 3 ? (
+      {yin == 3 ? (
         <Typography>
           <b>{name}</b> 의 활력도 벨런스는 안정적입니다
         </Typography>
@@ -82,7 +82,14 @@ export const YinYangBalance = ({ name = "Client", score = 0 }) => {
   );
 };
 
-export const BioDynamicField = ({ name = "Client", score = 0 }) => {
+export const BioDynamicField = ({
+  name = "Client",
+  detox = 0,
+  life = 0,
+  digestive = 0,
+  immune = 0,
+  purification = 0,
+}) => {
   return (
     <Article title={"Bio-Dynamic Field"}>
       <Typography mt={2}>
@@ -94,7 +101,7 @@ export const BioDynamicField = ({ name = "Client", score = 0 }) => {
         wood 는 해독 기능의 에너지 입니다. 간은 몸에서 해독 기능과, 중요한 단백질을 생성, 및
         영양소를 축적하는 기능을 가지고 있는데 그중 가장 중요한 능력이 해독 능력입니다.
       </Typography>
-      {score == 3 ? (
+      {detox == 3 ? (
         <Typography>
           <b>{name}</b>님의 wood element 기능은 정상입니다.
         </Typography>
@@ -126,7 +133,7 @@ export const BioDynamicField = ({ name = "Client", score = 0 }) => {
         Fire 는 생명 기능을 담당하는 에너지 입니다. Fire element 는 혈액순환, 순환기 등, 살아가는데
         핵심이 되는 기운을 보여줍니다.{" "}
       </Typography>
-      {score == 3 ? (
+      {life == 3 ? (
         <Typography>
           <b>{name}</b>님의 fire element 기능은 정상입니다.
         </Typography>
@@ -155,7 +162,7 @@ export const BioDynamicField = ({ name = "Client", score = 0 }) => {
         Earth는 소화 기능 에너지 입니다. 위와 췌장은 소화 및 인슐린, 포도당을 생성해 필요한 영양소를
         소화 시키고 흡수 시키는 기능을 가지고 있습니다.
       </Typography>
-      {score == 3 ? (
+      {digestive == 3 ? (
         <Typography>
           <b>{name}</b>님의 Earth element 기능은 정상입니다.
         </Typography>
@@ -181,7 +188,7 @@ export const BioDynamicField = ({ name = "Client", score = 0 }) => {
         <br />
         Metal 은 면역 기능과 폐, 대장의 기능을 조절하는 에너지 입니다.{" "}
       </Typography>
-      {score == 3 ? (
+      {immune == 3 ? (
         <Typography>
           <b>{name}</b>님의 Metal element 기능은 정상입니다.
         </Typography>
@@ -209,7 +216,7 @@ export const BioDynamicField = ({ name = "Client", score = 0 }) => {
         One point summary - 정화에너지 imbalance, 콩팥, 방광, 비뇨 생식기 기능 항진 <br />
         Water element 는 정화 기능과 신장의 기능을 담당하는 에너지 입니다.{" "}
       </Typography>
-      {score == 3 ? (
+      {purification == 3 ? (
         <Typography>
           <b>{name}</b>님의 Water element 기능은 정상입니다.
         </Typography>

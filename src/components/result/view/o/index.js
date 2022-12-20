@@ -13,23 +13,34 @@ import {
   TotalScoreArticle,
   VisceralArticle,
 } from "./articles";
+import { useUserforO } from "src/data/repository/o";
+import LoadingBar from "src/components/loading-bar";
 
 const ratingData = [
-  { items: [{ title: "Cellular Health", score: 2 }] },
-  { items: [{ title: "Hydration", score: 2 }] },
-  { items: [{ title: "Body Fat", score: 3 }] },
-  { items: [{ title: "Visceral Fat", score: 4 }] },
-  { items: [{ title: "Inflammation", score: 2 }] },
-  { items: [{ title: "Upper Body (left)", score: 3 }] },
-  { items: [{ title: "Upper Body (right)", score: 3 }] },
-  { items: [{ title: "Lower Body (left)", score: 3 }] },
-  { items: [{ title: "Lower Body (right)", score: 3 }] },
-  { items: [{ title: "Trunk", score: 4 }] },
-  { items: [{ title: "Cell integrity", score: 2 }] },
+  { items: [{ title: "Cellular Health", score: 0 }] },
+  { items: [{ title: "Hydration", score: 0 }] },
+  { items: [{ title: "Body Fat", score: 0 }] },
+  { items: [{ title: "Visceral Fat", score: 0 }] },
+  { items: [{ title: "Inflammation", score: 0 }] },
+  { items: [{ title: "Upper Body (left)", score: 0 }] },
+  { items: [{ title: "Upper Body (right)", score: 0 }] },
+  { items: [{ title: "Lower Body (left)", score: 0 }] },
+  { items: [{ title: "Lower Body (right)", score: 0 }] },
+  { items: [{ title: "Trunk", score: 0 }] },
+  { items: [{ title: "Cell integrity", score: 0 }] },
 ];
 
-const ResultOView = () => {
-  // const data = useUserforM();
+const ResultOView = ({ id }) => {
+  const { isLoading, data } = useUserforO(id);
+  console.log("C data", data);
+
+  if (isLoading) {
+    return <LoadingBar />;
+  }
+
+  if (!data) {
+    return <Box />;
+  }
 
   return (
     <>

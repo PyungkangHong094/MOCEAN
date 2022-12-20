@@ -7,6 +7,8 @@ const EnergyForm = ({ onInput }) => {
   const [status, setStatus] = useState(null);
 
   const onChange = (inputValue) => {
+    inputValue = parseFloat(inputValue);
+
     onInput(inputValue);
 
     if (inputValue <= 350 || 601 <= inputValue) {
