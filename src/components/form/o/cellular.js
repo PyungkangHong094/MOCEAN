@@ -1,9 +1,10 @@
 import { Box, Table, TableBody, TableHead, TableRow, Typography } from "@mui/material";
 import { green, orange, red, yellow } from "@mui/material/colors";
-import { useState } from "react";
+import { useEffect } from "react";
 import { theme } from "src/theme";
 import { BorderedCell, TextInputCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
+import { useOContext } from "./context";
 
 const initData = {
   pound: 0,
@@ -11,34 +12,40 @@ const initData = {
   fat: 0,
 };
 
-const Cellular = ({ initialData = initData }) => {
-  const [data, setData] = useState(initialData);
-  const { pound, smm, fat } = data;
+const Cellular = () => {
+  const { data, setData } = useOContext();
+  const { score, weight, smm, body_fat } = data || {};
 
   const setPound = (value) => {
-    const newData = {
-      ...data,
-      pound: value,
-    };
-    setData(newData);
+    setData({
+      key: "weight",
+      value,
+    });
   };
   const setSMM = (value) => {
-    const newData = {
-      ...data,
-      smm: value,
-    };
-    setData(newData);
+    setData({
+      key: "smm",
+      value,
+    });
   };
   const setFat = (value) => {
-    const newData = {
-      ...data,
-      fat: value,
-    };
-    setData(newData);
+    setData({
+      key: "body_fat",
+      value,
+    });
   };
 
-  const score =
-    0.54987 * (pound / 2.205) + 0.01279 * (smm / 2.205) - 1.85422 * (fat / 2.205) + 75.67391;
+  useEffect(() => {
+    const score =
+      0.54987 * ((weight || 0) / 2.205) +
+      0.01279 * ((smm || 0) / 2.205) -
+      1.85422 * ((body_fat || 0) / 2.205) +
+      75.67391;
+    setData({
+      key: "score",
+      value: score,
+    });
+  }, [weight, smm, body_fat]);
 
   return (
     <Box mt={4} mb={2}>
@@ -86,9 +93,9 @@ const Cellular = ({ initialData = initData }) => {
             <TitleCell align="center" title={"Score"} />
           </TableRow>
           <TableRow>
-            <TextInputCell type={"number"} defaultValue={pound} onChange={setPound} />
+            <TextInputCell type={"number"} defaultValue={weight} onChange={setPound} />
             <TextInputCell type={"number"} defaultValue={smm} onChange={setSMM} />
-            <TextInputCell type={"number"} defaultValue={fat} onChange={setFat} />
+            <TextInputCell type={"number"} defaultValue={body_fat} onChange={setFat} />
             <BorderedCell align={"center"}>
               <Typography>{score}</Typography>
             </BorderedCell>
@@ -101,13 +108,13 @@ const Cellular = ({ initialData = initData }) => {
           </TableRow>
           <TableRow>
             <BorderedCell align={"center"}>
-              <Typography>{pound / 2.205}</Typography>
+              <Typography>{(weight || 0) / 2.205}</Typography>
             </BorderedCell>
             <BorderedCell align={"center"}>
-              <Typography>{smm / 2.205}</Typography>
+              <Typography>{(smm || 0) / 2.205}</Typography>
             </BorderedCell>
             <BorderedCell align={"center"}>
-              <Typography>{fat / 2.205}</Typography>
+              <Typography>{(body_fat || 0) / 2.205}</Typography>
             </BorderedCell>
             <BorderedCell align={"center"}></BorderedCell>
           </TableRow>

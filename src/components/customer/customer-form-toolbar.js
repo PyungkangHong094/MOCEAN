@@ -20,6 +20,7 @@ import { useMutation } from "react-query";
 import { postE, putE } from "src/data/repository/e";
 import { postO, putO } from "src/data/repository/o";
 import { postC, putC } from "src/data/repository/c";
+import { useOContext } from "../form/o/context";
 import { useCContext } from "../form/c/context";
 import { useEContext } from "../form/e/context";
 import { addUser, updateUser } from "src/data/repository/users";
@@ -32,12 +33,25 @@ export const CustomerFormToolbar = ({ id, currentMenu }) => {
 
   const { profile } = useContext(profileContext);
 
+  const { data: dataO } = useOContext();
   const { data: dataC } = useCContext();
   const { data: dataE } = useEContext();
+  console.log("ToolBar O", dataO);
   console.log("ToolBar C", dataC);
   console.log("ToolBar E", dataE);
 
-  const { mutate: saveUser } = useMutation(isNew ? addUser : updateUser, {
+  const { mutate: addUserData } = useMutation(addUser, {
+    onSuccess: (data) => {
+      showAlertDialog({ title: "Success", message: "Add user success", onConfirm: () => {
+        console.log(data);
+        //router.replace(`/customers/form?id=${}`)
+      } });
+    },
+    onError: () => {
+      showAlertDialog({ title: "Failed", message: "Add user failed" });
+    },
+  });
+  const { mutate: updateUserData } = useMutation(updateUser, {
     onSuccess: () => {
       showAlertDialog({ title: "Success", message: "Add user success" });
     },
@@ -58,23 +72,43 @@ export const CustomerFormToolbar = ({ id, currentMenu }) => {
     showAlertDialog({ title: "Failed", message: "Save failed" });
   };
 
-  const { mutate: saveO } = useMutation(isNew ? postO : putO, {
+  const { mutate: postOData } = useMutation(postO, {
     onSuccess: onSaveSuccess,
     onError: onSaveFailed,
   });
-  const { mutate: saveC } = useMutation(isNew ? postC : putC, {
+  const { mutate: putOData } = useMutation(putO, {
+    onSuccess: onSaveSuccess,
+    onError: () => {
+      postOData({id, dataO})
+    },
+  });
+  const { mutate: postCData } = useMutation(postC, {
     onSuccess: onSaveSuccess,
     onError: onSaveFailed,
   });
-  const { mutate: saveE } = useMutation(isNew ? postE : putE, {
+  const { mutate: putCData } = useMutation(putC, {
+    onSuccess: onSaveSuccess,
+    onError: () => {
+      postCData({ id, dataC})
+    },
+  });
+  const { mutate: postEData } = useMutation(postE, {
     onSuccess: onSaveSuccess,
     onError: onSaveFailed,
+  });
+  const { mutate: putEData } = useMutation(putE, {
+    onSuccess: onSaveSuccess,
+    onError: () => {
+      postEData({ id, dataE });
+    },
   });
 
+  const saveUser = () => {
+    addUserData(profile)
+  }
+
   const saveForm = useCallback(() => {
-    if (profile.name !== "") {
-      saveUser(isNew ? profile : { customerId: id, data: profile });
-    }
+      saveUser({ customerId: id, data: profile });
     switch (currentMenu) {
       case 0:
         showAlertDialog({
@@ -84,31 +118,13 @@ export const CustomerFormToolbar = ({ id, currentMenu }) => {
         break;
 
       case 1:
-        saveO({
-          customerId: id,
-          dataO: {
-            score: 0,
-            weight: 0,
-            smm: 0,
-            body_fat: 0,
-            visceral_fat: 0,
-            total_body_water: 0,
-            whole_body_phase_angle: 0,
-            right_arm: 0,
-            left_arm: 0,
-            right_leg: 0,
-            left_leg: 0,
-            trunk: 0,
-            inflamation: 0,
-          },
-        });
+        putOData({ id, dataO });
         break;
-
       case 2:
-        saveC({ id, dataC });
+        putCData({ id, dataC });
         break;
       case 3:
-        saveE({ id, dataE });
+        putEData({ id, dataE });
         break;
     }
   }, [currentMenu, profile, dataC, dataE]);
@@ -144,7 +160,7 @@ export const CustomerFormToolbar = ({ id, currentMenu }) => {
         <Button variant="contained" color="error" sx={{ width: 100 }} onClick={cancelForm}>
           Cancel
         </Button>
-        <Button variant="contained" color="success" sx={{ width: 100, mx: 2 }} onClick={saveForm}>
+        <Button variant="contained" color="success" sx={{ width: 100, mx: 2 }} onClick={isNew ? saveUser : saveForm}>
           Save
         </Button>
       </Box>

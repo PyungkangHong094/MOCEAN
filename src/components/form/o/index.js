@@ -7,14 +7,25 @@ import Cellular from "./cellular";
 import Hydration from "./hydration";
 import Inflammation from "./inflammation";
 import Visceral from "./visceral";
+import { useOContext } from "./context";
+import { useEffect } from "react";
 
 const FormOView = ({ id }) => {
-  const { isLoading, data } = useUserforO(id);
-  console.log("O data", data);
+  const { initData, setData } = useOContext();
+  const { isLoading, data: apiResult } = useUserforO(id);
+
+  useEffect(() => {
+    if (apiResult) {
+      initData(apiResult.organ);
+    }
+  }, [apiResult]);
 
   if (isLoading) {
     return <LoadingBar />;
   }
+
+  console.log("O data", apiResult);
+
   return (
     <Box px={4} mb={4}>
       <Cellular />

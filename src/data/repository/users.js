@@ -26,7 +26,7 @@ export const useUser = (customerId) => {
 export const addUser = async (profile) => {
   const result = await ApiClient().post("/customers", profile);
 
-  return result.status == 200;
+  return result.data;
 };
 
 export const updateUser = async ({ customerId, data }) => {
