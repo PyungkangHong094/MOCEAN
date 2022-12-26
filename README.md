@@ -1,7 +1,9 @@
 MOCEAN
 
-- [Users Page](https://material-kit-react.devias.io/customers)
-- [Login Page](https://material-kit-react.devias.io/login)
+- [Users Page]
+- [Login Page]
+- [Edit Page]
+- [Input Page]
 
 
 ## Quick start
@@ -10,15 +12,18 @@ MOCEAN
 
 - Install dependencies: `npm install` or `yarn`
 
-- Start the server: `npm run dev` or `yarn dev`
+- Start the server: `yarn dev`
 
 - Views are on: `localhost:3000`
 
-## Resources
+## 푸쉬할때 필수 조건 
 
-- More freebies like this one: <https://devias.io>
+- MAKE SURE YOU GO ALL OF THEM 
 
+- yarn build 
 
-## License
+- yarn start
 
-- Licensed under MIT (https://github.com/devias-io/react-material-dashboard/blob/master/LICENSE.md)
+- docker-compose -f docker-compose-local.yml up —build
+
+- 다 하시고 문제가 없으실때 푸쉬를 꼭 해주셔야합니다 부탁드립니다 
