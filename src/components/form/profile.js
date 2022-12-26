@@ -29,32 +29,28 @@ export const ProfileProvider = ({ children }) => {
   }, [profile]);
 
   const setName = (v) => {
-    const newData = {
-      ...profile,
+    setProfile((prev) => ({
+      ...prev,
       name: v,
-    };
-    setProfile(newData);
+    }));
   };
   const setBirth = (v) => {
-    const newData = {
-      ...profile,
+    setProfile((prev) => ({
+      ...prev,
       birthday: v,
-    };
-    setProfile(newData);
+    }));
   };
   const setEmail = (v) => {
-    const newData = {
-      ...profile,
+    setProfile((prev) => ({
+      ...prev,
       email: v,
-    };
-    setProfile(newData);
+    }));
   };
   const setPhone = (v) => {
-    const newData = {
-      ...profile,
+    setProfile((prev) => ({
+      ...prev,
       phone_number: v,
-    };
-    setProfile(newData);
+    }));
   };
 
   return (
@@ -75,13 +71,6 @@ export const ProfileProvider = ({ children }) => {
 
 const FormProfile = ({ profile = {} }) => {
   const {
-    name: initialName,
-    birthday: initialBirth,
-    email: initialEmail,
-    phone_number: initialPhone,
-  } = profile;
-
-  const {
     profile: front_profile,
     setName,
     setBirth,
@@ -90,11 +79,15 @@ const FormProfile = ({ profile = {} }) => {
   } = useContext(profileContext);
 
   useEffect(() => {
-    setName(initialName);
-    setBirth(initialBirth);
-    setEmail(initialEmail);
-    setPhone(initialPhone);
-  }, []);
+    if (Object.keys(profile).length !== 0) {
+      setName(profile.name);
+      setBirth(profile.birthday);
+      setEmail(profile.email);
+      setPhone(profile.phone_number);
+    }
+  }, [profile]);
+  console.log("----------------------------------------------")
+  console.log("front_profile", profile, front_profile);
 
   return (
     <Box ml={4} maxWidth={500}>

@@ -4,9 +4,20 @@ import { useState } from "react";
 import { theme } from "src/theme";
 import { TextInputCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
+import { useOContext } from "./context";
+
 
 const Visceral = () => {
-  const [data, setData] = useState(0);
+  
+  const { data, setData } = useOContext();
+
+  const { visceral_fat } = data || {};
+  const setVisceral = (value) => {
+    setData({
+      key: 'visceral_fat',
+      value,
+    })
+  }
 
   return (
     <Box mt={4} mb={2}>
@@ -20,8 +31,8 @@ const Visceral = () => {
         <TableBody>
           <TableRow>
             <TitleCell title={"should be below 100"} align="center" />
-            <TextInputCell onChange={setData} />
-            <TitleCell title={data / 10} align={"center"} />
+            <TextInputCell onChange={setVisceral} />
+            <TitleCell title={visceral_fat / 10} align={"center"} />
           </TableRow>
         </TableBody>
       </Table>

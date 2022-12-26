@@ -5,6 +5,7 @@ import { useState } from "react";
 import { theme } from "src/theme";
 import { DropdownCell, TextInputCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
+import { useOContext } from "./context";
 
 const initData = {
   gender: 0,
@@ -12,38 +13,25 @@ const initData = {
   weight: 0,
 };
 
-const Hydration = ({ initialData = initData }) => {
-  const [data, setData] = useState(initialData);
-  const { bodyWater, weight } = data;
+const Hydration = () => {
+  const [gender, setGender] = useState(initData.gender);
+  const [weight, setWeight] = useState(initData.weight);
+  const { data, setData } = useOContext();
+  const { total_body_water } = data || {};
 
-  const setGender = (value) => {
-    const newData = {
-      ...data,
-      gender: value,
-    };
-    setData(newData);
-  };
   const setBodyWater = (value) => {
-    const newData = {
-      ...data,
-      bodyWater: value,
-    };
-    setData(newData);
-  };
-  const setWeight = (value) => {
-    const newData = {
-      ...data,
-      weight: value,
-    };
-    setData(newData);
+    setData({
+      key: 'total_body_water',
+      value,
+    });
   };
 
-  const score = weight == 0 ? 0 : ((bodyWater / weight) * 100).toFixed(1);
+  const score = weight == 0 ? 0 : (((total_body_water || 0) / weight) * 100).toFixed(1);
 
   return (
     <Box mt={4} mb={2}>
       <Typography mb={2} variant="h5">
-        2. Hydration% = Total Body Water (TBW) / Weigth
+        2. Hydration% = Total Body Water (TBW) / Weight
       </Typography>
       <Box sx={{ position: "relative", height: 240, mb: 2 }}>
         <Image src={"/static/images/inputs/o/o1.png"} layout="fill" objectFit="contain" />
@@ -60,7 +48,7 @@ const Hydration = ({ initialData = initData }) => {
                 </Typography>
               )}
             />
-            <TextInputCell defaultValue={bodyWater} hint={"Body water"} onChange={setBodyWater} />
+            <TextInputCell defaultValue={total_body_water || 0} hint={"Body water"} onChange={setBodyWater} />
             <TextInputCell defaultValue={weight} hint={"Weight"} onChange={setWeight} />
             <TitleCell title={score} />
           </TableRow>

@@ -3,8 +3,15 @@ import Image from "next/image";
 import { theme } from "src/theme";
 import { DropdownCell, TextInputCell } from "../cell-types";
 import TextInput from "../textinput";
+import { useOContext } from "./context";
+
 
 const CellIntegrity = () => {
+  const { data, setData } = useOContext();
+
+  const {whole_body_phase_angle} = data || {};
+
+
   return (
     <Box mt={4} mb={2}>
       <Typography mb={2} variant="h5">
@@ -31,7 +38,12 @@ const CellIntegrity = () => {
               )}
             />
             <TextInputCell hint={"Age"} type="number" onChange={() => {}} />
-            <TextInputCell hint={"Angle"} type="number" onChange={() => {}} />
+            <TextInputCell hint={"Angle"} type="number" onChange={(v) => {
+              setData({
+                key: 'whole_body_phase_angle',
+                value: parseFloat(v)
+              })
+            }} />
           </TableRow>
         </TableBody>
       </Table>

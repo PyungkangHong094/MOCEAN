@@ -91,7 +91,8 @@ const ResultEView = ({ id }) => {
     return <Box />;
   }
   const result = initData(data.emotion);
-  console.log("E data", result);
+  console.log("E data", data);
+  console.log("E result", result)
   const { name: customerName } = data;
 
   return (

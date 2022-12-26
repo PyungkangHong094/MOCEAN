@@ -41,7 +41,7 @@ export const CustomerListToolbar = ({ onSearch }) => {
           <Button
             color="primary"
             variant="contained"
-            onClick={() => router.push("/customers/form")}
+            onClick={() => router.push("/customers/add")}
           >
             Add Customers
           </Button>

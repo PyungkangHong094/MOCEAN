@@ -10,10 +10,14 @@ import ResultMView from "src/components/result/view/m";
 import ResultOView from "src/components/result/view/o";
 import ResultCView from "src/components/result/view/c";
 import ResultEView from "src/components/result/view/e";
+import {useUser} from "src/data/repository/users"
 
 const CustomerDetail = () => {
   const router = useRouter();
   const { cid } = router.query;
+
+  const {isLoading, data}  = useUser(cid);
+  const {name, create_dt, email} = data || {}
 
   const [menuIdx, setMenuIdx] = useState(0);
 
@@ -47,9 +51,9 @@ const CustomerDetail = () => {
       >
         <Box sx={{ position: "-webkit-sticky", position: "sticky", top: 0, zIndex: 2 }}>
           <ResultToolbar
-            name={"Joshua Park"}
-            datetime={"2022-10-01 16:30"}
-            email={"joshuapark@gmail.com"}
+            name={name}
+            datetime={create_dt}
+            email={email}
           />
           <ResultMenu onSelectMenu={(idx) => setMenuIdx(idx)} />
         </Box>

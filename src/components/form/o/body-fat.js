@@ -4,7 +4,13 @@ import { theme } from "src/theme";
 import { BorderedCell, DropdownCell, TextInputCell } from "../cell-types";
 import TextInput from "../textinput";
 
+
 const BodyFat = () => {
+  
+  // const { data, setData } = useOContext();
+
+
+
   return (
     <Box mt={4} mb={2}>
       <Typography mb={2} variant="h5">
