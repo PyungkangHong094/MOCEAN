@@ -86,7 +86,7 @@ const FormProfile = ({ profile = {} }) => {
       setPhone(profile.phone_number);
     }
   }, [profile]);
-
+  console.log("----------------------------------------------")
   console.log("front_profile", profile, front_profile);
 
   return (

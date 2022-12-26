@@ -11,7 +11,7 @@ const Visceral = () => {
   
   const { data, setData } = useOContext();
 
-  const { visceral_fat } = data;
+  const { visceral_fat } = data || {};
   const setVisceral = (value) => {
     setData({
       key: 'visceral_fat',
