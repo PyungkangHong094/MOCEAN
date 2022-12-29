@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { theme } from "src/theme";
 import InputForm from "./input-form";
 
-const DigestiveForm = ({ onInput }) => {
+const DigestiveForm = ({ onInput,ogData }) => {
   const [status, setStatus] = useState(null);
 
   const onChange = (inputValue) => {
@@ -25,7 +25,7 @@ const DigestiveForm = ({ onInput }) => {
   };
 
   return (
-    <InputForm title={"Digestive Score"} defaultValue={0} onChange={onChange}>
+    <InputForm title={"Digestive Score"} defaultValue={ogData} onChange={onChange}>
       {status != null && (
         <Typography variant="h6" color={status.color}>
           {status.text}

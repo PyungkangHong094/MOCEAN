@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { theme } from "src/theme";
 import InputForm from "./input-form";
 
-const SNSYangForm = ({ onInput }) => {
+const SNSYangForm = ({ onInput, ogData }) => {
   const [status, setStatus] = useState(null);
 
   const onChange = (inputValue) => {
@@ -21,7 +21,7 @@ const SNSYangForm = ({ onInput }) => {
   };
 
   return (
-    <InputForm title={"활력도 (SNS-Yang)"} defaultValue={0} onChange={onChange}>
+    <InputForm title={"활력도 (SNS-Yang)"} defaultValue={ogData} onChange={onChange}>
       {status != null && (
         <Typography variant="h6" color={status.color}>
           {status.text}

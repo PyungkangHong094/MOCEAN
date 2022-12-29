@@ -32,7 +32,7 @@ const FormEView = ({ id }) => {
     return <LoadingBar />;
   }
 
-  // console.log("E data", apiResult.emotion);
+  // console.log("E data on form side", apiResult.emotion);
 
   const onInput = (key) => (value) =>
     setData({
@@ -42,13 +42,13 @@ const FormEView = ({ id }) => {
 
   return (
     <Box p={4}>
-      <StressForm onInput={onInput("stress")} />
-      <SleepForm onInput={onInput("sleep")} />
-      <DigestiveForm onInput={onInput("digestion")} />
-      <EnergyForm onInput={onInput("energy")} />
+      <StressForm onInput={onInput("stress")} ogData = {apiResult.emotion.stress} />
+      <SleepForm onInput={onInput("sleep")} ogData = {apiResult.emotion.sleep} />
+      <DigestiveForm onInput={onInput("digestion")} ogData = {apiResult.emotion.digestion} />
+      <EnergyForm onInput={onInput("energy")} ogData = {apiResult.emotion.energy} />
       <Box my={16}>
-        <SNSYangForm onInput={onInput("sns_yang")} />
-        <PNSYinForm onInput={onInput("pns_yin")} />
+        <SNSYangForm onInput={onInput("sns_yang")} ogData = {apiResult.emotion.sns_yang} />
+        <PNSYinForm onInput={onInput("pns_yin")} ogData = {apiResult.emotion.pns_yin} />
       </Box>
       <Table sx={{ maxWidth: 600, mb: 4 }}>
         <TableBody>
@@ -56,7 +56,7 @@ const FormEView = ({ id }) => {
             <TitleCell title={"기준값"} align={"center"} />
             <TextInputCell
               type="number"
-              defaultValue={standard}
+              defaultValue={apiResult.emotion.default}
               onChange={(v) => {
                 v = parseFloat(v);
                 setStandard(v);
@@ -66,11 +66,11 @@ const FormEView = ({ id }) => {
           </TableRow>
         </TableBody>
       </Table>
-      <DetoxForm standardValue={standard} onInput={onInput("detox_energy")} />
-      <LifeForm standardValue={standard} onInput={onInput("life_energy")} />
-      <DigestiveEnergyForm standardValue={standard} onInput={onInput("digestive_energy")} />
-      <ImmuneForm standardValue={standard} onInput={onInput("immune_energy")} />
-      <PurificationForm standardValue={standard} onInput={onInput("purification_energy")} />
+      <DetoxForm standardValue={standard} onInput={onInput("detox_energy")} ogData = {apiResult.emotion.detox_energy} />
+      <LifeForm standardValue={standard} onInput={onInput("life_energy")} ogData = {apiResult.emotion.life_energy} />
+      <DigestiveEnergyForm standardValue={standard} onInput={onInput("digestive_energy")} ogData = {apiResult.emotion.digestive_energy} />
+      <ImmuneForm standardValue={standard} onInput={onInput("immune_energy")} ogData = {apiResult.emotion.immune_energy} />
+      <PurificationForm standardValue={standard} onInput={onInput("purification_energy")} ogData = {apiResult.emotion.purification_energy} />
     </Box>
   );
 };

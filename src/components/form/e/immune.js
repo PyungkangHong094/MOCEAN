@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { theme } from "src/theme";
 import InputForm from "./input-form";
 
-const ImmuneForm = ({ standardValue, onInput }) => {
+const ImmuneForm = ({ standardValue, onInput, ogData }) => {
   const [status, setStatus] = useState(null);
 
   const onChange = (inputValue) => {
@@ -26,7 +26,7 @@ const ImmuneForm = ({ standardValue, onInput }) => {
   };
 
   return (
-    <InputForm title={"Immune energy"} defaultValue={0} onChange={onChange}>
+    <InputForm title={"Immune energy"} defaultValue={ogData} onChange={onChange}>
       {status != null && (
         <Typography variant="h6" color={status.color}>
           {status.text}
