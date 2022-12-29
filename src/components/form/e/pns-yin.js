@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { theme } from "src/theme";
 import InputForm from "./input-form";
 
-const PNSYinForm = ({ onInput }) => {
+const PNSYinForm = ({ onInput, ogData }) => {
   const [status, setStatus] = useState(null);
 
   const onChange = (inputValue) => {
@@ -21,7 +21,7 @@ const PNSYinForm = ({ onInput }) => {
   };
 
   return (
-    <InputForm title={"안정도 (PNS-Yin)"} defaultValue={0} onChange={onChange}>
+    <InputForm title={"안정도 (PNS-Yin)"} defaultValue={ogData} onChange={onChange}>
       {status != null && (
         <Typography variant="h6" color={status.color}>
           {status.text}

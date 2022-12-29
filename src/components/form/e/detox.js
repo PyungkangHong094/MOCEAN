@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { theme } from "src/theme";
 import InputForm from "./input-form";
 
-const DetoxForm = ({ standardValue, onInput }) => {
+const DetoxForm = ({ standardValue, onInput, ogData }) => {
   const [status, setStatus] = useState(null);
 
   const onChange = (inputValue) => {
@@ -26,7 +26,7 @@ const DetoxForm = ({ standardValue, onInput }) => {
   };
 
   return (
-    <InputForm title={"Detox energy"} defaultValue={0} onChange={onChange}>
+    <InputForm title={"Detox energy"} defaultValue={ogData} onChange={onChange}>
       {status != null && (
         <Typography variant="h6" color={status.color}>
           {status.text}
