@@ -47,7 +47,7 @@ const ratingData = [
     ],
   },
 ];
-
+// 완료
 const initData = (data) => {
   if (!data) {
     return ratingData;
