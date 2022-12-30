@@ -101,7 +101,7 @@ const FormProfile = ({ profile = {} }) => {
       <TextInput
         fullWidth
         sx={{ my: 2 }}
-        placeholder="Input birth (yyyyMMdd)"
+        placeholder="Input birth (yyyy-MM-dd)"
         variant="outlined"
         value={front_profile.birthday}
         onChange={(e) => setBirth(e.target.value ?? "")}
