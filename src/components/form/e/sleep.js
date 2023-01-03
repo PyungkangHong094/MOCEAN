@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { theme } from "src/theme";
 import InputForm from "./input-form";
 
-const SleepForm = ({ onInput }) => {
+const SleepForm = ({ onInput, ogData }) => {
   const [status, setStatus] = useState(null);
 
   const onChange = (inputValue) => {
@@ -24,7 +24,7 @@ const SleepForm = ({ onInput }) => {
   };
 
   return (
-    <InputForm title={"Sleep Score"} defaultValue={0} onChange={onChange}>
+    <InputForm title={"Sleep Score"} defaultValue={ogData} onChange={onChange}>
       {status != null && (
         <Typography variant="h6" color={status.color}>
           {status.text}

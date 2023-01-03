@@ -32,7 +32,9 @@ const FormEView = ({ id }) => {
     return <LoadingBar />;
   }
 
-  // console.log("E data", apiResult.emotion);
+  // console.log("E data on form side", apiResult.emotion);
+  console.log(apiResult)
+
 
   const onInput = (key) => (value) =>
     setData({
@@ -40,39 +42,80 @@ const FormEView = ({ id }) => {
       value,
     });
 
-  return (
-    <Box p={4}>
-      <StressForm onInput={onInput("stress")} />
-      <SleepForm onInput={onInput("sleep")} />
-      <DigestiveForm onInput={onInput("digestion")} />
-      <EnergyForm onInput={onInput("energy")} />
-      <Box my={16}>
-        <SNSYangForm onInput={onInput("sns_yang")} />
-        <PNSYinForm onInput={onInput("pns_yin")} />
-      </Box>
-      <Table sx={{ maxWidth: 600, mb: 4 }}>
-        <TableBody>
-          <TableRow>
-            <TitleCell title={"기준값"} align={"center"} />
-            <TextInputCell
-              type="number"
-              defaultValue={standard}
-              onChange={(v) => {
-                v = parseFloat(v);
-                setStandard(v);
-                onInput("default")(v);
-              }}
-            />
-          </TableRow>
-        </TableBody>
-      </Table>
-      <DetoxForm standardValue={standard} onInput={onInput("detox_energy")} />
-      <LifeForm standardValue={standard} onInput={onInput("life_energy")} />
-      <DigestiveEnergyForm standardValue={standard} onInput={onInput("digestive_energy")} />
-      <ImmuneForm standardValue={standard} onInput={onInput("immune_energy")} />
-      <PurificationForm standardValue={standard} onInput={onInput("purification_energy")} />
-    </Box>
-  );
-};
-
-export default FormEView;
+  
+    if(apiResult.emotion){
+      return (
+        <Box p={4}>
+          <StressForm onInput={onInput("stress")} ogData = {apiResult.emotion.stress} />
+          <SleepForm onInput={onInput("sleep")} ogData = {apiResult.emotion.sleep} />
+          <DigestiveForm onInput={onInput("digestion")} ogData = {apiResult.emotion.digestion} />
+          <EnergyForm onInput={onInput("energy")} ogData = {apiResult.emotion.energy} />
+          <Box my={16}>
+            <SNSYangForm onInput={onInput("sns_yang")} ogData = {apiResult.emotion.sns_yang} />
+            <PNSYinForm onInput={onInput("pns_yin")} ogData = {apiResult.emotion.pns_yin} />
+          </Box>
+          <Table sx={{ maxWidth: 600, mb: 4 }}>
+            <TableBody>
+              <TableRow>
+                <TitleCell title={"기준값"} align={"center"} />
+                <TextInputCell
+                  type="number"
+                  defaultValue={apiResult.emotion.default}
+                  onChange={(v) => {
+                    v = parseFloat(v);
+                    setStandard(v);
+                    onInput("default")(v);
+                  }}
+                />
+              </TableRow>
+            </TableBody>
+          </Table>
+          <DetoxForm standardValue={standard} onInput={onInput("detox_energy")} ogData = {apiResult.emotion.detox_energy} />
+          <LifeForm standardValue={standard} onInput={onInput("life_energy")} ogData = {apiResult.emotion.life_energy} />
+          <DigestiveEnergyForm standardValue={standard} onInput={onInput("digestive_energy")} ogData = {apiResult.emotion.digestive_energy} />
+          <ImmuneForm standardValue={standard} onInput={onInput("immune_energy")} ogData = {apiResult.emotion.immune_energy} />
+          <PurificationForm standardValue={standard} onInput={onInput("purification_energy")} ogData = {apiResult.emotion.purification_energy} />
+        </Box>
+        
+      );
+    }
+    else{
+      return (
+        <Box p={4}>
+          <StressForm onInput={onInput("stress")} ogData = {0} />
+          <SleepForm onInput={onInput("sleep")} ogData = {0} />
+          <DigestiveForm onInput={onInput("digestion")} ogData = {0} />
+          <EnergyForm onInput={onInput("energy")} ogData = {0} />
+          <Box my={16}>
+            <SNSYangForm onInput={onInput("sns_yang")} ogData = {0} />
+            <PNSYinForm onInput={onInput("pns_yin")} ogData = {0} />
+          </Box>
+          <Table sx={{ maxWidth: 600, mb: 4 }}>
+            <TableBody>
+              <TableRow>
+                <TitleCell title={"기준값"} align={"center"} />
+                <TextInputCell
+                  type="number"
+                  defaultValue={0}
+                  onChange={(v) => {
+                    v = parseFloat(v);
+                    setStandard(v);
+                    onInput("default")(v);
+                  }}
+                />
+              </TableRow>
+            </TableBody>
+          </Table>
+          <DetoxForm standardValue={standard} onInput={onInput("detox_energy")} ogData = {0} />
+          <LifeForm standardValue={standard} onInput={onInput("life_energy")} ogData = {0} />
+          <DigestiveEnergyForm standardValue={standard} onInput={onInput("digestive_energy")} ogData = {0} />
+          <ImmuneForm standardValue={standard} onInput={onInput("immune_energy")} ogData = {0} />
+          <PurificationForm standardValue={standard} onInput={onInput("purification_energy")} ogData = {0} />
+        </Box>
+        
+      );
+  
+    }
+  };
+  
+  export default FormEView;

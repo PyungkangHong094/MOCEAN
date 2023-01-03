@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { theme } from "src/theme";
 import InputForm from "./input-form";
 
-const EnergyForm = ({ onInput }) => {
+const EnergyForm = ({ onInput, ogData }) => {
   const [status, setStatus] = useState(null);
 
   const onChange = (inputValue) => {
@@ -25,7 +25,7 @@ const EnergyForm = ({ onInput }) => {
   };
 
   return (
-    <InputForm title={"Energy Score"} defaultValue={0} onChange={onChange}>
+    <InputForm title={"Energy Score"} defaultValue={ogData} onChange={onChange}>
       {status != null && (
         <Typography variant="h6" color={status.color}>
           {status.text}
