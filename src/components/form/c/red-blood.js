@@ -5,7 +5,8 @@ import { DropdownCell, TextInputCell } from "../cell-types";
 import ImageUpload from "./image-upload";
 import InputForm from "./input-form";
 
-const RedBloodCell = ({ onSelect }) => {
+const RedBloodCell = ({ onInput, onSelect, ogData }) => {
+  const { red_blood_cell_type, red_blood_cell_url } = ogData;
   return (
     <Box mb={10}>
       <InputForm title={"Red Blood Cell"}>
@@ -21,6 +22,7 @@ const RedBloodCell = ({ onSelect }) => {
             { text: "Not Good", value: "fair", color: theme.palette.score.fair },
             { text: "Bad", value: "poor", color: theme.palette.score.poor },
           ]}
+          defaultValue={red_blood_cell_type}
           renderItem={(v) => (
             <Typography variant="h6" color={v.color}>
               {v.text}
@@ -29,7 +31,7 @@ const RedBloodCell = ({ onSelect }) => {
           onSelected={(v) => onSelect(v.value)}
         />
       </InputForm>
-      <ImageUpload id={"red-blood-cell"} />
+      <ImageUpload id={"red-blood-cell"} onInput={onInput} />
     </Box>
   );
 };

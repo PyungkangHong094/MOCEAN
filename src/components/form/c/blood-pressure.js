@@ -4,7 +4,9 @@ import { theme } from "src/theme";
 import { TextInputCell } from "../cell-types";
 import InputForm from "./input-form";
 
-const BloodPressure = ({ onSysInput, onDiasInput }) => {
+const BloodPressure = ({ onSysInput, onDiasInput, ogData }) => {
+  const { systolic_pressure, diastolic_pressure } = ogData;
+
   return (
     <InputForm title={"Blood Pressure"} maxWidth={900}>
       {/* {status != null && (
@@ -13,11 +15,13 @@ const BloodPressure = ({ onSysInput, onDiasInput }) => {
         </Typography>
       )} */}
       <TextInputCell
+        defaultValue={systolic_pressure}
         type={"number"}
         onChange={(v) => onSysInput(parseFloat(v))}
         hint={"systolic pressure"}
       />
       <TextInputCell
+        defaultValue={diastolic_pressure}
         type={"number"}
         onChange={(v) => onDiasInput(parseFloat(v))}
         hint={"diastolic pressure"}

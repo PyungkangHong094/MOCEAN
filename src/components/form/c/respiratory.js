@@ -4,9 +4,9 @@ import { theme } from "src/theme";
 import { TextInputCell } from "../cell-types";
 import InputForm from "./input-form";
 
-const PulseRate = ({ onInput, ogData }) => {
+const RespiratoryCirculation = ({ onInput, ogData }) => {
   return (
-    <InputForm title={"Pulse Rate"}>
+    <InputForm title={"Respiratory Circulation"}>
       <TextInputCell 
         defaultValue={ogData}
         type={"number"} 
@@ -16,4 +16,4 @@ const PulseRate = ({ onInput, ogData }) => {
   );
 };
 
-export default PulseRate;
+export default RespiratoryCirculation;

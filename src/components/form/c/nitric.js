@@ -4,7 +4,7 @@ import { theme } from "src/theme";
 import { DropdownCell, TextInputCell } from "../cell-types";
 import InputForm from "./input-form";
 
-const NitricOxideLevel = ({ onSelect }) => {
+const NitricOxideLevel = ({ onSelect, ogData }) => {
   return (
     <InputForm title={"Nitric Oxide Level"}>
       {/* {status != null && (
@@ -18,6 +18,7 @@ const NitricOxideLevel = ({ onSelect }) => {
           { text: "Low", value: "low", color: theme.palette.score.fair },
           { text: "Depleted", value: "depleted", color: theme.palette.score.poor },
         ]}
+        defaultValue={ogData}
         renderItem={(v) => (
           <Typography variant="h6" color={v.color}>
             {v.text}

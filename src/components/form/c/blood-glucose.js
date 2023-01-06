@@ -6,7 +6,7 @@ import { DropdownCell, TextInputCell, TitleCell } from "../cell-types";
 import ImageUpload from "./image-upload";
 import InputForm from "./input-form";
 
-const BloodGlucose = ({ onInput }) => {
+const BloodGlucose = ({ onInput, ogData }) => {
   return (
     <Box mb={4}>
       <Typography variant="h5">Blood Glucose</Typography>
@@ -21,7 +21,11 @@ const BloodGlucose = ({ onInput }) => {
         <TableBody>
           <TableRow>
             <TitleCell title={"Figure"} align={"center"} />
-            <TextInputCell type="number" onChange={(v) => onInput(parseFloat(v))} />
+            <TextInputCell 
+              defaultValue={ogData}
+              type="number" 
+              onChange={(v) => onInput(parseFloat(v))} 
+            />
           </TableRow>
         </TableBody>
       </Table>
