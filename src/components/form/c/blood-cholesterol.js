@@ -4,10 +4,14 @@ import { theme } from "src/theme";
 import { TextInputCell } from "../cell-types";
 import InputForm from "./input-form";
 
-const BloodCholesterol = ({ onInput }) => {
+const BloodCholesterol = ({ onInput, ogData }) => {
   return (
     <InputForm title={"Blood Cholesterol"}>
-      <TextInputCell type={"number"} onChange={(v) => onInput(parseFloat(v))} />
+      <TextInputCell 
+        defaultValue={ogData}
+        type={"number"} 
+        onChange={(v) => onInput(parseFloat(v))} 
+      />
     </InputForm>
   );
 };

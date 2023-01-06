@@ -58,7 +58,10 @@ export const DropdownCell = ({
   const [anchorEl, setAnchorEl] = useState(null);
 
   const isStatusOpen = Boolean(anchorEl);
-  const [status, setStatus] = useState(defaultValue ?? values[0]);
+  const [status, setStatus] = useState(defaultValue 
+    ? values.find(v => v.value === defaultValue)
+    : values[0]
+  );
   const openStatus = (event) => {
     setAnchorEl(event.currentTarget);
   };

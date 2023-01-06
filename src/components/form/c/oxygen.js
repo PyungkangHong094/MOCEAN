@@ -4,10 +4,14 @@ import { theme } from "src/theme";
 import { TextInputCell } from "../cell-types";
 import InputForm from "./input-form";
 
-const OxygenLevel = ({ onInput }) => {
+const OxygenLevel = ({ onInput, ogData }) => {
   return (
     <InputForm title={"Oxygen Level"}>
-      <TextInputCell type={"number"} onChange={(v) => onInput(parseFloat(v))} />
+      <TextInputCell 
+        defaultValue={ogData}
+        type={"number"} 
+        onChange={(v) => onInput(parseFloat(v))} 
+      />
     </InputForm>
   );
 };

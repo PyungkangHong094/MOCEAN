@@ -4,7 +4,7 @@ import { theme } from "src/theme";
 import { TextInputCell } from "../cell-types";
 import InputForm from "./input-form";
 
-const BloodCirculation = ({ onInput }) => {
+const BloodCirculation = ({ onInput, ogData }) => {
   const [status, setStatus] = useState(null);
 
   const onChange = (inputValue) => {
@@ -31,7 +31,7 @@ const BloodCirculation = ({ onInput }) => {
           {status.text}
         </Typography>
       )} */}
-      <TextInputCell onChange={onChange} />
+      <TextInputCell defaultValue={ogData} onChange={onChange} />
     </InputForm>
   );
 };

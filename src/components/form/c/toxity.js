@@ -4,7 +4,7 @@ import { theme } from "src/theme";
 import { TextInputCell } from "../cell-types";
 import InputForm from "./input-form";
 
-const ToxityLevel = ({ onInput }) => {
+const ToxityLevel = ({ onInput, ogData }) => {
   const [status, setStatus] = useState(null);
 
   const onChange = (inputValue) => {
@@ -26,13 +26,13 @@ const ToxityLevel = ({ onInput }) => {
     }
   };
   return (
-    <InputForm title={"Toxity Level"} defaultValue={0} onChange={onChange}>
+    <InputForm title={"Toxity Level"} onChange={onChange}>
       {/* {status != null && (
         <Typography variant="h6" color={status.color}>
           {status.text}
         </Typography>
       )} */}
-      <TextInputCell onChange={onChange} />
+      <TextInputCell defaultValue={ogData} onChange={onChange} />
     </InputForm>
   );
 };
