@@ -19,8 +19,8 @@ const RedBloodCell = ({ onInput, onSelect, ogData }) => {
           values={[
             { text: "Excellent", value: "excellent", color: theme.palette.score.excellent },
             { text: "Good", value: "good", color: theme.palette.score.good },
-            { text: "Not Good", value: "fair", color: theme.palette.score.fair },
-            { text: "Bad", value: "poor", color: theme.palette.score.poor },
+            { text: "Not Good", value: "not_good", color: theme.palette.score.fair },
+            { text: "Bad", value: "bad", color: theme.palette.score.poor },
           ]}
           defaultValue={red_blood_cell_type}
           renderItem={(v) => (

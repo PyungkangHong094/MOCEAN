@@ -65,6 +65,7 @@ const FormCView = ({ id }) => {
         <OxygenLevel onInput={onInput("oxygen_level")} ogData={circulatory.oxygen_level} />
         <PulseRate onInput={onInput("pulse_rate")} ogData={circulatory.pulse_rate} />
         <BloodGlucose onInput={onInput("blood_glucose")} ogData={circulatory.blood_glucose} />
+        <BloodCholesterol onInput={onInput("blood_cholesterol")} ogData={circulatory.blood_cholesterol} />
         <RespiratoryCirculation onInput={onInput("respiratory_circulation")} ogData={circulatory.respiratory_circulation} />
         <NitricOxideLevel onSelect={onInput("nitric_oxide_level")} ogData={circulatory.nitric_oxide_level} />
         <RedBloodCell
@@ -103,6 +104,7 @@ const FormCView = ({ id }) => {
         <OxygenLevel onInput={onInput("oxygen_level")} ogData={0} />
         <PulseRate onInput={onInput("pulse_rate")} ogData={0} />
         <BloodGlucose onInput={onInput("blood_glucose")} ogData={0} />
+        <BloodCholesterol onInput={onInput("blood_cholesterol")} ogData={0} />
         <RespiratoryCirculation onInput={onInput("respiratory_circulation")} ogData={0} />
         <NitricOxideLevel onSelect={onInput("nitric_oxide_level")} ogData={'optimal'} />
         <RedBloodCell
