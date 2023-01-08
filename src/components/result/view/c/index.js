@@ -66,7 +66,8 @@ const initData = (data) => {
   ratingData[1].items[0].score = getLymphCirculationScore(lymph_circulation);
   ratingData[2].items[0].score = getToxicityLevelScore(toxicity_level);
   ratingData[3].items[0].score = getVisceralFatScore(visceral_fat_type);
-  ratingData[4].items[0].score = Math.floor((getSystolicPressureScore(systolic_pressure) + getDiastolicPressureScore(diastolic_pressure)) / 2);
+  // ratingData[4].items[0].score = Math.floor((getSystolicPressureScore(systolic_pressure) + getDiastolicPressureScore(diastolic_pressure)) / 2);
+  ratingData[4].items[0].score = getSystolicPressureScore(systolic_pressure) === getDiastolicPressureScore(diastolic_pressure) ? getSystolicPressureScore(systolic_pressure) : 0;
   ratingData[5].items[0].score = getOxygenLevelScore(oxygen_level);
   ratingData[6].items[0].score = getPulseRateScore(pulse_rate);
   ratingData[7].items[0].score = getBloodGlucoseScore(blood_glucose);
