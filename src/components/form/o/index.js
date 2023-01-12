@@ -16,24 +16,56 @@ const FormOView = ({ id }) => {
 
   useEffect(() => {
     if (apiResult) {
-      initData(apiResult.organ);
+      initData(apiResult);
     }
+    console.log('O Data: ' + apiResult);
   }, [apiResult]);
 
   if (isLoading) {
     return <LoadingBar />;
   }
 
-  console.log("O data", apiResult);
+  const onInput = (section, key) => (value) =>
+    setData({
+      section, 
+      key,
+      value,
+    });
 
   return (
     <Box px={4} mb={4}>
-      <Cellular />
-      <Hydration />
-      <BodyFat />
-      <Visceral />
-      <Inflammation />
-      <CellIntegrity />
+      <Cellular 
+        onWeightInput={onInput('cellular_health_score', 'weight')}
+        onSMMInput={onInput('cellular_health_score', 'smm')}
+        onBodyFatInput={onInput('cellular_health_score', 'body_fat')}
+      />
+      <Hydration 
+        onGenderInput={onInput('hydration', 'gender')}
+        onBodyWaterInput={onInput('hydration', 'total_body_water')}
+        onWeightInput={onInput('hydration', 'weight')}
+      />
+      <BodyFat 
+        onGenderInput={onInput('body_fat', 'gender')}
+        onAgeInput={onInput('body_fat', 'age')}
+        onBodyFatInput={onInput('body_fat', 'body_fat')}
+      />
+      <Visceral 
+        onVisceralInput={onInput('visceral_fat', 'visceral_fat')}
+        onVisceralDivideInput={onInput('visceral_fat', 'visceral_fat_divide_10')}
+      />
+      <Inflammation 
+        onRightArmInput={onInput('inflammation_reference', 'right_arm')}
+        onLeftArmInput={onInput('inflammation_reference', 'left_arm')}
+        onRightLegInput={onInput('inflammation_reference', 'right_leg')}
+        onLeftLegInput={onInput('inflammation_reference', 'left_leg')}
+        onTrunkInput={onInput('inflammation_reference', 'trunk')}
+        onInflammationInput={onInput('inflammation_reference', 'inflammation')}
+      />
+      <CellIntegrity 
+        onGenderInput={onInput('cell_integrity', 'gender')}
+        onAgeInput={onInput('cell_integrity', 'age')}
+        onAngleInput={onInput('cell_integrity', 'whole_body_phase_angle')}
+      />
     </Box>
   );
 };

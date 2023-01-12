@@ -5,12 +5,18 @@ import { DropdownCell, TextInputCell } from "../cell-types";
 import TextInput from "../textinput";
 import { useOContext } from "./context";
 
-
-const CellIntegrity = () => {
+const CellIntegrity = ({ onGenderInput, onAgeInput, onAngleInput }) => {
   const { data, setData } = useOContext();
 
-  const {whole_body_phase_angle} = data || {};
-
+  const {
+    gender, 
+    age,
+    whole_body_phase_angle
+  } = data.cell_integrity || {
+    gender: 'male',
+    age: 0,
+    whole_body_phase_angle: 0
+  };
 
   return (
     <Box mt={4} mb={2}>
@@ -30,20 +36,30 @@ const CellIntegrity = () => {
           <TableRow>
             <DropdownCell
               id="gender"
-              values={["Male", "Female"]}
+              values={[
+                { text: "Male", value: "male" },
+                { text: "Female", value: "female" }
+              ]}
+              defaultValue={gender}
               renderItem={(v) => (
                 <Typography variant="h6" color={"black"}>
-                  {v}
+                  {v.text}
                 </Typography>
               )}
+              onSelected={(v) => onGenderInput(v.value)}
             />
-            <TextInputCell hint={"Age"} type="number" onChange={() => {}} />
-            <TextInputCell hint={"Angle"} type="number" onChange={(v) => {
-              setData({
-                key: 'whole_body_phase_angle',
-                value: parseFloat(v)
-              })
-            }} />
+            <TextInputCell 
+              defaultValue={age}
+              hint={"Age"} 
+              type="number" 
+              onChange={(v) => onAgeInput(parseFloat(v))} 
+            />
+            <TextInputCell 
+              defaultValue={whole_body_phase_angle}
+              hint={"Angle"} 
+              type="number" 
+              onChange={(v) => onAngleInput(parseFloat(v))}
+            />
           </TableRow>
         </TableBody>
       </Table>

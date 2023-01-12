@@ -6,33 +6,18 @@ import { BorderedCell, TextInputCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
 import { useOContext } from "./context";
 
-const initData = {
-  pound: 0,
-  smm: 0,
-  fat: 0,
-};
-
-const Cellular = () => {
+const Cellular = ({ onWeightInput, onSMMInput, onBodyFatInput }) => {
   const { data, setData } = useOContext();
-  const { score, weight, smm, body_fat } = data || {};
-
-  const setPound = (value) => {
-    setData({
-      key: "weight",
-      value,
-    });
-  };
-  const setSMM = (value) => {
-    setData({
-      key: "smm",
-      value,
-    });
-  };
-  const setFat = (value) => {
-    setData({
-      key: "body_fat",
-      value,
-    });
+  const { 
+    weight, 
+    smm, 
+    body_fat, 
+    score
+  } = data.cellular_health_score || {
+    weight: 0,
+    smm: 0,
+    body_fat: 0,
+    score: 0
   };
 
   useEffect(() => {
@@ -42,6 +27,7 @@ const Cellular = () => {
       1.85422 * ((body_fat || 0) / 2.205) +
       75.67391;
     setData({
+      section: "cellular_health_score",
       key: "score",
       value: score,
     });
@@ -93,9 +79,21 @@ const Cellular = () => {
             <TitleCell align="center" title={"Score"} />
           </TableRow>
           <TableRow>
-            <TextInputCell type={"number"} defaultValue={weight} onChange={setPound} />
-            <TextInputCell type={"number"} defaultValue={smm} onChange={setSMM} />
-            <TextInputCell type={"number"} defaultValue={body_fat} onChange={setFat} />
+            <TextInputCell 
+              type={"number"} 
+              defaultValue={weight} 
+              onChange={(v) => onWeightInput(parseFloat(v))} 
+            />
+            <TextInputCell 
+              type={"number"} 
+              defaultValue={smm} 
+              onChange={(v) => onSMMInput(parseFloat(v))} 
+            />
+            <TextInputCell 
+              type={"number"} 
+              defaultValue={body_fat} 
+              onChange={(v) => onBodyFatInput(parseFloat(v))} 
+            />
             <BorderedCell align={"center"}>
               <Typography>{score}</Typography>
             </BorderedCell>

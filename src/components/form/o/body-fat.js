@@ -3,13 +3,19 @@ import Image from "next/image";
 import { theme } from "src/theme";
 import { BorderedCell, DropdownCell, TextInputCell } from "../cell-types";
 import TextInput from "../textinput";
+import { useOContext } from "./context";
 
-
-const BodyFat = () => {
-  
-  // const { data, setData } = useOContext();
-
-
+const BodyFat = ({ onGenderInput, onAgeInput, onBodyFatInput }) => {
+  const { data, setData } = useOContext();
+  const { 
+    gender,
+    age,
+    body_fat
+  } = data.body_fat || {
+    gender: 'male',
+    age: 0,
+    body_fat: 0
+  };
 
   return (
     <Box mt={4} mb={2}>
@@ -29,15 +35,30 @@ const BodyFat = () => {
           <TableRow>
             <DropdownCell
               id="gender"
-              values={["Male", "Female"]}
+              values={[
+                { text: "Male", value: "male" },
+                { text: "Female", value: "female" }
+              ]}
+              defaultValue={gender}
               renderItem={(v) => (
                 <Typography variant="h6" color={"black"}>
-                  {v}
+                  {v.text}
                 </Typography>
               )}
+              onSelected={(v) => onGenderInput(v.value)}
             />
-            <TextInputCell hint={"Age"} type="number" onChange={() => {}} />
-            <TextInputCell hint={"Percent"} type="number" onChange={() => {}} />
+            <TextInputCell 
+              defaultValue={age}
+              hint={"Age"} 
+              type="number" 
+              onChange={(v) => onAgeInput(parseFloat(v))} 
+            />
+            <TextInputCell 
+              defaultValue={body_fat}
+              hint={"Percent"} 
+              type="number" 
+              onChange={(v) => onBodyFatInput(parseFloat(v))} 
+            />
           </TableRow>
         </TableBody>
       </Table>
