@@ -1,32 +1,35 @@
 import { Box, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import { green, orange, red, yellow } from "@mui/material/colors";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { theme } from "src/theme";
 import { DropdownCell, TextInputCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
 import { useOContext } from "./context";
 
-const initData = {
-  gender: 0,
-  bodyWater: 0,
-  weight: 0,
-};
-
-const Hydration = () => {
-  const [gender, setGender] = useState(initData.gender);
-  const [weight, setWeight] = useState(initData.weight);
+const Hydration = ({ onGenderInput, onBodyWaterInput, onWeightInput }) => {
   const { data, setData } = useOContext();
-  const { total_body_water } = data || {};
-
-  const setBodyWater = (value) => {
-    setData({
-      key: 'total_body_water',
-      value,
-    });
+  const { 
+    gender,
+    total_body_water,
+    weight,
+    score 
+  } = data.hydration || {
+    gender: 'male',
+    total_body_water: 0,
+    weight: 0,
+    score: 0
   };
 
-  const score = weight == 0 ? 0 : (((total_body_water || 0) / weight) * 100).toFixed(1);
+  useEffect(() => {
+    if (weight > 0) {
+      setData({
+        section: 'hydration',
+        key: 'score',
+        value: parseFloat(((total_body_water / weight) * 100).toFixed(1))
+      });
+    }
+  }, [total_body_water, weight]);
 
   return (
     <Box mt={4} mb={2}>
@@ -41,15 +44,28 @@ const Hydration = () => {
           <TableRow>
             <DropdownCell
               id="gender"
-              values={["Male", "Female"]}
+              values={[
+                { text: "Male", value: "male" },
+                { text: "Female", value: "female" }
+              ]}
+              defaultValue={gender}
               renderItem={(v) => (
                 <Typography variant="h6" color={"black"}>
-                  {v}
+                  {v.text}
                 </Typography>
               )}
+              onSelected={(v) => onGenderInput(v.value)}
             />
-            <TextInputCell defaultValue={total_body_water || 0} hint={"Body water"} onChange={setBodyWater} />
-            <TextInputCell defaultValue={weight} hint={"Weight"} onChange={setWeight} />
+            <TextInputCell 
+              defaultValue={total_body_water} 
+              hint={"Body water"} 
+              onChange={(v) => onBodyWaterInput(parseFloat(v))} 
+            />
+            <TextInputCell 
+              defaultValue={weight} 
+              hint={"Weight"} 
+              onChange={(v) => onWeightInput(parseFloat(v))} 
+            />
             <TitleCell title={score} />
           </TableRow>
         </TableBody>

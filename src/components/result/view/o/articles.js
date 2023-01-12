@@ -23,7 +23,7 @@ export const TotalScoreArticle = ({ name = "Client", score = 0 }) => {
   );
 };
 
-export const HydrationArticle = ({ score = 0 }) => {
+export const HydrationArticle = ({ name = "Client", score = 0 }) => {
   const helpMessage = () => {
     switch (score) {
       case 0:
@@ -54,14 +54,14 @@ export const HydrationArticle = ({ score = 0 }) => {
         <br />
       </Typography>
       <Typography>
-        <b>Client</b>&apos;s hydration level is <ScoreText score={score} />
+        <b>{name}</b>&apos;s hydration level is <ScoreText score={score} />
       </Typography>
       <Typography>{helpMessage}</Typography>
     </Article>
   );
 };
 
-export const MuscleArticle = ({ leanFat = 0, leanBodyFat = 0, bodyFat = 0 }) => {
+export const MuscleArticle = ({ leanFat = 0, leanBodyFat = 0, bodyFat = 0, score = 0 }) => {
   // const helpMessage = ({ score = 0 }) => {
   //     switch (score) {
   //         case 0:
@@ -87,7 +87,7 @@ export const MuscleArticle = ({ leanFat = 0, leanBodyFat = 0, bodyFat = 0 }) => 
       </Typography>
       <Typography>
         <br />
-        Your body fat % is <b>{bodyFat}%</b>. This is consdiered as <ScoreText score={bodyFat} />
+        Your body fat % is <b>{bodyFat}%</b>. This is consdiered as <ScoreText score={score} />
         <br />
         <br />
       </Typography>
@@ -141,7 +141,7 @@ export const VisceralArticle = ({ name = "Client", fat = 0, score = 0 }) => {
   );
 };
 
-export const InflammationArticle = ({ name = "Client", ecw = 0, twb = 1 }) => {
+export const InflammationArticle = ({ name = "Client", inflammation = 0, score = 0 }) => {
   // const helpMessage = ({ score = 0 }) => {
   //     switch (score) {
   //         case 0:
@@ -163,8 +163,8 @@ export const InflammationArticle = ({ name = "Client", ecw = 0, twb = 1 }) => {
         <br />
       </Typography>
       <Typography my={2}>
-        {name}&apos;s ECW/TBW ratio is <b>{ecw / twb}</b>, which is indicative of{" "}
-        <ScoreText score={ecw / twb} /> level
+        {name}&apos;s ECW/TBW ratio is <b>{inflammation}</b>, which is indicative of{" "}
+        <ScoreText score={score} /> level
       </Typography>
       <Typography>
         You have a difference in upper & lower body ECW/TBW ratio, which indicates there is a
@@ -174,7 +174,7 @@ export const InflammationArticle = ({ name = "Client", ecw = 0, twb = 1 }) => {
   );
 };
 
-export const PhaseArticle = ({ value = 0 }) => {
+export const PhaseArticle = ({ angle = 0, score = 0 }) => {
   // const helpMessage = ({ score = 0 }) => {
   //     switch (score) {
   //         case 0:
@@ -199,7 +199,7 @@ export const PhaseArticle = ({ value = 0 }) => {
         exhibits low Phase Angles.
       </Typography>
       <Typography>
-        Your phase angle is {value} which is considered as <ScoreText score={value} />
+        Your phase angle is <b>{angle}</b> which is considered as <ScoreText score={score} />
       </Typography>
     </Article>
   );
