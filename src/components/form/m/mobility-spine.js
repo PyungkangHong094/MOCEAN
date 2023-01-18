@@ -1,8 +1,12 @@
 import { Box, Table, TableRow, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BorderedCell, DropdownCell, EmptyCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
 import TableFrame from "./table-frame";
+import { initData, useMContext } from './context';
+import { useDialog } from "src/components/dialogs/context";
+import { useMutation } from "react-query";
+import { postMPartial, putMPartial } from "src/data/repository/m";
 
 const dropdownValues = [
   {
@@ -15,46 +19,45 @@ const dropdownValues = [
   },
 ];
 
-const initData = {
-  forward: 0,
-  flat: 0,
-  scapular: 0,
-  toe: 0,
-};
+const MobilitySpine = () => {
+  const { showAlertDialog } = useDialog();
+  const { data, setData } = useMContext();
+  const {
+    forward_head_posture,
+    flat_back,
+    scapular_winging,
+    toe_touch,
+    assessment_maximum,
+    assessment_score
+  } = data.mobility_and_balance_spine || initData.mobility_and_balance_spine;
 
-const MobilitySpine = ({ initialData = initData }) => {
-  const [data, setData] = useState(initialData);
-
-  const setForward = (v) => {
-    const newData = {
-      ...data,
-      forward: v.value,
-    };
-    setData(newData);
+  const body = { 
+    customerId: data.id, 
+    reqData: data.mobility_and_balance_spine, 
+    endpoint: 'musculoskeletal/mobility-and-balance/spine'
   };
-  const setFlat = (v) => {
-    const newData = {
-      ...data,
-      flat: v.value,
-    };
-    setData(newData);
+  const onSaveSuccess = () => {
+    showAlertDialog({ title: "Success", message: "Save completed" });
   };
-  const setScapular = (v) => {
-    const newData = {
-      ...data,
-      scapular: v.value,
-    };
-    setData(newData);
-  };
-  const setToe = (v) => {
-    const newData = {
-      ...data,
-      toe: v.value,
-    };
-    setData(newData);
+  const onSaveFailed = () => {
+    showAlertDialog({ title: "Failed", message: "Save failed" });
   };
 
-  const sum = Object.values(data).reduce((prev, curr) => prev + curr);
+  const { mutate: postMData } = useMutation(postMPartial, {
+    onSuccess: onSaveSuccess,
+    onError: onSaveFailed
+  });
+  const { mutate: putMData } = useMutation(putMPartial, {
+    onSuccess: onSaveSuccess,
+    onError: () => postMData(body)
+  });
+
+  useEffect(() => {
+    const score = forward_head_posture + flat_back + scapular_winging + toe_touch;
+    
+    setData('mobility_and_balance_spine', 'assessment_score', score);
+  
+  }, [forward_head_posture, flat_back, scapular_winging, toe_touch]);
 
   return (
     <TableFrame
@@ -70,20 +73,22 @@ const MobilitySpine = ({ initialData = initData }) => {
           ))}
         </TableRow>
       }
+      onSave={() => putMData(body)}
     >
       <TableRow>
         <TitleCell title={"Forward Head Posture"} />
         <DropdownCell
           id="spine-forward"
+          defaultValue={forward_head_posture}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={setForward}
+          onSelected={v => setData('mobility_and_balance_spine', 'forward_head_posture', v.value)}
         />
-        <TitleCell title={data.forward} />
+        <TitleCell title={forward_head_posture} />
         <TitleCell title={2} />
         <EmptyCell />
       </TableRow>
@@ -91,15 +96,16 @@ const MobilitySpine = ({ initialData = initData }) => {
         <TitleCell title={"Flat Back"} />
         <DropdownCell
           id="spine-flat"
+          defaultValue={flat_back}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={setFlat}
+          onSelected={v => setData('mobility_and_balance_spine', 'flat_back', v.value)}
         />
-        <TitleCell title={data.flat} />
+        <TitleCell title={flat_back} />
         <TitleCell title={2} />
         <EmptyCell />
       </TableRow>
@@ -107,15 +113,16 @@ const MobilitySpine = ({ initialData = initData }) => {
         <TitleCell title={"Scapular Wining"} />
         <DropdownCell
           id="spine-scapular"
+          defaultValue={scapular_winging}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={setScapular}
+          onSelected={v => setData('mobility_and_balance_spine', 'scapular_winging', v.value)}
         />
-        <TitleCell title={data.scapular} />
+        <TitleCell title={scapular_winging} />
         <TitleCell title={2} />
         <EmptyCell />
       </TableRow>
@@ -123,6 +130,7 @@ const MobilitySpine = ({ initialData = initData }) => {
         <TitleCell title={"Toe Touch"} />
         <DropdownCell
           id="spine-toe"
+          defaultValue={toe_touch}
           values={[
             {
               text: "If palm the floor (Hypermobile)",
@@ -140,9 +148,9 @@ const MobilitySpine = ({ initialData = initData }) => {
               {v.text}
             </Typography>
           )}
-          onSelected={setToe}
+          onSelected={v => setData('mobility_and_balance_spine', 'toe_touch', v.value)}
         />
-        <TitleCell title={data.toe} />
+        <TitleCell title={toe_touch} />
         <TitleCell title={2} />
         <EmptyCell />
       </TableRow>
@@ -161,9 +169,9 @@ const MobilitySpine = ({ initialData = initData }) => {
       </TableRow>
       <TableRow>
         <EmptyCell colSpan={2} />
-        <TitleCell align={"center"} title={sum} />
-        <TitleCell align={"center"} title={8} />
-        <TitleCell align={"center"} title={sum / 8} />
+        <TitleCell align={"center"} title={assessment_score} />
+        <TitleCell align={"center"} title={assessment_maximum} />
+        <TitleCell align={"center"} title={assessment_score / assessment_maximum} />
       </TableRow>
     </TableFrame>
   );

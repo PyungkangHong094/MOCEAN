@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LoadingBar from "src/components/loading-bar";
 import ScoreText from "src/components/score";
 import { useUserforM } from "src/data/repository/m";
@@ -24,10 +24,18 @@ import MobilitySpine from "./mobility-spine";
 import MobilityUpper from "./mobility-upper";
 import Movement from "./movement";
 import Posture from "./posture";
+import { useMContext } from './context';
 
 const FormMView = ({ id }) => {
-  const { isLoading, data } = useUserforM(id);
-  console.log("M data", data);
+  const { initData } = useMContext();
+  const { isLoading, data: apiResult } = useUserforM(id);
+
+  useEffect(() => {
+    if (apiResult) {
+      initData(apiResult);
+    }
+    // console.log('M Data: ' + apiResult);
+  }, [apiResult]);
 
   if (isLoading) {
     return <LoadingBar />;

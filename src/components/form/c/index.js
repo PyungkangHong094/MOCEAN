@@ -24,7 +24,7 @@ const FormCView = ({ id }) => {
     if (apiResult) {
       initData(apiResult.circulatory);
     }
-    console.log('C Data: ' + apiResult);
+    // console.log('C Data: ' + apiResult);
   }, [apiResult]);
 
   if (isLoading) {

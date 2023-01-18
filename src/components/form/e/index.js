@@ -33,7 +33,7 @@ const FormEView = ({ id }) => {
   }
 
   // console.log("E data on form side", apiResult.emotion);
-  console.log(apiResult)
+  // console.log(apiResult)
 
 
   const onInput = (key) => (value) =>

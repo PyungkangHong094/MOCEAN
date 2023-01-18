@@ -1,20 +1,29 @@
 import { Box, Divider, Typography } from "@mui/material";
 import ScoreText from "../../../score";
 
-const ArticleBox = ({ name = "Client", score = 1 }) => {
+const ArticleBox = ({ name = "Client", score = 0, data = [] }) => {
+  let list = [];
+  for (let i = 0; i < data.length; i++) {
+    for (let j = 0; j < data[i].items.length; j++) {
+      if (data[i].items[j].score < 2) {
+        list.push(data[i].items[j].title);
+      }
+    }
+  }
+
   let resultMessage;
   switch (score) {
     case 0:
-      resultMessage = <PoorMessage name={name} />;
+      resultMessage = <PoorMessage name={name} list={list} />;
       break;
     case 1:
-      resultMessage = <FairMessage name={name} />;
+      resultMessage = <FairMessage name={name} list={list} />;
       break;
     case 2:
-      resultMessage = <GoodMessage name={name} />;
+      resultMessage = <GoodMessage name={name} list={list} />;
       break;
     case 3:
-      resultMessage = <ExcellentMessage name={name} />;
+      resultMessage = <ExcellentMessage name={name} list={list} />;
       break;
   }
 
@@ -44,38 +53,38 @@ const ArticleBox = ({ name = "Client", score = 1 }) => {
   );
 };
 
-const PoorMessage = ({ name }) => (
+const PoorMessage = ({ name, list }) => (
   <Typography>
     The musculoskeletal functional state of <b>{name}</b> is <ScoreText score={0} />, which can
     cause problems such as chronic pain, sleep disorders, and digestive disorders.
     <br />
     <br />
     In order to improve the musculoskeletal function, it is necessary to recover{" "}
-    <b>[List the list of fair or dangerous in the current state]</b>.
+    {list.map(item => <b>{item}, </b>)}.
   </Typography>
 );
 
-const FairMessage = ({ name }) => (
+const FairMessage = ({ name, list }) => (
   <Typography>
     The musculoskeletal function of the <b>{name}</b> is <ScoreText score={1} />, and maintaining
     this posture risks causing pain and structural deformation and exacerbating functional problems.
     <br />
     <br />
     In order to improve the musculoskeletal function, it is necessary to recover{" "}
-    <b>[현재 상태에서 fair 또는 poor 인 것들의 리스트 나열]</b>.
+    {list.map(item => <b>{item}, </b>)}.
   </Typography>
 );
 
-const GoodMessage = ({ name }) => (
+const GoodMessage = ({ name, list }) => (
   <Typography>
     The musculoskeletal function of the <b>{name}</b> is <ScoreText score={2} />.<br />
     <br />
-    Improving <b>[현재 상태에서 fair 또는 poor 인 것들의 리스트 나열]</b> can enhance your
+    Improving {list.map(item => <b>{item}, </b>)} can enhance your
     musculoskeletal function and overall health!
   </Typography>
 );
 
-const ExcellentMessage = ({ name }) => (
+const ExcellentMessage = ({ name, list }) => (
   <Typography>
     The musuloskeletal functional status of <b>{name}</b> is <ScoreText score={3} />. Let&apos;s
     keep this condition and stay healthy!
