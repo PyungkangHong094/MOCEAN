@@ -1,4 +1,4 @@
-MOCEAN
+MOCEAN CRM 
 
 - [Users Page]
 - [Login Page]
@@ -10,7 +10,7 @@ MOCEAN
 
 - Make sure your NodeJS and npm versions are up to date for `React 17`
 
-- Install dependencies: `npm install` or `yarn`
+- Install dependencies: `yarn`
 
 - Start the server: `yarn dev`
 
@@ -20,10 +20,10 @@ MOCEAN
 
 - MAKE SURE YOU GO ALL OF THEM 
 
-- yarn build 
+- `yarn build`
 
-- yarn start
+- `yarn start`
 
-- docker-compose -f docker-compose-local.yml up --build
+- `docker-compose -f docker-compose-local.yml up --build`
 
 - 다 하시고 문제가 없으실때 푸쉬를 꼭 해주셔야합니다 부탁드립니다 
