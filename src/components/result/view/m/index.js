@@ -87,6 +87,14 @@ const initData = (data) => {
 const ResultMView = ({ id }) => {
   const { isLoading, data } = useUserforM(id);
 
+  if (isLoading) {
+    return <LoadingBar />;
+  }
+
+  if (!data) {
+    return <Box />;
+  }
+
   const { musculo_skeletal_health } = data;
 
   let imageId = null;
@@ -102,14 +110,6 @@ const ResultMView = ({ id }) => {
     } else if (musculo_skeletal_health?.lower_extremity_assessment === 'bilateral') {
       imageId = 4;
     }
-  }
-
-  if (isLoading) {
-    return <LoadingBar />;
-  }
-
-  if (!data) {
-    return <Box />;
   }
 
   const result = initData(data);

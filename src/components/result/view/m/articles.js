@@ -60,7 +60,7 @@ const PoorMessage = ({ name, list }) => (
     <br />
     <br />
     In order to improve the musculoskeletal function, it is necessary to recover{" "}
-    {list.map(item => <b>{item}, </b>)}.
+    {list.map(item => <b key={item}>{item}, </b>)}.
   </Typography>
 );
 
@@ -71,7 +71,7 @@ const FairMessage = ({ name, list }) => (
     <br />
     <br />
     In order to improve the musculoskeletal function, it is necessary to recover{" "}
-    {list.map(item => <b>{item}, </b>)}.
+    {list.map(item => <b key={item}>{item}, </b>)}.
   </Typography>
 );
 
@@ -79,7 +79,7 @@ const GoodMessage = ({ name, list }) => (
   <Typography>
     The musculoskeletal function of the <b>{name}</b> is <ScoreText score={2} />.<br />
     <br />
-    Improving {list.map(item => <b>{item}, </b>)} can enhance your
+    Improving {list.map(item => <b key={item}>{item}, </b>)} can enhance your
     musculoskeletal function and overall health!
   </Typography>
 );

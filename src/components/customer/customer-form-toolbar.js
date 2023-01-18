@@ -117,16 +117,16 @@ export const CustomerFormToolbar = ({ id, currentMenu }) => {
     },
   });
 
-  const addUser = () => {
+  const saveNewUser = () => {
     addUserData(profile);
   }
 
-  const updateUser = ({ customerId, data }) => {
+  const saveUser = ({ customerId, data }) => {
     updateUserData({ customerId, data });
   }
 
   const saveForm = useCallback(() => {
-    updateUser({ customerId: id, data: profile });
+    saveUser({ customerId: id, data: profile });
     switch (currentMenu) {
       case 0:
         putMData({ id, dataM });
@@ -179,7 +179,7 @@ export const CustomerFormToolbar = ({ id, currentMenu }) => {
         <Button variant="contained" color="error" sx={{ width: 100 }} onClick={cancelForm}>
           Cancel
         </Button>
-        <Button variant="contained" color="success" sx={{ width: 100, mx: 2 }} onClick={isNew ? addUser : saveForm}>
+        <Button variant="contained" color="success" sx={{ width: 100, mx: 2 }} onClick={isNew ? saveNewUser : saveForm}>
           Save
         </Button>
       </Box>
