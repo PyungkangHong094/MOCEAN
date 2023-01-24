@@ -28,7 +28,7 @@ export const CustomerList = (props) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
 
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(25);
   const [filter, setFilter] = useState("");
 
   const { data, isLoading, isFetching, isError } = useQuery({

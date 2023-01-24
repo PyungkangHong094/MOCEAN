@@ -1,8 +1,12 @@
 import { Box, Table, TableBody, TableHead, TableRow, Typography } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BorderedCell, DropdownCell, EmptyCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
 import TableFrame from "./table-frame";
+import { initData, useMContext } from './context';
+import { useDialog } from "src/components/dialogs/context";
+import { useMutation } from "react-query";
+import { postMPartial, putMPartial } from "src/data/repository/m";
 
 const dropdownValues = [
   {
@@ -19,28 +23,67 @@ const dropdownValues = [
   },
 ];
 
-const initData = {
-  single: { left: 2, right: 2 },
-  adduction: { left: 2, right: 2 },
-  hip: { left: 2, right: 2 },
-  thomas: { left: 2, right: 2 },
-  mtp: { left: 2, right: 2 },
-};
+const MobilityLower = () => {
+  const { showAlertDialog } = useDialog();
+  const { data, setData } = useMContext();
+  const {
+    pelvic_torsion,
+    single_leg_raise_left,
+    single_leg_raise_right,
+    adduction_drop_test_left,
+    adduction_drop_test_right,
+    hip_ir_left,
+    hip_ir_right,
+    thomas_test_left,
+    thomas_test_right,
+    first_mtp_flexion_left,
+    first_mtp_flexion_right,
+    left_feet,
+    right_feet,
+    pattern,
+    assessment_maximum,
+    assessment_score_left,
+    assessment_score_right,
+    patient_score_left,
+    patient_score_right
+  } = data.mobility_and_balance_lower_extremity || initData.mobility_and_balance_lower_extremity;
 
-const MobilityLower = ({ initialData = initData }) => {
-  const [data, setData] = useState(initialData);
-
-  const setDropdownData = (key, opt, v) => {
-    const value = { ...data[key], [opt]: v };
-    const newData = {
-      ...data,
-      [key]: value,
-    };
-    setData(newData);
+  const body = { 
+    customerId: data.id, 
+    reqData: data.mobility_and_balance_lower_extremity, 
+    endpoint: 'musculoskeletal/mobility-and-balance/lower-extremity'
+  };
+  const onSaveSuccess = () => {
+    showAlertDialog({ title: "Success", message: "Save completed" });
+  };
+  const onSaveFailed = () => {
+    showAlertDialog({ title: "Failed", message: "Save failed" });
   };
 
-  const sumLeft = Object.values(data).reduce((prev, curr) => prev + curr.left, 0);
-  const sumRight = Object.values(data).reduce((prev, curr) => prev + curr.right, 0);
+  const { mutate: postMData } = useMutation(postMPartial, {
+    onSuccess: onSaveSuccess,
+    onError: onSaveFailed
+  });
+  const { mutate: putMData } = useMutation(putMPartial, {
+    onSuccess: onSaveSuccess,
+    onError: () => postMData(body)
+  });
+
+  useEffect(() => {
+    const score = single_leg_raise_left + adduction_drop_test_left + hip_ir_left + thomas_test_left + first_mtp_flexion_left;
+
+    setData('mobility_and_balance_lower_extremity', 'assessment_score_left', score);    
+    setData('mobility_and_balance_lower_extremity', 'patient_score_left', score / assessment_maximum);
+  
+  }, [single_leg_raise_left, adduction_drop_test_left, hip_ir_left, thomas_test_left, first_mtp_flexion_left]);
+
+  useEffect(() => {
+    const score = single_leg_raise_right + adduction_drop_test_right + hip_ir_right + thomas_test_right + first_mtp_flexion_right;
+
+    setData('mobility_and_balance_lower_extremity', 'assessment_score_right', score);    
+    setData('mobility_and_balance_lower_extremity', 'patient_score_right', score / assessment_maximum);
+
+  }, [single_leg_raise_right, adduction_drop_test_right, hip_ir_right, thomas_test_right, first_mtp_flexion_right]);
 
   return (
     <TableFrame
@@ -63,6 +106,7 @@ const MobilityLower = ({ initialData = initData }) => {
           ))}
         </TableRow>
       }
+      onSave={() => putMData(body)}
     >
       <TableRow>
         <TitleCell title={"Pelvic Torsion"} />
@@ -76,144 +120,155 @@ const MobilityLower = ({ initialData = initData }) => {
         <TitleCell title={"Single Leg Raise"} />
         <DropdownCell
           id="lower-single-left"
+          defaultValue={single_leg_raise_left}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={(v) => setDropdownData("single", "left", v.value)}
+          onSelected={(v) => setData('mobility_and_balance_lower_extremity', 'single_leg_raise_left', v.value)}
         />
         <DropdownCell
           id="lower-single-right"
+          defaultValue={single_leg_raise_right}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={(v) => setDropdownData("single", "right", v.value)}
+          onSelected={(v) => setData('mobility_and_balance_lower_extremity', 'single_leg_raise_right', v.value)}
         />
-        <TitleCell title={data.single.left} />
-        <TitleCell title={data.single.right} />
+        <TitleCell title={single_leg_raise_left} />
+        <TitleCell title={single_leg_raise_right} />
         <TitleCell title={2} />
       </TableRow>
       <TableRow>
         <TitleCell title={"Adduction Drop Test"} />
         <DropdownCell
           id="lower-adduction-left"
+          defaultValue={adduction_drop_test_left}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={(v) => setDropdownData("adduction", "left", v.value)}
+          onSelected={(v) => setData('mobility_and_balance_lower_extremity', 'adduction_drop_test_left', v.value)}
         />
         <DropdownCell
           id="lower-adduction-right"
+          defaultValue={adduction_drop_test_right}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={(v) => setDropdownData("adduction", "right", v.value)}
+          onSelected={(v) => setData('mobility_and_balance_lower_extremity', 'adduction_drop_test_right', v.value)}
         />
-        <TitleCell title={data.adduction.left} />
-        <TitleCell title={data.adduction.right} />
+        <TitleCell title={adduction_drop_test_left} />
+        <TitleCell title={adduction_drop_test_right} />
         <TitleCell title={2} />
       </TableRow>
       <TableRow>
         <TitleCell title={"Hip IR"} />
         <DropdownCell
           id="lower-hip-left"
+          defaultValue={hip_ir_left}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={(v) => setDropdownData("hip", "left", v.value)}
+          onSelected={(v) => setData('mobility_and_balance_lower_extremity', 'hip_ir_left', v.value)}
         />
         <DropdownCell
           id="lower-hip-right"
+          defaultValue={hip_ir_right}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={(v) => setDropdownData("hip", "right", v.value)}
+          onSelected={(v) => setData('mobility_and_balance_lower_extremity', 'hip_ir_right', v.value)}
         />
-        <TitleCell title={data.hip.left} />
-        <TitleCell title={data.hip.right} />
+        <TitleCell title={hip_ir_left} />
+        <TitleCell title={hip_ir_right} />
         <TitleCell title={2} />
       </TableRow>
       <TableRow>
         <TitleCell title={"Thomas Test"} />
         <DropdownCell
           id="lower-thomas-left"
+          defaultValue={thomas_test_left}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={(v) => setDropdownData("thomas", "left", v.value)}
+          onSelected={(v) => setData('mobility_and_balance_lower_extremity', 'thomas_test_left', v.value)}
         />
         <DropdownCell
           id="lower-thomas-right"
+          defaultValue={thomas_test_right}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={(v) => setDropdownData("thomas", "right", v.value)}
+          onSelected={(v) => setData('mobility_and_balance_lower_extremity', 'thomas_test_right', v.value)}
         />
-        <TitleCell title={data.thomas.left} />
-        <TitleCell title={data.thomas.right} />
+        <TitleCell title={thomas_test_left} />
+        <TitleCell title={thomas_test_right} />
         <TitleCell title={2} />
       </TableRow>
       <TableRow>
         <TitleCell title={"1st MTP flexion"} />
         <DropdownCell
           id="lower-mtp-left"
+          defaultValue={first_mtp_flexion_left}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={(v) => setDropdownData("mtp", "left", v.value)}
+          onSelected={(v) => setData('mobility_and_balance_lower_extremity', 'first_mtp_flexion_left', v.value)}
         />
         <DropdownCell
           id="lower-mtp-right"
+          defaultValue={first_mtp_flexion_right}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={(v) => setDropdownData("mtp", "right", v.value)}
+          onSelected={(v) => setData('mobility_and_balance_lower_extremity', 'first_mtp_flexion_right', v.value)}
         />
-        <TitleCell title={data.mtp.left} />
-        <TitleCell title={data.mtp.right} />
+        <TitleCell title={first_mtp_flexion_left} />
+        <TitleCell title={first_mtp_flexion_right} />
         <TitleCell title={2} />
       </TableRow>
       <TableRow>
         <TitleCell title={"Feet"} />
         <DropdownCell
           id="lower-feet-left"
+          defaultValue={left_feet}
           values={[
             {
               text: "Supination",
-              value: 0,
+              value: "supination",
             },
             {
               text: "Pronation",
-              value: 0,
+              value: "pronation",
             },
           ]}
           renderItem={(v) => (
@@ -221,17 +276,19 @@ const MobilityLower = ({ initialData = initData }) => {
               {v.text}
             </Typography>
           )}
+          onSelected={(v) => setData('mobility_and_balance_upper_extremity', 'left_feet', v.value)}
         />
         <DropdownCell
           id="lower-feet-right"
+          defaultValue={right_feet}
           values={[
             {
               text: "Supination",
-              value: 0,
+              value: "supination",
             },
             {
               text: "Pronation",
-              value: 0,
+              value: "pronation",
             },
           ]}
           renderItem={(v) => (
@@ -239,6 +296,7 @@ const MobilityLower = ({ initialData = initData }) => {
               {v.text}
             </Typography>
           )}
+          onSelected={(v) => setData('mobility_and_balance_upper_extremity', 'right_feet', v.value)}
         />
         <EmptyCell />
         <EmptyCell />
@@ -249,18 +307,19 @@ const MobilityLower = ({ initialData = initData }) => {
         <DropdownCell
           id="lower-pattern"
           colSpan={2}
+          defaultValue={pattern}
           values={[
             {
               text: "RDP",
-              value: 0,
+              value: "rdp",
             },
             {
               text: "Bilateral",
-              value: 0,
+              value: "bilateral",
             },
             {
               text: "Patho",
-              value: 0,
+              value: "patho",
             },
           ]}
           renderItem={(v) => (
@@ -268,6 +327,7 @@ const MobilityLower = ({ initialData = initData }) => {
               {v.text}
             </Typography>
           )}
+          onSelected={(v) => setData('mobility_and_balance_upper_extremity', 'pattern', v.value)}
         />
         <EmptyCell />
         <EmptyCell />
@@ -282,16 +342,16 @@ const MobilityLower = ({ initialData = initData }) => {
       </TableRow>
       <TableRow>
         <TitleCell title={"Lower Extremity_Left"} />
-        <TitleCell title={sumLeft} colSpan={2} align={"center"} />
-        <TitleCell title={10} align={"center"} />
-        <TitleCell title={sumLeft / 10} align={"center"} />
+        <TitleCell title={assessment_score_left} colSpan={2} align={"center"} />
+        <TitleCell title={assessment_maximum} align={"center"} />
+        <TitleCell title={patient_score_left} align={"center"} />
         <EmptyCell />
       </TableRow>
       <TableRow>
         <TitleCell title={"Lower Extremity_Right"} />
-        <TitleCell title={sumRight} colSpan={2} align={"center"} />
-        <TitleCell title={10} align={"center"} />
-        <TitleCell title={sumRight / 10} align={"center"} />
+        <TitleCell title={assessment_score_right} colSpan={2} align={"center"} />
+        <TitleCell title={assessment_maximum} align={"center"} />
+        <TitleCell title={patient_score_right} align={"center"} />
         <EmptyCell />
       </TableRow>
     </TableFrame>

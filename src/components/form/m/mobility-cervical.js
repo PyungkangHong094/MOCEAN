@@ -1,8 +1,12 @@
 import { Box, Table, TableBody, TableHead, TableRow, Typography } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BorderedCell, DropdownCell, EmptyCell, TextInputCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
 import TableFrame from "./table-frame";
+import { initData, useMContext } from './context';
+import { useDialog } from "src/components/dialogs/context";
+import { useMutation } from "react-query";
+import { postMPartial, putMPartial } from "src/data/repository/m";
 
 const dropdownValues = [
   {
@@ -19,46 +23,46 @@ const dropdownValues = [
   },
 ];
 
-const initData = {
-  extension: 2,
-  flexion: 2,
-  rotation: 2,
-  side: 2,
-};
+const MobilityCervical = () => {
+  const { showAlertDialog } = useDialog();
+  const { data, setData } = useMContext();
+  const {
+    cervical_extension,
+    cervical_flexion,
+    cervical_rotation,
+    cervical_side_bending,
+    assessment_maximum,
+    assessment_score
+  } = data.mobility_and_balance_cervical || initData.mobility_and_balance_cervical;
 
-const MobilityCervical = ({ initialData = initData }) => {
-  const [data, setData] = useState(initialData);
-
-  const setExtension = (v) => {
-    const newData = {
-      ...data,
-      extension: v.value,
-    };
-    setData(newData);
+  const body = { 
+    customerId: data.id, 
+    reqData: data.mobility_and_balance_cervical, 
+    endpoint: 'musculoskeletal/mobility-and-balance/cervical'
   };
-  const setFlexion = (v) => {
-    const newData = {
-      ...data,
-      flexion: v.value,
-    };
-    setData(newData);
+  const onSaveSuccess = () => {
+    showAlertDialog({ title: "Success", message: "Save completed" });
   };
-  const setRotation = (v) => {
-    const newData = {
-      ...data,
-      rotation: v.value,
-    };
-    setData(newData);
-  };
-  const setSide = (v) => {
-    const newData = {
-      ...data,
-      side: v.value,
-    };
-    setData(newData);
+  const onSaveFailed = () => {
+    showAlertDialog({ title: "Failed", message: "Save failed" });
   };
 
-  const sum = Object.values(data).reduce((prev, curr) => prev + curr);
+  const { mutate: postMData } = useMutation(postMPartial, {
+    onSuccess: onSaveSuccess,
+    onError: onSaveFailed
+  });
+  const { mutate: putMData } = useMutation(putMPartial, {
+    onSuccess: onSaveSuccess,
+    onError: () => postMData(body)
+  });
+
+  useEffect(() => {
+    const score = cervical_extension + cervical_flexion + cervical_rotation + cervical_side_bending;
+    
+    setData('mobility_and_balance_cervical', 'assessment_score', score);
+  
+  }, [cervical_extension, cervical_flexion, cervical_rotation, cervical_side_bending]);
+
 
   return (
     <TableFrame
@@ -74,6 +78,7 @@ const MobilityCervical = ({ initialData = initData }) => {
           ))}
         </TableRow>
       }
+      onSave={() => putMData(body)}
     >
       <TableRow>
         <TitleCell title={"Mandible Position"} />
@@ -86,15 +91,16 @@ const MobilityCervical = ({ initialData = initData }) => {
         <TitleCell title={"Cervical Extension"} />
         <DropdownCell
           id="cervical-extension"
+          defaultValue={cervical_extension}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={setExtension}
+          onSelected={v => setData('mobility_and_balance_cervical', 'cervical_extension', v.value)}
         />
-        <TitleCell title={data.extension} />
+        <TitleCell title={cervical_extension} />
         <TitleCell title={2} />
         <EmptyCell />
       </TableRow>
@@ -102,15 +108,16 @@ const MobilityCervical = ({ initialData = initData }) => {
         <TitleCell title={"Cervical Flexion"} />
         <DropdownCell
           id="cervical-flexion"
+          defaultValue={cervical_flexion}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={setFlexion}
+          onSelected={v => setData('mobility_and_balance_cervical', 'cervical_flexion', v.value)}
         />
-        <TitleCell title={data.flexion} />
+        <TitleCell title={cervical_flexion} />
         <TitleCell title={2} />
         <EmptyCell />
       </TableRow>
@@ -118,15 +125,16 @@ const MobilityCervical = ({ initialData = initData }) => {
         <TitleCell title={"Cervical Rotation"} />
         <DropdownCell
           id="cervical-rotation"
+          defaultValue={cervical_rotation}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={setRotation}
+          onSelected={v => setData('mobility_and_balance_cervical', 'cervical_rotation', v.value)}
         />
-        <TitleCell title={data.rotation} />
+        <TitleCell title={cervical_rotation} />
         <TitleCell title={2} />
         <EmptyCell />
       </TableRow>
@@ -134,15 +142,16 @@ const MobilityCervical = ({ initialData = initData }) => {
         <TitleCell title={"Cervical Side Bendering"} />
         <DropdownCell
           id="cervical-side"
+          defaultValue={cervical_side_bending}
           values={dropdownValues}
           renderItem={(v) => (
             <Typography variant="h6" color={"black"}>
               {v.text}
             </Typography>
           )}
-          onSelected={setSide}
+          onSelected={v => setData('mobility_and_balance_cervical', 'cervical_side_bending', v.value)}
         />
-        <TitleCell title={data.side} />
+        <TitleCell title={cervical_side_bending} />
         <TitleCell title={2} />
         <EmptyCell />
       </TableRow>
@@ -156,9 +165,9 @@ const MobilityCervical = ({ initialData = initData }) => {
       <TableRow>
         <EmptyCell />
         <EmptyCell />
-        <TitleCell align={"center"} title={sum} />
-        <TitleCell align={"center"} title={8} />
-        <TitleCell align={"center"} title={sum / 8} />
+        <TitleCell align={"center"} title={assessment_score} />
+        <TitleCell align={"center"} title={assessment_maximum} />
+        <TitleCell align={"center"} title={assessment_score / assessment_maximum} />
       </TableRow>
     </TableFrame>
   );

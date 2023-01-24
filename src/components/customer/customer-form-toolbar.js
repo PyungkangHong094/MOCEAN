@@ -17,9 +17,11 @@ import { useDialog } from "../dialogs/context";
 import { useCallback, useContext, useState } from "react";
 import { ArrowBackIosNewRounded } from "@mui/icons-material";
 import { useMutation } from "react-query";
+import { postM, putM } from "src/data/repository/m";
 import { postE, putE } from "src/data/repository/e";
 import { postO, putO } from "src/data/repository/o";
 import { postC, putC } from "src/data/repository/c";
+import { useMContext } from "../form/m/context";
 import { useOContext } from "../form/o/context";
 import { useCContext } from "../form/c/context";
 import { useEContext } from "../form/e/context";
@@ -33,9 +35,11 @@ export const CustomerFormToolbar = ({ id, currentMenu }) => {
 
   const { profile } = useContext(profileContext);
 
+  const { data: dataM } = useMContext();
   const { data: dataO } = useOContext();
   const { data: dataC } = useCContext();
   const { data: dataE } = useEContext();
+  console.log("Toolbar M", dataM);
   console.log("ToolBar O", dataO);
   console.log("ToolBar C", dataC);
   console.log("ToolBar E", dataE);
@@ -72,6 +76,16 @@ export const CustomerFormToolbar = ({ id, currentMenu }) => {
     showAlertDialog({ title: "Failed", message: "Save failed" });
   };
 
+  const { mutate: postMData } = useMutation(postM, {
+    onSuccess: onSaveSuccess,
+    onError: onSaveFailed,
+  });
+  const { mutate: putMData } = useMutation(putM, {
+    onSuccess: onSaveSuccess,
+    onError: () => {
+      postMData({id, dataM});
+    }
+  });
   const { mutate: postOData } = useMutation(postO, {
     onSuccess: onSaveSuccess,
     onError: onSaveFailed,
@@ -103,18 +117,23 @@ export const CustomerFormToolbar = ({ id, currentMenu }) => {
     },
   });
 
-  const saveUser = () => {
-    addUserData(profile)
+  const saveNewUser = () => {
+    addUserData(profile);
+  }
+
+  const saveUser = ({ customerId, data }) => {
+    updateUserData({ customerId, data });
   }
 
   const saveForm = useCallback(() => {
-      saveUser({ customerId: id, data: profile });
+    saveUser({ customerId: id, data: profile });
     switch (currentMenu) {
       case 0:
-        showAlertDialog({
-          title: "Warning",
-          message: "Only work for customer info. You should click 'Check' button for save data.",
-        });
+        putMData({ id, dataM });
+        // showAlertDialog({
+        //   title: "Warning",
+        //   message: "Only work for customer info. You should click 'Check' button for save data.",
+        // });
         break;
 
       case 1:
@@ -160,7 +179,7 @@ export const CustomerFormToolbar = ({ id, currentMenu }) => {
         <Button variant="contained" color="error" sx={{ width: 100 }} onClick={cancelForm}>
           Cancel
         </Button>
-        <Button variant="contained" color="success" sx={{ width: 100, mx: 2 }} onClick={isNew ? saveUser : saveForm}>
+        <Button variant="contained" color="success" sx={{ width: 100, mx: 2 }} onClick={isNew ? saveNewUser : saveForm}>
           Save
         </Button>
       </Box>

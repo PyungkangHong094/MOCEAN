@@ -18,7 +18,7 @@ const FormOView = ({ id }) => {
     if (apiResult) {
       initData(apiResult);
     }
-    console.log('O Data: ' + apiResult);
+    // console.log('O Data: ' + apiResult);
   }, [apiResult]);
 
   if (isLoading) {
