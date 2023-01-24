@@ -1,48 +1,48 @@
 import { Box, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import AddPhotoAlternateRoundedIcon from "@mui/icons-material/AddPhotoAlternateRounded";
-// import { uploadFile } from 'react-s3';
-// import S3 from 'react-aws-s3';
+import { useDialog } from "src/components/dialogs/context";
+import { useMutation } from "react-query";
+import { postImage } from 'src/data/repository/c';
 
-// const config = {
-//   bucketName: 'circulatory-visceral-fat',
-//   // region: 'us-east-1',
-//   region: 'ewr1',
-//   accessKeyId: 'CBMQIGT02ZONS4E1UUNP',
-//   secretAccessKey: 'j7YVFt8coZSRxYBI7IlHO3S1X42ULWwKADDpD1wS',
-//   s3Url: 'https://ewr1.vultrobjects.com/circulatory-visceral-fat'
-// };
+const ImageUpload = ({ type, image, onInput }) => {
+  const router = useRouter();
+  const { showAlertDialog } = useDialog();
+  const { id } = router.query;
 
-// const ReactS3Client = new S3(config);
+  const onSaveSuccess = () => {
+    // showAlertDialog({ title: "Success", message: "Image uploaded" });
+  };
+  const onSaveFailed = () => {
+    // showAlertDialog({ title: "Failed", message: "Image upload failed" });
+  };
 
-const ImageUpload = ({ id, onInput }) => {
-  const [image, setImage] = useState(undefined);
-
-  useEffect(() => {
-    console.log(image);
-    // ReactS3Client.uploadFile(image, image?.name)
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
-  }, [image]);
+  const { mutate: uploadImage } = useMutation(postImage, {
+    onSuccess: (data) => {
+      onInput(data);
+      onSaveSuccess();
+    },
+    onError: (error) => {
+      console.log(error);
+      onSaveFailed();
+    }
+  });
 
   return (
     <>
       <input
         accept="image/*"
         style={{ display: "none" }}
-        id={id}
+        id={type}
         type="file"
-        onChange={(e) => {
-          // setImage(e.target.files[0]);
-          setImage(URL.createObjectURL(e.target.files[0]));
-          onInput(URL.createObjectURL(e.target.files[0]));
-        }}
+        onChange={(e) => uploadImage({
+          id: id,
+          imageType: type,
+          file: e.target.files[0]
+        })}
       />
-      <label htmlFor={id}>
+      <label htmlFor={type}>
         <Box
           sx={{
             display: "flex",
@@ -60,7 +60,7 @@ const ImageUpload = ({ id, onInput }) => {
           }}
         >
           {image ? (
-            <img style={{ width: "100%", objectFit: "cover" }} src={image} />
+            <img style={{ width: "100%", objectFit: "cover" }} src={`https://${image}`} />
           ) : (
             <AddPhotoAlternateRoundedIcon fontSize="large" />
           )}

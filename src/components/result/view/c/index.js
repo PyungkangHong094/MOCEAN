@@ -90,8 +90,8 @@ const ResultCView = ({ id }) => {
     return <Box />;
   }
 
-  const { name } = data;
-  const result = initData(data.circulatory);
+  const { name, circulatory } = data;
+  const result = initData(circulatory);
   console.log("C data", data);
   console.log("C Result", result);
 
@@ -109,7 +109,7 @@ const ResultCView = ({ id }) => {
         <Divider variant="middle" sx={{ color: "black", borderBottom: 1.5 }} />
         <NitricArticle name={name} score={result[10].items[0].score} />
         <Divider variant="middle" sx={{ color: "black", borderBottom: 1.5 }} />
-        <LiveBloodArticle name={name} score={result[11].items[0].score} />
+        <LiveBloodArticle name={name} score={result[11].items[0].score} image={circulatory?.red_blood_cell_url} />
       </Box>
     </>
   );

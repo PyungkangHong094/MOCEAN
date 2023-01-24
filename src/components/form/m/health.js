@@ -186,10 +186,10 @@ const Health = () => {
                 />
                 <Checkbox
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
-                  checked={imageList[id].upper === upper_extremity_assessment && imageList[id].lower === lower_extremity_assessment}
+                  checked={imageList[id]?.upper === upper_extremity_assessment && imageList[id]?.lower === lower_extremity_assessment}
                   onChange={(event) => {
-                    setData('musculo_skeletal_health', 'upper_extremity_assessment', event.target.checked ? imageList[id].upper : '');
-                    setData('musculo_skeletal_health', 'lower_extremity_assessment', event.target.checked ? imageList[id].lower : '');
+                    setData('musculo_skeletal_health', 'upper_extremity_assessment', event.target.checked ? imageList[id]?.upper : '');
+                    setData('musculo_skeletal_health', 'lower_extremity_assessment', event.target.checked ? imageList[id]?.lower : '');
                   }}
                 />
               </Box>
@@ -206,8 +206,8 @@ const Health = () => {
           aria-expanded={isStatusOpen ? "true" : undefined}
           onClick={openStatus}
         >
-          <Typography variant="h6" color={conditionList[condition].color}>
-            {conditionList[condition].text}
+          <Typography variant="h6" color={conditionList[condition]?.color}>
+            {conditionList[condition]?.text}
           </Typography>
         </Button>
         <Menu
@@ -224,7 +224,7 @@ const Health = () => {
               setData('musculo_skeletal_health', 'condition', key); 
               closeStatus(); 
             }}>
-              {conditionList[key].text}
+              {conditionList[key]?.text}
             </MenuItem>
           ))}
         </Menu>

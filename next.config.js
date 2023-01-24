@@ -13,6 +13,6 @@
 
 module.exports = {
   images: {
-    domains: ["helpx.adobe.com"],
+    domains: ["helpx.adobe.com", "ewr1.vultrobjects.com"],
   },
 };

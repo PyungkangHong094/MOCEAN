@@ -24,3 +24,14 @@ export const postC = async ({ id, dataC }) => {
 
   return data;
 };
+
+export const postImage = async ({ id, imageType, file }) => {
+  // console.log(id, imageType, file);
+  const { data: url } = await ApiClient({ 
+    contentType: 'multipart/form-data' 
+  }).post(`/customers/${id}/circulatory/${imageType}`, {
+    'file': file
+  });
+
+  return url;
+}
