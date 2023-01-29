@@ -59,12 +59,36 @@ export const postM = async ({ id, dataM }) => {
 }
 
 export const putMPartial = async ({ customerId, reqData, endpoint }) => { 
+  if (endpoint === 'musculoskeletal-health') {
+    reqData = {
+      gender: reqData.gender, 
+      pushup_test: reqData.pushup_test,
+      squat_test: reqData.squat_test,
+      plank_test: reqData.plank_test,
+      lower_extremity_assessment: reqData.lower_extremity_assessment,
+      upper_extremity_assessment: reqData.upper_extremity_assessment,
+      condition: reqData.condition
+    };
+  }
+  
   const { data } = await ApiClient().put(`/customers/${customerId}/${endpoint}`, reqData);
 
   return data;
 }
 
 export const postMPartial = async ({ customerId, reqData, endpoint }) => {
+  if (endpoint === 'musculoskeletal-health') {
+    reqData = {
+      gender: reqData.gender, 
+      pushup_test: reqData.pushup_test,
+      squat_test: reqData.squat_test,
+      plank_test: reqData.plank_test,
+      lower_extremity_assessment: reqData.lower_extremity_assessment,
+      upper_extremity_assessment: reqData.upper_extremity_assessment,
+      condition: reqData.condition
+    };
+  }
+
   const { data } = await ApiClient().post(`/customers/${customerId}/${endpoint}`, reqData);
 
   return data;

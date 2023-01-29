@@ -18,12 +18,12 @@ import { theme } from "src/theme";
 import { BorderedCell, DropdownCell, TextInputCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
 import TableFrame from "./table-frame";
-import { initData, useMContext } from './context';
+import { useMContext } from './context';
 import { useDialog } from "src/components/dialogs/context";
 import { useMutation } from "react-query";
 import { postMPartial, putMPartial } from "src/data/repository/m";
 
-const Health = () => {
+const Health = ({ id }) => {
   const { showAlertDialog } = useDialog();
   const { data, setData } = useMContext();
   const {
@@ -34,7 +34,7 @@ const Health = () => {
     lower_extremity_assessment,
     upper_extremity_assessment,
     condition
-  } = data.musculo_skeletal_health || initData.musculo_skeletal_health;
+  } = data?.musculo_skeletal_health;
 
   const imageList = {
     1: {
@@ -85,7 +85,7 @@ const Health = () => {
   };
 
   const body = {
-    customerId: data.id,
+    customerId: id,
     reqData: data.musculo_skeletal_health,
     endpoint: 'musculoskeletal-health'
   };

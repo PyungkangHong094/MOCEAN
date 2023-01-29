@@ -32,7 +32,11 @@ const ToxityLevel = ({ onInput, ogData }) => {
           {status.text}
         </Typography>
       )} */}
-      <TextInputCell defaultValue={ogData} onChange={onChange} />
+      <TextInputCell 
+        defaultValue={ogData}
+        type="number" 
+        onChange={onChange} 
+      />
     </InputForm>
   );
 };

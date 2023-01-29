@@ -49,6 +49,22 @@ export const useOContext = () => useContext(Ocontext);
 export const OProvider = ({ children }) => {
   const [data, setData] = useState(initData);
 
+  const initOData = (oData) => {
+    let newData = { ...data };
+    const keys = Object.keys(initData);
+
+    for (const key of keys) {
+      if (oData && oData[key]) {
+        newData[key] = oData[key];
+      }
+      else {
+        newData[key] = initData[key];
+      }
+    }
+
+    setData(newData);
+  }
+
   const setPair = ({ section, key, value }) => {
     let newData = { ...data };
     if (!newData[section]) {
@@ -63,7 +79,7 @@ export const OProvider = ({ children }) => {
     <Ocontext.Provider
       value={{
         data,
-        initData: setData,
+        initData: initOData,
         setData: setPair,
       }}
     >

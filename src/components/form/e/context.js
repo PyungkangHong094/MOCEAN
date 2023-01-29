@@ -26,6 +26,22 @@ export const useEContext = () => useContext(Econtext);
 export const EProvider = ({ children }) => {
   const [data, setData] = useState(initData);
 
+  const initEData = (eData) => {
+    let newData = { ...data };
+    const keys = Object.keys(initData);
+
+    for (const key of keys) {
+      if (eData && eData[key]) {
+        newData[key] = eData[key];
+      }
+      else {
+        newData[key] = initData[key];
+      }
+    }
+
+    setData(newData);
+  }
+
   const setPair = ({ key, value }) => {
     const newData = {
       ...data,
@@ -38,7 +54,7 @@ export const EProvider = ({ children }) => {
     <Econtext.Provider
       value={{
         data,
-        initData: setData,
+        initData: initEData,
         setData: setPair,
       }}
     >

@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import { BorderedCell, DropdownCell, TextInputCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
 import TableFrame from "./table-frame";
-import { initData, useMContext } from './context';
+import { useMContext } from './context';
 import { useDialog } from "src/components/dialogs/context";
 import { useMutation } from "react-query";
 import { postMPartial, putMPartial } from "src/data/repository/m";
 
-const Cardio = () => {
+const Cardio = ({ id }) => {
   const { showAlertDialog } = useDialog();
   const { data, setData } = useMContext();
   const {
@@ -16,10 +16,10 @@ const Cardio = () => {
     gender,
     seconds_on_bruce_protocol,
     maximum_hr
-  } = data.cardio_respiratory_strength || initData.cardio_respiratory_strength;
+  } = data?.cardio_respiratory_strength;
 
   const body = {
-    customerId: data.id, 
+    customerId: id, 
     reqData: data.cardio_respiratory_strength, 
     endpoint: 'cardio-respiratory-strength'
   };
