@@ -29,6 +29,22 @@ export const useCContext = () => useContext(Ccontext);
 export const CProvider = ({ children }) => {
   const [data, setData] = useState(initData);
 
+  const initCData = (cData) => {
+    let newData = { ...data };
+    const keys = Object.keys(initData);
+
+    for (const key of keys) {
+      if (cData && cData[key]) {
+        newData[key] = cData[key];
+      }
+      else {
+        newData[key] = initData[key];
+      }
+    }
+
+    setData(newData);
+  }
+
   const setPair = ({ key, value }) => {
     const newData = {
       ...data,
@@ -41,7 +57,7 @@ export const CProvider = ({ children }) => {
     <Ccontext.Provider
       value={{
         data,
-        initData: setData,
+        initData: initCData,
         setData: setPair,
       }}
     >

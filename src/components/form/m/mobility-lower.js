@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { BorderedCell, DropdownCell, EmptyCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
 import TableFrame from "./table-frame";
-import { initData, useMContext } from './context';
+import { useMContext } from './context';
 import { useDialog } from "src/components/dialogs/context";
 import { useMutation } from "react-query";
 import { postMPartial, putMPartial } from "src/data/repository/m";
@@ -23,7 +23,7 @@ const dropdownValues = [
   },
 ];
 
-const MobilityLower = () => {
+const MobilityLower = ({ id }) => {
   const { showAlertDialog } = useDialog();
   const { data, setData } = useMContext();
   const {
@@ -46,10 +46,10 @@ const MobilityLower = () => {
     assessment_score_right,
     patient_score_left,
     patient_score_right
-  } = data.mobility_and_balance_lower_extremity || initData.mobility_and_balance_lower_extremity;
+  } = data?.mobility_and_balance_lower_extremity;
 
   const body = { 
-    customerId: data.id, 
+    customerId: id, 
     reqData: data.mobility_and_balance_lower_extremity, 
     endpoint: 'musculoskeletal/mobility-and-balance/lower-extremity'
   };

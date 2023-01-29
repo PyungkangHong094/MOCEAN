@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { BorderedCell, DropdownCell, EmptyCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
 import TableFrame from "./table-frame";
-import { initData, useMContext } from './context';
+import { useMContext } from './context';
 import { useDialog } from "src/components/dialogs/context";
 import { useMutation } from "react-query";
 import { postMPartial, putMPartial } from "src/data/repository/m";
@@ -45,7 +45,7 @@ const nrpValues = [
   },
 ];
 
-const Movement = () => {
+const Movement = ({ id }) => {
   const { showAlertDialog } = useDialog();
   const { data, setData } = useMContext();
   const {
@@ -64,10 +64,10 @@ const Movement = () => {
     assessment_maximum,
     assessment_score,
     patient_score
-  } = data.movement || initData.movement;
+  } = data?.movement;
 
   const body = { 
-    customerId: data.id, 
+    customerId: id, 
     reqData: data.movement, 
     endpoint: 'movement'
   };

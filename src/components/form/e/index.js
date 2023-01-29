@@ -18,7 +18,7 @@ import SNSYangForm from "./sns-yang";
 import StressForm from "./stress";
 
 const FormEView = ({ id }) => {
-  const { initData, setData } = useEContext();
+  const { data, initData, setData } = useEContext();
   const { isLoading, data: apiResult } = useUserforE(id);
   const [standard, setStandard] = useState(0);
 
@@ -37,18 +37,16 @@ const FormEView = ({ id }) => {
       key,
       value,
     });
-
-  const { emotion } = apiResult;
   
   return (
     <Box p={4}>
-      <StressForm onInput={onInput("stress")} ogData = {emotion?.stress} />
-      <SleepForm onInput={onInput("sleep")} ogData = {emotion?.sleep} />
-      <DigestiveForm onInput={onInput("digestion")} ogData = {emotion?.digestion} />
-      <EnergyForm onInput={onInput("energy")} ogData = {emotion?.energy} />
+      <StressForm onInput={onInput("stress")} ogData = {data?.stress} />
+      <SleepForm onInput={onInput("sleep")} ogData = {data?.sleep} />
+      <DigestiveForm onInput={onInput("digestion")} ogData = {data?.digestion} />
+      <EnergyForm onInput={onInput("energy")} ogData = {data?.energy} />
       <Box my={16}>
-        <SNSYangForm onInput={onInput("sns_yang")} ogData = {emotion?.sns_yang} />
-        <PNSYinForm onInput={onInput("pns_yin")} ogData = {emotion?.pns_yin} />
+        <SNSYangForm onInput={onInput("sns_yang")} ogData = {data?.sns_yang} />
+        <PNSYinForm onInput={onInput("pns_yin")} ogData = {data?.pns_yin} />
       </Box>
       <Table sx={{ maxWidth: 600, mb: 4 }}>
         <TableBody>
@@ -56,7 +54,7 @@ const FormEView = ({ id }) => {
             <TitleCell title={"기준값"} align={"center"} />
             <TextInputCell
               type="number"
-              defaultValue={emotion?.default}
+              defaultValue={data?.default}
               onChange={(v) => {
                 v = parseFloat(v);
                 setStandard(v);
@@ -66,11 +64,11 @@ const FormEView = ({ id }) => {
           </TableRow>
         </TableBody>
       </Table>
-      <DetoxForm standardValue={standard} onInput={onInput("detox_energy")} ogData = {emotion?.detox_energy} />
-      <LifeForm standardValue={standard} onInput={onInput("life_energy")} ogData = {emotion?.life_energy} />
-      <DigestiveEnergyForm standardValue={standard} onInput={onInput("digestive_energy")} ogData = {emotion?.digestive_energy} />
-      <ImmuneForm standardValue={standard} onInput={onInput("immune_energy")} ogData = {emotion?.immune_energy} />
-      <PurificationForm standardValue={standard} onInput={onInput("purification_energy")} ogData = {emotion?.purification_energy} />
+      <DetoxForm standardValue={standard} onInput={onInput("detox_energy")} ogData = {data?.detox_energy} />
+      <LifeForm standardValue={standard} onInput={onInput("life_energy")} ogData = {data?.life_energy} />
+      <DigestiveEnergyForm standardValue={standard} onInput={onInput("digestive_energy")} ogData = {data?.digestive_energy} />
+      <ImmuneForm standardValue={standard} onInput={onInput("immune_energy")} ogData = {data?.immune_energy} />
+      <PurificationForm standardValue={standard} onInput={onInput("purification_energy")} ogData = {data?.purification_energy} />
     </Box>
   );
 };

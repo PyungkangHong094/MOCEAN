@@ -59,11 +59,13 @@ const Hydration = ({ onGenderInput, onBodyWaterInput, onWeightInput }) => {
             <TextInputCell 
               defaultValue={total_body_water} 
               hint={"Body water"} 
+              type="number"
               onChange={(v) => onBodyWaterInput(parseFloat(v))} 
             />
             <TextInputCell 
               defaultValue={weight} 
               hint={"Weight"} 
+              type="number"
               onChange={(v) => onWeightInput(parseFloat(v))} 
             />
             <TitleCell title={score} />

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { BorderedCell, DropdownCell, EmptyCell, TitleCell } from "../cell-types";
 import TextInput from "../textinput";
 import TableFrame from "./table-frame";
-import { initData, useMContext } from './context';
+import { useMContext } from './context';
 import { useDialog } from "src/components/dialogs/context";
 import { useMutation } from "react-query";
 import { postMPartial, putMPartial } from "src/data/repository/m";
@@ -19,7 +19,7 @@ const dropdownValues = [
   },
 ];
 
-const MobilitySpine = () => {
+const MobilitySpine = ({ id }) => {
   const { showAlertDialog } = useDialog();
   const { data, setData } = useMContext();
   const {
@@ -29,10 +29,10 @@ const MobilitySpine = () => {
     toe_touch,
     assessment_maximum,
     assessment_score
-  } = data.mobility_and_balance_spine || initData.mobility_and_balance_spine;
+  } = data?.mobility_and_balance_spine;
 
   const body = { 
-    customerId: data.id, 
+    customerId: id, 
     reqData: data.mobility_and_balance_spine, 
     endpoint: 'musculoskeletal/mobility-and-balance/spine'
   };

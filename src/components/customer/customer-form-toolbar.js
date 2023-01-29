@@ -86,15 +86,16 @@ export const CustomerFormToolbar = ({ id, currentMenu }) => {
       postMData({id, dataM});
     }
   });
-  const { mutate: postOData } = useMutation(postO, {
-    onSuccess: onSaveSuccess,
-    onError: onSaveFailed,
-  });
+  // const { mutate: postOData } = useMutation(postO, {
+  //   onSuccess: onSaveSuccess,
+  //   onError: onSaveFailed,
+  // });
   const { mutate: putOData } = useMutation(putO, {
     onSuccess: onSaveSuccess,
-    onError: () => {
-      postOData({id, dataO})
-    },
+    // onError: () => {
+    //   postOData({id, dataO})
+    // },
+    onError: onSaveFailed,
   });
   const { mutate: postCData } = useMutation(postC, {
     onSuccess: onSaveSuccess,

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 
-export const initData = {
+const initData = {
     posture: {
         index: 0
     },
@@ -73,10 +73,10 @@ export const initData = {
         finger_touch_ground: 0,
         hip_shift_during_toe_touch: 0,
         toe_touch_upper_back_rounding: 0,
-        flexion_left: 1,
-        flexion_right: 1,
-        lateral_flexion_left: 1,
-        lateral_flexion_right: 1,
+        flexion_left: 0,
+        flexion_right: 0,
+        lateral_flexion_left: 0,
+        lateral_flexion_right: 0,
         assessment_maximum: 12,
         assessment_score: 0,
         patient_score: 0
@@ -92,6 +92,9 @@ export const initData = {
         pushup_test: 0,
         squat_test: 0,
         plank_test: 0,
+        pushup_score: 0,
+        squat_score: 0,
+        plank_score: 0,
         lower_extremity_assessment: 'rdp',
         upper_extremity_assessment: 'rdp',
         condition: 'danger'
@@ -109,8 +112,24 @@ export const useMContext = () => useContext(MContext);
 export const MProvider = ({ children }) => {
     const [data, setData] = useState(initData);
 
+    const initMData = (mData) => {
+        let newData = { ...data };
+        const keys = Object.keys(initData);
+
+        for (const key of keys) {
+            if (mData && mData[key]) {
+                newData[key] = mData[key];
+            }
+            else {
+                newData[key] = initData[key];
+            }
+        }
+
+        setData(newData);
+    }
+
     const setPair = (section, key, value) => {
-        console.log(section, key, value);
+        // console.log(section, key, value);
         let newData = { ...data };
         if (!newData[section]) {
             newData[section] = initData[section];
@@ -124,7 +143,7 @@ export const MProvider = ({ children }) => {
         <MContext.Provider
             value={{
                 data,
-                initData: setData,
+                initData: initMData,
                 setData: setPair
             }}
         >

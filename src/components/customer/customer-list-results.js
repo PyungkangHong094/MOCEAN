@@ -28,7 +28,7 @@ export const CustomerList = (props) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
 
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(25);
+  const [limit, setLimit] = useState(50);
   const [filter, setFilter] = useState("");
 
   const { data, isLoading, isFetching, isError } = useQuery({
@@ -135,7 +135,7 @@ export const CustomerList = (props) => {
             onRowsPerPageChange={handleLimitChange}
             page={page - 1}
             rowsPerPage={limit}
-            rowsPerPageOptions={[5, 10, 25]}
+            rowsPerPageOptions={[50, 100, 250]}
           />
         </Card>
       )}

@@ -39,7 +39,7 @@ export const TextInputCell = ({ type, colSpan, defaultValue, hint, onChange = (v
       maxRows={1}
       type={type}
       placeholder={hint}
-      defaultValue={defaultValue}
+      value={defaultValue}
       onChange={(e) => onChange(e.target.value)}
       onSubmit={() => {}}
     />

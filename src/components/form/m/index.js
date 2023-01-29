@@ -43,14 +43,14 @@ const FormMView = ({ id }) => {
 
   return (
     <Box px={4}>
-      <Posture />
-      <MobilityCervical />
-      <MobilitySpine />
-      <MobilityUpper />
-      <MobilityLower />
-      <Movement />
-      <Cardio />
-      <Health />
+      <Posture id={id} />
+      <MobilityCervical id={id} />
+      <MobilitySpine id={id} />
+      <MobilityUpper id={id} />
+      <MobilityLower id={id} />
+      <Movement id={id} />
+      <Cardio id={id} />
+      <Health id={id} />
 
       <Box height={100} />
     </Box>

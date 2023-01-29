@@ -26,13 +26,17 @@ const LymphCirculation = ({ onInput, ogData }) => {
     }
   };
   return (
-    <InputForm title={"Lymph Circulation"} defaultValue={0} onChange={onChange}>
+    <InputForm title={"Lymph Circulation"} onChange={onChange}>
       {/* {status != null && (
         <Typography variant="h6" color={status.color}>
           {status.text}
         </Typography>
       )} */}
-      <TextInputCell defaultValue={ogData} onChange={onChange} />
+      <TextInputCell 
+        defaultValue={ogData} 
+        type="number"
+        onChange={onChange} 
+      />
     </InputForm>
   );
 };
