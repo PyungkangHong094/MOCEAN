@@ -38,7 +38,7 @@ const LoginPage = () => {
           },
           onError: (error) => {
             showAlertDialog({
-              title: "로그인 오류",
+              title: "login error",
               message: `[${error.code}]\n${error.message}`,
             });
             setSubmitting(false);
@@ -70,7 +70,7 @@ const LoginPage = () => {
                 Sign in
               </Typography>
               <Typography color="textSecondary" gutterBottom variant="body2">
-                MOCEAN 관리자 로그인
+                Log in to MOCEAN Administrator
               </Typography>
             </Box>
 
@@ -115,7 +115,7 @@ const LoginPage = () => {
                 type="submit"
                 variant="contained"
               >
-                로그인
+                Log in
               </Button>
             </Box>
           </form>

@@ -17,8 +17,8 @@ export const CustomerListItem = ({ customer, selected, onSelect, onRemove }) => 
 
   const requestRemove = () => {
     showConfirmDialog({
-      title: "유저 삭제",
-      message: "유저의 모든 정보가 삭제됩니다. \n 삭제를 원하시면 클릭해주세요.",
+      title: "Delete customer",
+      message: "All information about the user will be deleted. \n Click to delete.",
       onConfirm: onRemove,
     });
   };
@@ -49,16 +49,16 @@ export const CustomerListItem = ({ customer, selected, onSelect, onRemove }) => 
       <TableCell>
         <Link href={`customers/form?id=${customer.id}`}>
           <Button color="primary" variant="contained" sx={{ mr: 1 }}>
-            수정
+            Edit
           </Button>
         </Link>
         <Link href={`customers/${customer.id}`}>
           <Button color="success" variant="contained" sx={{ mr: 1 }}>
-            보기
+            Reslut
           </Button>
         </Link>
         <Button color="error" variant="contained" sx={{ mr: 1 }} onClick={requestRemove}>
-          삭제
+          Delete
         </Button>
       </TableCell>
     </TableRow>

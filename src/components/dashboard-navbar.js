@@ -47,7 +47,7 @@ export const DashboardNavbar = (props) => {
 
           <Box sx={{ flexGrow: 1 }} />
           <Typography sx={{ m: 1 }} variant="h7" style={{ color: "black" }}>
-            반갑습니다, {username} 님
+            Welcome, {username} 
           </Typography>
           <Typography sx={{ m: 1 }} variant="h7" style={{ color: "black" }}>
             {email}
@@ -59,8 +59,8 @@ export const DashboardNavbar = (props) => {
             sx={{ mr: 1 }}
             onClick={() =>
               showConfirmDialog({
-                title: "로그아웃",
-                message: "정말로 로그아웃하시겠습니까?",
+                title: "Log Out",
+                message: "Are you sure you want to log out?",
                 onConfirm: () => {
                   deleteAuthResult();
                   router.push("/");
@@ -68,7 +68,7 @@ export const DashboardNavbar = (props) => {
               })
             }
           >
-            로그아웃
+            Log Out
           </Button>
 
           {/* <Avatar

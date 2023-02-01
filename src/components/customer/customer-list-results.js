@@ -107,10 +107,10 @@ export const CustomerList = (props) => {
                         onChange={handleSelectAll}
                       />
                     </TableCell>
-                    <TableCell>이름</TableCell>
-                    <TableCell>이메일</TableCell>
-                    <TableCell>생년월일</TableCell>
-                    <TableCell>전화번호</TableCell>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Email</TableCell>
+                    <TableCell>BirthDay</TableCell>
+                    <TableCell>Phone</TableCell>
                     <TableCell></TableCell>
                   </TableRow>
                 </TableHead>
