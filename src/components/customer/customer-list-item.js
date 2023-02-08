@@ -54,7 +54,7 @@ export const CustomerListItem = ({ customer, selected, onSelect, onRemove }) => 
         </Link>
         <Link href={`customers/${customer.id}`}>
           <Button color="success" variant="contained" sx={{ mr: 1 }}>
-            Reslut
+            result 
           </Button>
         </Link>
         <Button color="error" variant="contained" sx={{ mr: 1 }} onClick={requestRemove}>
