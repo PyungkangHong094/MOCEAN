@@ -10,6 +10,7 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
+import NorthIcon from '@mui/icons-material/North';
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
@@ -51,8 +52,18 @@ const FormMView = ({ id }) => {
       <Movement id={id} />
       <Cardio id={id} />
       <Health id={id} />
-
-      <Box height={100} />
+      <Box sx={{
+        display: 'flex',
+        alignItems: 'center',
+        paddingTop: 5,
+        width: 'fit-content',
+        color: '#55B6C9',
+        cursor: 'pointer'
+      }} onClick={() => window.scrollTo(0, 0)}>
+        <NorthIcon style={{ marginRight: 5, fontSize: 40 }} />
+        <Typography>back to top</Typography>
+      </Box>
+      <Box height={50} />
     </Box>
   );
 };

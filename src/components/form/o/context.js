@@ -10,14 +10,14 @@ const initData = {
   },
   hydration: {
     gender: 'male',
-    total_body_water: 0,
-    weight: 0,
+    total_body_water: null,
+    weight: null,
     score: 0
   },
   body_fat: {
     gender: 'male',
-    age: 0,
-    body_fat: 0
+    age: null,
+    body_fat: null
   },
   visceral_fat: {
     visceral_fat: 0,
@@ -33,8 +33,8 @@ const initData = {
   },
   cell_integrity: {
     gender: 'male',
-    age: 0,
-    whole_body_phase_angle: 0
+    age: null,
+    whole_body_phase_angle: null
   }
 };
 

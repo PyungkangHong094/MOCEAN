@@ -1,4 +1,5 @@
 import { Box, CircularProgress, Table, TableBody, TableRow, Typography } from "@mui/material";
+import NorthIcon from '@mui/icons-material/North';
 import { useEffect, useState } from "react";
 import LoadingBar from "src/components/loading-bar";
 import { useUserforE } from "src/data/repository/e";
@@ -69,6 +70,17 @@ const FormEView = ({ id }) => {
       <DigestiveEnergyForm standardValue={standard} onInput={onInput("digestive_energy")} ogData = {data?.digestive_energy} />
       <ImmuneForm standardValue={standard} onInput={onInput("immune_energy")} ogData = {data?.immune_energy} />
       <PurificationForm standardValue={standard} onInput={onInput("purification_energy")} ogData = {data?.purification_energy} />
+      <Box sx={{
+        display: 'flex',
+        alignItems: 'center',
+        paddingTop: 5,
+        width: 'fit-content',
+        color: '#55B6C9',
+        cursor: 'pointer'
+      }} onClick={() => window.scrollTo(0, 0)}>
+        <NorthIcon style={{ marginRight: 5, fontSize: 40 }} />
+        <Typography>back to top</Typography>
+      </Box>
     </Box>
   );
 };
