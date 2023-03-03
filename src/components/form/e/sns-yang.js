@@ -21,7 +21,7 @@ const SNSYangForm = ({ onInput, ogData }) => {
   };
 
   return (
-    <InputForm title={"활력도 (SNS-Yang)"} defaultValue={ogData} onChange={onChange}>
+    <InputForm title={"SNS-Yang"} defaultValue={ogData} onChange={onChange}>
       {status != null && (
         <Typography variant="h6" color={status.color}>
           {status.text}

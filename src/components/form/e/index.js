@@ -52,7 +52,7 @@ const FormEView = ({ id }) => {
       <Table sx={{ maxWidth: 600, mb: 4 }}>
         <TableBody>
           <TableRow>
-            <TitleCell title={"기준값"} align={"center"} />
+            <TitleCell title={"Default"} align={"center"} />
             <TextInputCell
               type="number"
               defaultValue={data?.default}

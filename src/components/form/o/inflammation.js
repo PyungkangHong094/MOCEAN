@@ -68,6 +68,14 @@ const Inflammation = ({
             />
           </TableRow>
           <TableRow>
+            <TitleCell title={"Trunk"} align="center" />
+            <TextInputCell 
+              defaultValue={trunk}
+              type={"number"}
+              onChange={(v) => onTrunkInput(parseFloat(v))}
+            />
+          </TableRow>
+          <TableRow>
             <TitleCell title={"Lower Body-Right Leg"} align="center" />
             <TextInputCell 
               defaultValue={right_leg}
@@ -81,14 +89,6 @@ const Inflammation = ({
               defaultValue={left_leg}
               type={"number"}
               onChange={(v) => onLeftLegInput(parseFloat(v))}
-            />
-          </TableRow>
-          <TableRow>
-            <TitleCell title={"Trunk"} align="center" />
-            <TextInputCell 
-              defaultValue={trunk}
-              type={"number"}
-              onChange={(v) => onTrunkInput(parseFloat(v))}
             />
           </TableRow>
         </TableBody>

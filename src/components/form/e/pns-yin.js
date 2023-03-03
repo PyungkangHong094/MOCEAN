@@ -21,7 +21,7 @@ const PNSYinForm = ({ onInput, ogData }) => {
   };
 
   return (
-    <InputForm title={"안정도 (PNS-Yin)"} defaultValue={ogData} onChange={onChange}>
+    <InputForm title={"PNS-Yin"} defaultValue={ogData} onChange={onChange}>
       {status != null && (
         <Typography variant="h6" color={status.color}>
           {status.text}
