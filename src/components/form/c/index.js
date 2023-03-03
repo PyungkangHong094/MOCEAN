@@ -1,4 +1,5 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
+import NorthIcon from '@mui/icons-material/North';
 import { useEffect } from "react";
 import LoadingBar from "src/components/loading-bar";
 import { useUserforC } from "src/data/repository/c";
@@ -73,6 +74,16 @@ const FormCView = ({ id }) => {
           red_blood_cell_url: data?.red_blood_cell_url
         }}
       />
+      <Box sx={{
+        display: 'flex',
+        alignItems: 'center',
+        width: 'fit-content',
+        color: '#55B6C9',
+        cursor: 'pointer'
+      }} onClick={() => window.scrollTo(0, 0)}>
+        <NorthIcon style={{ marginRight: 5, fontSize: 40 }} />
+        <Typography>back to top</Typography>
+      </Box>
     </Box>
   );
 };
