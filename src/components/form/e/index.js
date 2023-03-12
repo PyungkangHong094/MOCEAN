@@ -73,6 +73,8 @@ const FormEView = ({ id }) => {
       <Box sx={{
         display: 'flex',
         alignItems: 'center',
+        marginLeft: 'auto',
+        marginRight: 0,
         paddingTop: 5,
         width: 'fit-content',
         color: '#55B6C9',
