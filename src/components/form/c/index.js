@@ -77,6 +77,8 @@ const FormCView = ({ id }) => {
       <Box sx={{
         display: 'flex',
         alignItems: 'center',
+        marginLeft: 'auto',
+        marginRight: 0,
         width: 'fit-content',
         color: '#55B6C9',
         cursor: 'pointer'
